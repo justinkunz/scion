@@ -19,6 +19,7 @@ class EitherOr extends React.Component {
                                 <button onClick={() => this.props.onValueChange(this.props.fieldId, this.props.btn1)} className={btn1Active}>{this.props.btn1}</button>
                                 <div className="or"></div>
                                 <button onClick={() => this.props.onValueChange(this.props.fieldId, this.props.btn2)} className={btn2Active}>{this.props.btn2}</button>
+
                             </div>
                         </div>
                     </div>

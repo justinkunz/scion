@@ -2,6 +2,8 @@ import React from 'react';
 import { Slider } from 'react-semantic-ui-range';
 
 class Slide extends React.Component {
+
+
     render() {
         return (
             <div>
@@ -11,7 +13,7 @@ class Slide extends React.Component {
                             <div className="titleWrap">
                                 <div className="ui form">
                                     <div className="sliderTitle">{this.props.question}</div>
-                                    <Slider onChange={() => this.props.onValueChange(this.props.id, this.value)} settings={this.props.settings} color={this.props.color} />
+                                    <Slider settings={{ ...this.props.settings, onChange: (val) => this.props.onValueChange(this.props.fieldId, val) }} color={this.props.color} />
                                 </div>
                             </div>
                         </div>

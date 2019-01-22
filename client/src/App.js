@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './css/App.css';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { HomePage, Questionaire, ResultsPage } from './components/pages'
+import { HomePage, ResultsPage } from './components/pages';
+import IP_Quest from './components/pages/surveys/IP_Quest';
 
 class App extends Component {
   render() {
@@ -10,7 +11,7 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Route path="/" exact component={HomePage} />
-            <Route path="/questions" exact component={Questionaire} />
+            <Route path="/ip_questions" exact component={IP_Quest} />
             <Route path="/results" exact component={ResultsPage} />
           </div>
         </BrowserRouter>
