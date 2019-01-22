@@ -11,7 +11,7 @@ class Slide extends React.Component {
                             <div className="titleWrap">
                                 <div className="ui form">
                                     <div className="sliderTitle">{this.props.question}</div>
-                                    <Slider settings={this.props.settings} color={this.props.color} />
+                                    <Slider onChange={() => this.props.onValueChange(this.props.id, this.value)} settings={this.props.settings} color={this.props.color} />
                                 </div>
                             </div>
                         </div>

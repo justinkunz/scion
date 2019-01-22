@@ -2,6 +2,7 @@ import React from 'react';
 
 class Dropdown extends React.Component {
     render() {
+
         return (
             <div>
                 <div className="qCont">
@@ -10,11 +11,9 @@ class Dropdown extends React.Component {
                             <div className="titleWrap">
                                 <div className="ui form">
                                     <div className="field">
-                                        <span>Question </span>
-                                        <select className="ui search dropdown ui qbox segment">
-                                            <option value="">Default Dropdown Setting</option>
-                                            <option >Choice A</option>
-                                            <option >Choice B</option>
+                                        <span>{this.props.question}</span>
+                                        <select onChange={(e) => this.props.onValueChange(this.props.fieldId, e.target.value)} className="valuegrab ui search dropdown ui qbox segment">
+                                            {this.props.listOptions.map(e => <option >{e}</option>)}
                                         </select>
                                     </div>
                                 </div>

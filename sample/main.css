@@ -1,0 +1,236 @@
+body {
+    margin: 0;
+}
+
+.blue {
+    color: #63c7f5; 
+}
+
+.red {
+    color: #f44336; 
+}
+ #titleCont {
+    background-image: url("./images/background.jpg");
+    background-size: cover;
+    text-align: center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width: 100%;
+    height: 100vh;
+}
+.title {
+    display: none;
+}
+#btnCont {
+    display: none;
+}
+.titleText {
+    font-family: 'Staatliches', cursive;
+    color: #63c7f5;
+    font-size: 50px;
+}
+
+a {
+    text-decoration: none;
+}
+#titleName {
+    color: #F44336;
+}
+.basicBtn {
+    background: transparent;
+    color: aliceblue;
+    font-family: 'Thasadith', sans-serif;
+    height: 30px;
+
+}
+#skillBox {
+    width: 65%;
+    margin: 0 12.5% 100px 12.5%;
+    background-color: #566e8ad9;
+    color: #63c7f5;
+    border-radius: 15px;
+    padding: 0 5% 0 5%;
+}
+
+.skillCont {
+    float: left;
+    margin: 10px 5% 10px 5%;
+    width: 23.333%;
+}
+
+
+.skill .label {
+    font-size: 20px;
+    color: #e7c1ff;
+    margin-bottom: 5px;
+}
+
+.skill .list {
+    color: #ffffff;
+    font-family: 'Thasadith', sans-serif;
+}
+
+#skillTopLabel {
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+    font-family: 'Staatliches', cursive;
+    color: #c1ffee;
+}
+
+.clearFix {
+    overflow: auto;
+    width: 100%;
+}
+
+#skillCont {
+    text-align: center;
+}
+
+#aboutBody {
+    margin: 50px 25% 100px 25%;
+    text-align: center;
+}
+.titleBtns {
+    border-color: #63c7f5;
+    width: 25%;
+    margin: 0 10px 0 10px;
+}
+
+.containers .header {
+    color: #f44336;
+    font-size: 50px;
+    margin-bottom: 10px;
+    font-family: 'Staatliches', cursive;
+    text-align: center;
+}
+
+.containers {
+    margin-left: 20px;
+    margin-right: 20px;
+    font-family: 'Comfortaa', cursive;
+}
+
+.car{
+    height: 300px;
+    width: 20%;
+    border: solid;
+    border-color: #63c7f5;
+}
+
+.cardImg {
+    height: 200px;
+    text-align: center;
+    margin: 5px;
+    margin-top: 10px;
+
+}
+
+.cardBtns {
+    width: 40%;
+    margin-bottom: 10px;
+    font-family: 'Staatliches', cursive;
+
+}
+
+.codeBtn {
+    color: #63c7f5;
+}
+
+.demoBtn {
+    color: #4caf50;
+}
+.btnCont {
+    text-align: center;
+}
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin: 2.5%;
+    opacity: 1;
+
+  }
+  
+  
+  .card:hover {
+    box-shadow: 0 8px 16px 0  #63c7f5
+  }
+  
+  .container {
+    padding: 2px 16px;
+  }
+
+.project-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 0 10px;
+    grid-auto-rows: 10px;
+}
+.card-images {
+    width: 50%;
+    text-align: center;
+    margin: 20px 25% 0 25%;
+}
+
+/* contact */
+#contTitle {
+    margin-top: 100px;
+}
+.contactCont {
+    text-align: center;
+}
+
+.contact .images {
+    width: 50px;
+    margin: 0 5px 0 5px;
+}
+
+.imageCont {
+    margin: 20px 0 50px 0;
+}
+
+.textLabel {
+    margin: 5px 0 5px 0;
+}
+
+.fade {
+    opacity: 1;
+  }
+
+
+.footer {
+    width: 100%;
+    padding: 17.5px 0 17.5px 0px;
+    background-color: #63c7f5; 
+    text-align: center;
+    color: white;
+    font-family: 'Comfortaa', cursive;
+    font-size: 15px;
+}
+
+@media screen and (max-width: 414px){
+    .titleBtns {
+        font-size: 10px;
+    }
+
+    #aboutBody {
+        margin: 20px 10% 50px 10%;
+    }
+
+    #skillBox {
+        display: none;
+    }
+
+    .contactCont {
+        font-size: 12px;
+    }
+
+    .containers .header {
+        font-size: 33px;
+    }
+    #titleMain, #titleSub {
+        font-size: 38px;
+        margin: 0 7.5% 0 7.5%;
+    }
+};

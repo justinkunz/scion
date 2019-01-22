@@ -1,50 +1,86 @@
 import React from 'react';
-import { Dropdown, EitherOr, RadioBtn, ToggleBtn, Slide } from '../form';
+import { Dropdown, EitherOr, RadioBtn, ToggleBtn, Slide, SubmitBtn } from '../form';
 
 class Questionaire extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { color: "red", sliderValue: 5 }
+        this.state = { sliderValue: 5 }
     }
 
     render() {
-        //setting for toggle
+        //setting for slider
         const settings = {
             start: 5,
             min: 0,
             max: 10,
             step: 1,
-            onChange: (value) => {
-                this.setState({
-                    sliderValue: value
-                })
-                if (value > 6) {
-                    this.setState({
-                        color: "green"
-                    })
-                }
-                else if (value < 4) {
-                    this.setState({
-                        color: "red"
-                    })
-                }
-                else {
-                    this.setState({
-                        color: "orange"
-                    })
-                }
-            }
+        };
+
+        //value change handler
+        const onValueChange = (fieldId, val) => {
+            this.setState({ [fieldId]: val })
         }
+
+        //on cancel btn click
+        const onCancel = () => {
+            alert("Form cancelled")
+        };
+
+        //on submit btn click
+        const onFormSubmit = () => {
+            alert("DEV ALERT - Current application state has been logged in the console")
+            console.log("We will push this to an API once the questions are set up")
+            console.log(this.state)
+        }
+
+        //sample dropdown list array
+        const dropdownListOpts = ["A", "B", "C", "D"]
+
         return (
             <div>
-                <ToggleBtn toggleLeft="Left Toggle Choice" toggleRight="Right Toggle Choice" />
-                <EitherOr question="Which do you prefer" btn1="HTML" btn2="CSS" />
-                <RadioBtn question="Radio Button" answer1="first answer" answer2="second answer" answer3="third answer" answer4="forth answer" />
-                <Dropdown />
-                <Slide settings={settings} question="Test Slider Question" color={this.state.color} />
-            </div>
+                <EitherOr
+                    fieldId="HTMLORCSS"
+                    key="HTMLORCSS"
+                    activeAns={this.state.HTMLORCSS || ""}
+                    onValueChange={onValueChange}
+
+                    question="Which do you prefer?"
+                    btn1="HTML"
+                    btn2="CSS"
+                />
+
+                <RadioBtn
+                    key="dayQ"
+                    fieldId="dayQ"
+                    onValueChange={onValueChange}
+
+                    question="How is your day?"
+                    listOptions={["Good", "Okay", "Bad"]}
+                />
+
+                <Dropdown
+                    key="Fav_letter"
+                    fieldId="Fav_letter"
+                    onValueChange={onValueChange}
+
+                    question="Whats your favorite letter?"
+                    listOptions={dropdownListOpts} />
+
+                <Slide
+                    key="sliderQ"
+                    fieldId="sliderQ"
+                    onValueChange={onValueChange}
+                    settings={settings}
+                    color="blue"
+
+                    question="How much do you enjoy this slider?"
+                />
+
+                <SubmitBtn onCancel={onCancel} onSubmit={onFormSubmit} />
+            </div >
         )
     };
 };
+
 
 export default Questionaire;
