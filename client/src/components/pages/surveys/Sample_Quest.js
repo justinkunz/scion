@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown, EitherOr, RadioBtn, ToggleBtn, Slide, SubmitBtn } from '../form';
+import { Dropdown, EitherOr, RadioBtn, ToggleBtn, Slide, SubmitBtn } from '../../form';
 
 class Questionaire extends React.Component {
     constructor(props) {
