@@ -4,6 +4,8 @@ class HomePage extends React.Component {
   render() {
     return (
       <div>
+        <Navbar activePage="Home" />
+
         <div className="alert alert-success col-8 offset-2 summ" role="alert">
           <h4 className="alert-heading">Intended Parents</h4>
           <p>
@@ -17,12 +19,11 @@ class HomePage extends React.Component {
             about the terms an intended parent needs to meet please check out
             our help documents.
           </p>
-          <hr />
           <a href="/ipSurvey">
             <button className="btn btn-info btn-lg m-2">Take Survey</button>
           </a>
         </div>
-        <Navbar activePage="Home" />
+
         <div className="alert alert-primary col-8 offset-2 summ" role="alert">
           <h4 className="alert-heading">Gestational Carriers</h4>
           <p>
@@ -35,7 +36,6 @@ class HomePage extends React.Component {
             whether or not being a gestational carrier may or may not be right
             for you, please reference our help documents.
           </p>
-          <hr />
           <a href="/gcSurvey">
             <button className="btn btn-info btn-lg m-2">Take Survey</button>
           </a>
