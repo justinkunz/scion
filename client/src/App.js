@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import './css/bootstrap.css';
 import './css/App.css';
@@ -7,6 +8,7 @@ import LoginForm from './components/pages/LogIn';
 import SignUpForm from './components/pages/SignUp';
 import ipSurvey from './components/pages/surveys/ipSurvey';
 import gcSurvey from './components/pages/surveys/gcSurvey';
+
 
 class App extends Component {
   render() {
@@ -22,9 +24,9 @@ class App extends Component {
             <Route path="/sign_up" exact component={SignUpForm} />
           </div>
         </BrowserRouter>
-      </div >
+      </div>
     );
-  };
-};
+  }
+}
 
 export default App;
