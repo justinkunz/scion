@@ -22,11 +22,11 @@ class Navbar extends React.Component {
                         Intended Parents
                     </a>
                     <div className="right menu">
-                        <a className="ui item">
+                        <a href="/sign_up" className="ui item" className={getClassNames("signUp")}>
                             Sign Up
                         </a>
 
-                        <a className="ui item">
+                        <a href="/sign_in" className={getClassNames("signIn")}>
                             Sign In
                         </a>
                     </div>

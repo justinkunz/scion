@@ -1,7 +1,9 @@
 var mongoose = require('mongoose')
-var db = require('../models/GCSurveyResults')
-mongoose.connect("mongodb://localhost/final_proj")
+
 var email = require("../email/email")
+var db = require('../models/GCSurveyResults')
+
+mongoose.connect("mongodb://localhost/final_proj")
 
 function apiRoutes(app) {
 
