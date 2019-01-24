@@ -1,6 +1,11 @@
-var express = require('express');
-var app = express();
-var PORT = process.env.PORT || 3001;
+// dependencies 
+const express = require('express');
+const mongoose =require('mongoose');
+const routes = ""
+
+
+const app = express();
+const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
