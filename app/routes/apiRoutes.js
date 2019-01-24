@@ -1,7 +1,8 @@
 var mongoose = require('mongoose')
+var email = require("../email/email")
+
 var db = require('../models/answers')
 mongoose.connect("mongodb://localhost/final_proj")
-var email = require("../email/email")
 
 function apiRoutes(app) {
 
