@@ -21,4 +21,10 @@ require("./app/routes/apiRoutes")(app);
 // connect to Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/{reactreadinglist}");
 
+// heroku mLab connections
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
+mongoose.connect(MONGODB_URI);
+
+
 app.listen(PORT);
