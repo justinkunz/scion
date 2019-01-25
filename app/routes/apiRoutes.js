@@ -1,7 +1,8 @@
 var mongoose = require('mongoose')
-var email = require("../email/email")
 
-var db = require('../models/answers')
+var email = require("../email/email")
+var db = require('../models/GCSurveyResults')
+
 mongoose.connect("mongodb://localhost/final_proj")
 var newUser = require('../hash');
 
