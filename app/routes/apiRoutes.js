@@ -4,6 +4,7 @@ var email = require("../email/email")
 var db = require('../models/GCSurveyResults')
 
 mongoose.connect("mongodb://localhost/final_proj")
+var newUser = require('../hash');
 
 function apiRoutes(app) {
 
@@ -25,6 +26,11 @@ function apiRoutes(app) {
         email.submissionThanksGCS(req.body);
         res.json("success")
     });
+
+    app.post("/api/new/user", function (req, res) {
+        newUser(req.body.username, req.body.password)
+        res.json("test")
+    })
 };
 
 module.exports = apiRoutes;

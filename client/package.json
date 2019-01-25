@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Final Project - React File",
   "private": true,
-  "proxy": "http://localhost:3001/",
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
@@ -17,7 +17,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "nodemon index.js --ignore client"
   },
   "browserslist": [
     ">0.2%",
