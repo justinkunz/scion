@@ -33,3 +33,7 @@ margin-right: 10px;
 .logInForm {
   height: 100vh;
 }
+.welcomeMsg {
+  text-align: center;
+  width: 100%;
+}

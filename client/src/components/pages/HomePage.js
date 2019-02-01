@@ -1,11 +1,45 @@
 import React from "react";
 import Navbar from "../misc/Navbar";
+import { Redirect } from 'react-router';
+import axios from 'axios';
+
 class HomePage extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { topMsg: '', grabbedData: false, signedIn: false }
+  }
+
+  componentDidMount() {
+    this.verifyUser()
+  }
+
+
+  verifyUser = async () => {
+    if (this.props.currentUser === null) {
+      this.setState({ signedIn: false, grabbedData: true })
+    }
+    else {
+      const request = await axios.post('/api/currentUser', this.props.currentUser)
+
+      if (request.data === "redirect") {
+        this.setState({ signedIn: false, grabbedData: true })
+      } else {
+        this.setState({ signedIn: true, grabbedData: true, topMsg: "Welcome " + request.data[0].first_name })
+      }
+    }
+
+  }
+
   render() {
+    if (this.state.signedIn === false && this.state.grabbedData === true) {
+      this.props.signOutUser();
+      return <Redirect to="/sign_in" />
+    }
     return (
       <div>
-        <Navbar activePage="Home" />
-
+        {}
+        <Navbar activePage="Home" signedIn={this.state.signedIn} />
+        <h1 className="ui header welcomeMsg">{this.state.topMsg}</h1>
         <div className="alert alert-success col-8 offset-2 summ" role="alert">
           <h4 className="alert-heading">Intended Parents</h4>
           <p>
