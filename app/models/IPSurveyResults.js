@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.schema;
+const Schema = mongoose.Schema;
 
 const IPresultSchema = new Schema({
     PL_PC: { type: Boolean, unique: true, require: true },
@@ -14,9 +14,9 @@ const IPresultSchema = new Schema({
     hosp_birth: { type: Boolean, unique: true, require: true },
     implant_timeline: { type: Boolean, unique: true, require: true },
     married_ind: { type: Boolean, unique: true, require: true },
-    relationship_ind: { type: Boolean, unique, require: true },
-    religion: { type: Boolean, unique: true, require: true}
+    relationship_ind: { type: Boolean, require: true },
+    religion: { type: Boolean, unique: true, require: true }
 })
 
-var IPSurveyResults = mongoose.model("IPSurveyResults", IPresultSchema);
+var IPSurveyResults = mongoose.model("IP", IPresultSchema);
 module.exports = IPSurveyResults

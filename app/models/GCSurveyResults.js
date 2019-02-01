@@ -9,7 +9,7 @@ var GCresultSchema = new Schema({
   embryos_ct: { type: String, unique: true, require: true },
   ethnicity: { type: String, unique: true, require: true },
   haveChildren: { type: Boolean, unique: true, require: true },
-  havePets: { type: Boolean, unique: true, require: true }, 
+  havePets: { type: Boolean, unique: true, require: true },
   hosp_birth: { type: Boolean, unique: true, require: true },
   insurance: { type: Boolean, unique: true, require: true },
   location: { type: Boolean, unique: true, require: true },
@@ -18,5 +18,5 @@ var GCresultSchema = new Schema({
   religion: { type: Boolean, unique: true, require: true }
 });
 
-var GCSurveyResults = mongoose.model("GCSurveyResults", GCresultSchema);
+var GCSurveyResults = mongoose.model("GC", GCresultSchema);
 module.exports = GCSurveyResults;
