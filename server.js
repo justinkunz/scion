@@ -8,7 +8,13 @@ const PORT = process.env.PORT || 3001;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/happyFamily");
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/happyFamily";
+
+mongoose.connect(MONGODB_URI);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 require("./app/routes/apiRoutes")(app)
 
