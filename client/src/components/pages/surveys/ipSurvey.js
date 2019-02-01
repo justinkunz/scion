@@ -69,7 +69,7 @@ class IPSurvey extends React.Component {
       "Buddist",
       "Islamic"
     ];
-    const embr_ct = ["1-3", "4-6", "7-10", ">10"];
+    const embryos_count = ["1-3", "4-6", "7-10", ">10"];
     const fertility_frequency = [
       "not yet",
       "1-3 months",
@@ -112,11 +112,11 @@ class IPSurvey extends React.Component {
           listOptions={religions}
         />
         <RadioBtn
-          key="embryos_ct"
-          fieldId="embryos_ct"
+          key="embryos_count"
+          fieldId="embryos_count"
           onValueChange={onValueChange}
           question="How many embryos would you like to implant?"
-          listOptions={embr_ct}
+          listOptions={embryos_count}
         />
         <EitherOr
           fieldId="married_ind"
