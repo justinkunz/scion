@@ -37,9 +37,9 @@ class HomePage extends React.Component {
     }
     return (
       <div>
-        {}
+        
         <Navbar activePage="Home" signedIn={this.state.signedIn} />
-        <h1 className="ui header welcomeMsg">{this.state.topMsg}</h1>
+        {/* <h1 className="ui header welcomeMsg">{this.state.topMsg}</h1>
         <div className="alert alert-success col-8 offset-2 summ" role="alert">
           <h4 className="alert-heading">Intended Parents</h4>
           <p>
@@ -73,7 +73,8 @@ class HomePage extends React.Component {
           <a href="/gcSurvey">
             <button className="btn btn-info btn-lg m-2">Take Survey</button>
           </a>
-        </div>
+        </div> */}
+        HOME PAGE
       </div>
     );
   }
