@@ -17,12 +17,14 @@ class App extends Component {
     this.state = { token: null }
   }
 
-  signInUser = tokenObj => this.setState({ token: tokenObj });
+  signInUser = token => {
+    localStorage.setItem("token", token)
+    this.setState({ "token": token });
+  }
 
-  signOutUser = () => this.setState({ token: null });
-
-  componentDidUpdate() {
-    console.log(this.state)
+  signOutUser = () => {
+    localStorage.removeItem("token")
+    this.setState({ token: null });
   }
 
   render() {
