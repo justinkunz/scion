@@ -8,6 +8,7 @@ import LoginForm from './components/pages/LogIn';
 import SignUpForm from './components/pages/SignUp';
 import ipSurvey from './components/pages/surveys/ipSurvey';
 import gcSurvey from './components/pages/surveys/gcSurvey';
+import GCInfo from './components/pages/surveys/GCInfo';
 import SignOut from './components/pages/SignOut';
 import SignIn from './components/pages/SignUpChoose';
 
@@ -35,6 +36,7 @@ class App extends Component {
             <Route path="/" exact render={() => <HomePage signOutUser={this.signOutUser} currentUser={this.state.token} />} />
             <Route path="/ipSurvey" exact component={ipSurvey} />
             <Route path="/gcSurvey" exact component={gcSurvey} />
+            <Route path="/GCInfo" exact component={GCInfo} />
             <Route path="/results" exact component={ResultsPage} />
             <Route path="/sign_up" exact component={SignIn} />
             <Route path="/sign_out" exact render={() => <SignOut signOutUser={this.signOutUser} />} />
