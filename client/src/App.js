@@ -55,15 +55,9 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Route path="/" exact render={() => <HomePage signOutUser={this.signOutUser} currentUser={this.state.token} />} />
-<<<<<<< HEAD
-            <Route path="/ipSurvey" exact component={ipSurvey} />
-            <Route path="/gcSurvey" exact component={gcSurvey} />
-            <Route path="/GCInfo" exact component={GCInfo} />
-=======
             <Route path="/sign_up/ip" exact render={() => <SignUpForm type="IP" />} />
             <Route path="/hp2" exact component={Hp2} />
             <Route path="/sign_up/gc" exact render={() => <SignUpForm type="GC" />} />
->>>>>>> 25dfc10a060593191f23b39dc53bb4b76183a1ad
             <Route path="/results" exact component={ResultsPage} />
             <Route path="/sign_up" exact component={SignUpChoose} />
             <Route path="/sign_out" exact render={() => <SignOut signOutUser={this.signOutUser} />} />
