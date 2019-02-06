@@ -3,7 +3,7 @@ var email = require("../email/email");
 var db = require('../models');
 var hash = require('../hash');
 
-mongoose.connect("mongodb://localhost/generalDb");
+mongoose.connect("mongodb://localhost/happyFamily");
 
 function apiRoutes(app) {
 
