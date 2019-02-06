@@ -1,11 +1,11 @@
 import React from "react";
 import Navbar from "../../misc/Navbar";
-import { Dropdown, EitherOr, RadioBtn, Slide, SubmitBtn } from "../../form";
+import { Dropdown, EitherOr, RadioBtn, Slide, SubmitBtn, Location } from "../../form";
 
 class GCSurvey extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { signedIn: true };
   }
 
   render() {
@@ -79,6 +79,7 @@ class GCSurvey extends React.Component {
       "2+ years from now"
     ];
     const ethnicity = [
+      "Please Select",
       "Of Africian decent",
       "Caucasian",
       "Middle Eastern",
@@ -92,12 +93,13 @@ class GCSurvey extends React.Component {
       "$21,000 - 49,000",
       "$50,000 - 75,000",
       "$75,000 - $100,000",
-      "$100,000 <"
+      "> $100,000"
     ];
 
     return (
       <div>
-        <Navbar activePage="Gestational Carriers" />
+        <Navbar activePage="Preference Survey" signedIn={this.state.signedIn} />
+        <Location />
         <Dropdown
           key="degree_type"
           fieldId="degree_type"
@@ -213,7 +215,7 @@ class GCSurvey extends React.Component {
           btn2="No"
         />
         <SubmitBtn onCancel={onCancel} onSubmit={onFormSubmit} />
-      </div>
+      </div >
     );
   }
 }

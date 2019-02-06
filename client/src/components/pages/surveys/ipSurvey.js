@@ -6,7 +6,7 @@ import { Dropdown, EitherOr, RadioBtn, Slide, SubmitBtn } from "../../form";
 class IPSurvey extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { signedIn: true };
   }
 
   render() {
@@ -87,7 +87,7 @@ class IPSurvey extends React.Component {
 
     return (
       <div>
-        <Navbar activePage="Intended Parents" />
+        <Navbar activePage="Preference Survey" signedIn={this.state.signedIn} />
         <Dropdown
           key="degree_type"
           fieldId="degree_type"
