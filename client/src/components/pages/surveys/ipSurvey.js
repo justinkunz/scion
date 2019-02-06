@@ -93,9 +93,9 @@ class IPSurvey extends React.Component {
 
     return (
       <div>
-        {/* Question 1 */}
         <Navbar activePage="Intended Parents" />
         <Navbar activePage="Preference Survey" signedIn={this.state.signedIn} />
+        {/* Question 1 */}
         <Dropdown
           key="degree_type"
           fieldId="degree_type"

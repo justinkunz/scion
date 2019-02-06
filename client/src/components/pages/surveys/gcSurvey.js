@@ -88,10 +88,10 @@ class GCSurvey extends React.Component {
 
     return (
       <div>
-        {/* Question 1 */}
         <Navbar activePage="Gestational Carriers" />
         <Navbar activePage="Preference Survey" signedIn={this.state.signedIn} />
         <Location />
+        {/* Question 1 */}
         <Dropdown
           key="degree_type"
           fieldId="degree_type"
