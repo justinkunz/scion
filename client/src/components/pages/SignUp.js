@@ -1,12 +1,13 @@
 import React from 'react';
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
-import SweetAlert from 'sweetalert2-react';
+import SweetAlert from 'react-bootstrap-sweetalert';
 import Navbar from '../misc/Navbar';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
 
 class SignIn extends React.Component {
+
     constructor(props) {
         super(props)
         console.log(this.props)
@@ -25,8 +26,10 @@ class SignIn extends React.Component {
             acctCreated: false
         }
     }
-    onLoginClick = () => {
-        console.log(this.state)
+
+    frontEndValidation = () => {
+
+        //missing fields
         if (this.state.first_name === '' || this.state.last_name === '' || this.state.email === '' || this.state.phone_num === '' || this.state.confirm_pw === '' || this.state.password === '') {
             this.setState({
                 title: "Yikes!",
@@ -35,23 +38,86 @@ class SignIn extends React.Component {
             });
             return
         }
+
+        //valid email check
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const isEmail = re.test(String(this.state.email).toLowerCase());
+        if (!isEmail) {
+            this.setState({
+                title: "Uh oh!",
+                text: "Please enter a valid email",
+                show: true
+            });
+            return true
+        };
+
+        //phone number not a number
+        if (isNaN(this.state.phone_num)) {
+            this.setState({
+                title: "Uh oh!",
+                text: "Phone number must be numeric",
+                show: true
+            });
+            return true
+        }
+
+        //passwords dont match
+
         if (this.state.confirm_pw !== this.state.password) {
             this.setState({
                 title: "Uh oh!",
                 text: "Passwords do not match!",
                 show: true
             });
-            return
-        }
+            return true
+        };
+
+
+        //passwords less than 6 chars
+        if (this.state.password.length < 6) {
+            this.setState({
+                title: "Uh oh!",
+                text: "Password must be at least 6 characters long!",
+                show: true
+            });
+            return true
+        };
+
+        return false
+    };
+
+    onLoginClick = () => {
+        if (this.frontEndValidation()) return
 
         axios.post('/api/new/user', this.state).then(data => {
+            console.log(data)
+            console.log(data.data.error)
+
+            if (data.data.error === "Could not sign up user") {
+                this.setState({
+                    title: "Uh oh!",
+                    text: "An error occured when creating your account",
+                    show: true
+                });
+                return
+            };
+            if (data.data.error === "existing user") {
+                this.setState({
+                    title: "Your account already exists!",
+                    text: "Please sign in with your existing information",
+                    show: true,
+                    acctCreated: true
+                })
+                return
+            };
             if (data.status === 200) {
+
                 this.setState({
                     title: "Success!",
                     text: "Account Successfully Created",
                     show: true,
+                    acctCreated: true
                 })
-                this.setState({ acctCreated: true })
 
             }
             else {
@@ -64,8 +130,9 @@ class SignIn extends React.Component {
         })
     }
 
+
     render() {
-        if (this.state.acctCreated === true) {
+        if (this.state.acctCreated === true && this.state.show === false) {
             return <Redirect to="/sign_in" />
         }
         return (
@@ -123,9 +190,12 @@ class SignIn extends React.Component {
                                 <SweetAlert
                                     show={this.state.show}
                                     title={this.state.title}
-                                    text={this.state.text}
                                     onConfirm={() => this.setState({ show: false })}
-                                />
+                                >
+                                    <div style={{ maxHeight: "20vh" }}>
+                                        {this.state.text}
+                                    </div>
+                                </SweetAlert>
                             </Segment>
                         </Form>
 

@@ -35,6 +35,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.1",
+    "react-bootstrap-sweetalert": "^4.4.1",
     "sweetalert2": "^8.0.1",
     "sweetalert2-react": "^0.7.2"
   }
