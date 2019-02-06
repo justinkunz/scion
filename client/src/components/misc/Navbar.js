@@ -15,8 +15,8 @@ class Navbar extends React.Component {
                         <a href="/" className={this.getClassNames("Home")}>
                             Home
                         </a>
-                        <a href="/my_account" className={this.getClassNames("Gestational Carriers")}>
-                            My Account
+                        <a href="/survey" className={this.getClassNames("Preference Survey")}>
+                            Preference Survey
                     </a>
 
                         <div className="right menu">
@@ -32,15 +32,9 @@ class Navbar extends React.Component {
         return (
             <div>
                 <div className="ui secondary pointing menu">
-                    {/* <a href="/" className={this.getClassNames("Home")}>
+                    <a href="/" className={this.getClassNames("Home")}>
                         Home
-                        </a> */}
-                    <a href="/gcSurvey" className={this.getClassNames("Gestational Carriers")}>
-                        Gestational Carriers
-                    </a>
-                    <a href="ipSurvey" className={this.getClassNames("Intended Parents")}>
-                        Intended Parents
-                    </a>
+                        </a>
                     <div className="right menu">
                         <a href="/sign_up" className="ui item" className={this.getClassNames("signUp")}>
                             Sign Up

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
-import SweetAlert from 'sweetalert2-react';
+import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
+import SweetAlert from 'react-bootstrap-sweetalert';
 import Navbar from '../misc/Navbar'
 import axios from 'axios';
 
@@ -14,9 +14,10 @@ class LoginForm extends React.Component {
 
     signUserIn = async () => {
         const request = await axios.post('/api/signIn', this.state)
-        console.log(request.data)
+
         if (request.data.message === "success") {
             this.props.signInUser(request.data.token)
+
         }
         else {
             this.setState({ title: "Uh oh!", text: "Your email address and/or password was incorrect!", show: true })
@@ -58,12 +59,17 @@ class LoginForm extends React.Component {
                                 <Button onClick={() => this.signUserIn()} color='teal' fluid size='large'>
                                     Login
                                 </Button>
+
                                 <SweetAlert
                                     show={this.state.show}
                                     title={this.state.title}
-                                    text={this.state.text}
                                     onConfirm={() => this.setState({ show: false })}
-                                />
+                                >
+                                    <div style={{ maxHeight: "20vh" }}>
+                                        {this.state.text}
+                                    </div>
+                                </SweetAlert>
+
                             </Segment>
                         </Form>
                         <Message>

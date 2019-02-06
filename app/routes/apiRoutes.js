@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var email = require("../email/email");
 var db = require('../models');
 var hash = require('../hash');
+var jwt = require('jsonwebtoken');
 
 mongoose.connect("mongodb://localhost/happyFamily");
 
@@ -30,23 +31,28 @@ function apiRoutes(app) {
 
     //call for protected pages to find if user / which user is currently logged in
     app.post('/api/currentUser', function (req, res) {
+        var token = req.body.token;
+        console.log(token)
 
-        //hash token from object passed in
-        var hashedToken = hash.hashThis(toString(req.body.timeIn) + toString(req.body.userId) + toString(req.body.pin) + req.body.user_type)
-        console.log(hashedToken)
-        //if the hashed version of the data is equal to the token key in the object, search the database for the user, return data
-        if (hashedToken == req.body.tokenKey) {
-            db.users.find({ _id: req.body.userId }).then(function (data, err) {
+        //decode token
+        var decoded = jwt.decode(token)
+        console.log(decoded)
+
+        //if data exists, return user data
+        if (decoded.data) {
+            db.users.find({ _id: decoded.data }).then(function (data, err) {
                 if (err) throw err;
+                console.log(data)
                 res.json(data)
             });
+        }
 
-        } else {
-            //else, tell front end to redirect to sign in page
+        //if data can not be extracted, return redirect command
+        else {
             res.json("redirect")
         }
-    })
 
+    })
     //call to sign in users
     app.post("/api/signIn", function (req, res) {
 
@@ -56,24 +62,15 @@ function apiRoutes(app) {
         db.users.find({ email: req.body.username.toLowerCase() }).then(function (data, err) {
             if (err || data.length === 0) res.send("error")
 
-            console.log(data)
             if (hashedInput === data[0].password) {
 
-                var randomPIN = Math.floor(Math.random() * 99999)
-                var currentTime = new Date
-                var userId = data[0]._id
-                var userType = data[0].user_type
-                var hashedToken = hash.hashThis(toString(currentTime) + toString(userId) + toString(randomPIN) + userType)
+                //create token
+                var token = jwt.sign({
+                    exp: Math.floor(Date.now() / 1000) + (60 * 60),
+                    data: data[0]._id,
+                }, 'secret');
 
-                var tokenObj = {
-                    userId: userId,
-                    timeIn: currentTime,
-                    pin: randomPIN,
-                    user_type: userType,
-                    tokenKey: hashedToken
-                }
-
-                res.send({ message: "success", token: tokenObj })
+                res.send({ message: "success", token: token })
             }
             else {
                 res.send("error")
@@ -81,33 +78,82 @@ function apiRoutes(app) {
 
         })
     })
-
+    app.get("/api/delete", function (req, res) {
+        db.users.remove().then(function (err, data) {
+            res.json(data)
+        });
+    });
     //creating new accounts
     app.post("/api/new/user", function (req, res) {
         var userInfo = req.body
 
-        //return error if any fields are null
-        if (userInfo.first_name === '' || userInfo.last_name === '' || userInfo.email === '' || userInfo.phone_num === '' || userInfo.confirm_pw === '' || userInfo.password === '') {
-            res.status(400).send({ "error": "Could not sign up user" })
+        //data validation
+
+        //email check
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        isEmail = re.test(String(userInfo.email).toLowerCase());
+        if (!isEmail) {
+            res.send({ "error": "Could not sign up user" })
+            return
         }
 
-        //get hashed pw
-        var hashPW = hash.hashThis(req.body.password)
+        //missing fields
+        if (userInfo.first_name === '' || userInfo.last_name === '' || userInfo.email === '' || userInfo.phone_num === '' || userInfo.confirm_pw === '' || userInfo.password === '') {
+            res.send({ "error": "Could not sign up user" })
+            return
+        }
 
-        db.users.create({
-            email: userInfo.email.toLowerCase(),
-            password: hashPW,
-            first_name: userInfo.first_name.charAt(0).toUpperCase() + userInfo.first_name.slice(1),
-            last_name: userInfo.last_name.charAt(0).toUpperCase() + userInfo.last_name.slice(1),
-            phone_num: userInfo.phone_num,
-            user_type: userInfo.type,
-            created_at: new Date
-        }).then(function (err, data) {
-            if (err) res.status(400).send({ "error": "Could not sign up user" })
-            console.log(data)
-        })
-        res.status(200).send({ "success": "Successfully created user account" })
-    })
-};
+        //phone number not a number
+        if (isNaN(userInfo.phone_num)) {
+            res.send({ "error": "Could not sign up user" })
+            return
+        }
+
+        //passwords dont match
+        if (userInfo.confirm_pw !== userInfo.password) {
+            res.send({ "error": "Could not sign up user" })
+            return
+        }
+
+        //passwords less than 6 chars
+        if (userInfo.password.length < 6) {
+            res.send({ "error": "Could not sign up user" })
+            return
+        }
+
+        //find existing accounts with that username
+        db.users.find({ email: userInfo.email.toLowerCase() }).then(function (data, err) {
+
+
+            if (data.length === 0) {
+
+                //get hashed pw
+                var hashPW = hash.hashThis(req.body.password)
+
+                db.users.create({
+                    email: userInfo.email.toLowerCase(),
+                    password: hashPW,
+                    first_name: userInfo.first_name.charAt(0).toUpperCase() + userInfo.first_name.slice(1),
+                    last_name: userInfo.last_name.charAt(0).toUpperCase() + userInfo.last_name.slice(1),
+                    phone_num: userInfo.phone_num,
+                    user_type: userInfo.type,
+                    created_at: new Date,
+                    answered_survey: false
+                }).then(function (err, data) {
+                    res.send({ "error": "Could not sign up user" })
+                    return
+                    console.log(data)
+                })
+                res.status(200).send({ "success": "Successfully created user account" })
+                return
+            }
+
+            //existing username
+            res.send({ "error": "existing user" })
+            return
+        });
+
+    });
+}
 
 module.exports = apiRoutes;
