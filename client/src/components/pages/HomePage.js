@@ -25,18 +25,29 @@ class HomePage extends React.Component {
       const request = await axios.post('/api/currentUser', { token: localStorage.getItem("token") })
 
       if (request.data === "redirect") {
-        this.setState({ signedIn: false, grabbedData: true })
+        this.setState({ signedIn: false, grabbedData: true, answered_survey: request.data.answered_survey })
       } else {
-        this.setState({ signedIn: true, grabbedData: true, topMsg: "Welcome " + request.data[0].first_name })
+
+        if (request.data[0]) {
+          this.setState({ signedIn: true, grabbedData: true, topMsg: "Welcome " + request.data[0].first_name })
+        }
+        else {
+          this.setState({ signedIn: false, grabbedData: true })
+        }
       }
     }
 
   }
 
   render() {
-    if (this.state.signedIn === false && this.state.grabbedData === true) {
+
+    if (!this.state.signedIn && this.state.grabbedData) {
       this.props.signOutUser();
       return <Redirect to="/sign_in" />
+    }
+
+    if (!this.state.answered_survey && this.state.grabbedData) {
+      return <Redirect to="/survey" />
     }
     return (
       <div>

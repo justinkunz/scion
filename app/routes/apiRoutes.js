@@ -78,7 +78,11 @@ function apiRoutes(app) {
 
         })
     })
-
+    app.get("/api/delete", function (req, res) {
+        db.users.remove().then(function (err, data) {
+            res.json(data)
+        });
+    });
     //creating new accounts
     app.post("/api/new/user", function (req, res) {
         var userInfo = req.body
@@ -133,7 +137,8 @@ function apiRoutes(app) {
                     last_name: userInfo.last_name.charAt(0).toUpperCase() + userInfo.last_name.slice(1),
                     phone_num: userInfo.phone_num,
                     user_type: userInfo.type,
-                    created_at: new Date
+                    created_at: new Date,
+                    answered_survey: false
                 }).then(function (err, data) {
                     res.send({ "error": "Could not sign up user" })
                     return
