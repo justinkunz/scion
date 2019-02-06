@@ -38,19 +38,19 @@ class IPSurvey extends React.Component {
     };
 
     // ------------------------------------------------------------
-    // PL_PC: "Pro Life"
-    // birthCenter: "Yes"
-    // cyro_presrv_ind: "Yes"
-    // degree_type: "Associates Degree"
-    // donor_req: "No"
-    // embryos_ct: "4-6"
-    // fert_treat: "Yes"
-    // fertility_frequency: "not yet"
-    // hosp_birth: "Yes"
-    // implant_timeline: "Within the next 3 months"
-    // married_ind: "Yes"
-    // relationship_ind: "No"
-    // religion: "Jewish"
+    // 1. What is the highest level of education you prefer your gestational carrier to have?
+    // 2. Do you prefer your gestational carrier to be pro-life or pro choice?
+    // 3. Do you have a preference to your gestational carriers religious preference?
+    // 4. How many embryos would you like to implant?
+    // 5. Would you allow your GC to give birth at a birthing center?
+    // 6. Would you allow your GC to give birth at a hospital?
+    // 7. How soon would you like to implant?
+    // 8. Do you prefer your GC to have a support system within 30 miles of their address?
+    // 9. Do you feel comfortable with a GC that is currently the parent or guardian of a child?
+    // 10. Do you prefer your GC to have previous experience as a GC?
+    // 11. Do you have a preference of your GC’s current relationship status?
+    // 12. What amount are you willing to compensate the GC for their services?
+    // 13. Do you require your GC to have insurance?
     // ------------------------------------------------------------
 
     const education_lvl = [
@@ -70,24 +70,32 @@ class IPSurvey extends React.Component {
       "Islamic"
     ];
     const embryos_count = ["1-3", "4-6", "7-10", ">10"];
-    const fertility_frequency = [
-      "not yet",
-      "1-3 months",
-      "4-6 months",
-      "7-10 months",
-      ">10 months"
+    const relationshipStatus = [
+      "n/a",
+      "Single",
+      "Married",
+      "Commmon Law Married"
     ];
     const how_soon = [
-      "Within the next 3 months",
-      "In 3-6 months",
-      "In 6-12 months",
-      "In 1-2 years",
+      "0-3 months",
+      "3-6 months",
+      "6-12 months",
+      "1-2 years",
       "2+ years from now"
+    ];
+    const desiredCompensation = [
+      "< $20,000",
+      "$21,000 - 49,000",
+      "$50,000 - 75,000",
+      "$75,000 - $100,000",
+      "$100,000 <"
     ];
 
     return (
       <div>
+        <Navbar activePage="Intended Parents" />
         <Navbar activePage="Preference Survey" signedIn={this.state.signedIn} />
+        {/* Question 1 */}
         <Dropdown
           key="degree_type"
           fieldId="degree_type"
@@ -95,15 +103,17 @@ class IPSurvey extends React.Component {
           question="What is the highest level of education you would prefer your gestational carrier to have?"
           listOptions={education_lvl}
         />
+        {/* Question 2 */}
         <EitherOr
           fieldId="PL_PC"
           key="PL_PC"
           activeAns={this.state.PL_PC || ""}
           onValueChange={onValueChange}
           question="Would you prefer your gestational carrier to be pro-life or pro-choice?"
-          btn1="Pro Life"
-          btn2="Pro Choice"
+          btn1="Pro-Life"
+          btn2="Pro-Choice"
         />
+        {/* Question 3 */}
         <Dropdown
           key="religion"
           fieldId="religion"
@@ -111,6 +121,7 @@ class IPSurvey extends React.Component {
           question="Do you have a preference on your gestational carrier's religious preference?"
           listOptions={religions}
         />
+        {/* Question 4 */}
         <RadioBtn
           key="embryos_count"
           fieldId="embryos_count"
@@ -118,24 +129,7 @@ class IPSurvey extends React.Component {
           question="How many embryos would you like to implant?"
           listOptions={embryos_count}
         />
-        <EitherOr
-          fieldId="married_ind"
-          key="married_ind"
-          activeAns={this.state.married_ind || ""}
-          onValueChange={onValueChange}
-          question="Are you married and/or common law married?"
-          btn1="Yes"
-          btn2="No"
-        />
-        <EitherOr
-          fieldId="relationship_ind"
-          key="relationship_ind"
-          activeAns={this.state.relationship_ind || ""}
-          onValueChange={onValueChange}
-          question="Are you currently in a commited relationship?"
-          btn1="Yes"
-          btn2="No"
-        />
+        {/* Question 5 */}
         <EitherOr
           fieldId="birthCenter"
           key="birthCenter"
@@ -145,40 +139,17 @@ class IPSurvey extends React.Component {
           btn1="Yes"
           btn2="No"
         />
+        {/* Question 6 */}
         <EitherOr
-          fieldId="hosp_birth"
-          key="hosp_birth"
+          fieldId="hospital"
+          key="hospital"
           activeAns={this.state.hosp_birth || ""}
           onValueChange={onValueChange}
           question="Do you prefer to have your gestational carrier give birth at a hospital?"
           btn1="Yes"
           btn2="No"
         />
-        <EitherOr
-          fieldId="fert_treat"
-          key="fert_treat"
-          activeAns={this.state.fert_treat || ""}
-          onValueChange={onValueChange}
-          question="Have you ever received any kind of fertility treatment?"
-          btn1="Yes"
-          btn2="No"
-        />
-        <RadioBtn
-          key="fertility_frequency"
-          fieldId="fertility_frequency"
-          onValueChange={onValueChange}
-          question="If so, how long ago did you recieve this treatment?"
-          listOptions={fertility_frequency}
-        />
-        <EitherOr
-          fieldId="cyro_presrv_ind"
-          key="cyro_presrv_ind"
-          activeAns={this.state.cyro_presrv_ind || ""}
-          onValueChange={onValueChange}
-          question="Do you have any specimens and/or eggs and/or embryos currently cryo-preserved?"
-          btn1="Yes"
-          btn2="No"
-        />
+        {/* Question 7 */}
         <RadioBtn
           key="implant_timeline"
           fieldId="implant_timeline"
@@ -186,12 +157,59 @@ class IPSurvey extends React.Component {
           question="How soon do you want to implant?"
           listOptions={how_soon}
         />
+        {/* Question 8 */}
         <EitherOr
-          fieldId="donor_req"
-          key="donor_req"
-          activeAns={this.state.donor_req || ""}
+          fieldId="location"
+          key="location"
+          activeAns={this.state.location || ""}
           onValueChange={onValueChange}
-          question="Do you require an embryo donor?"
+          question="Do you prefer your GC to have a support system that lives within 30 miles?"
+          btn1="Yes"
+          btn2="No"
+        />
+        {/* Question 9 */}
+        <EitherOr
+          fieldId="haveChildren"
+          key="haveChildren"
+          activeAns={this.state.haveChildren || ""}
+          onValueChange={onValueChange}
+          question="Do you feel comfertable with a GC that is the legal parent/ guardian of a person(s) under the age of 18 years old?"
+          btn1="Yes"
+          btn2="No"
+        />
+        {/* Question 10 */}
+        <EitherOr
+          fieldId="previous_gc"
+          key="previous_gc"
+          activeAns={this.state.previous_gc || ""}
+          onValueChange={onValueChange}
+          question="do you prefer your GC to have prior expeirence as a gestational carrier?"
+          btn1="Yes"
+          btn2="No"
+        />
+        {/* Question 11 */}
+        <Dropdown
+          key="relationshipStatus"
+          fieldId="relationshipStatus"
+          onValueChange={onValueChange}
+          question="What is your relationship status?"
+          listOptions={relationshipStatus}
+        />
+        {/* Question 12 */}
+        <RadioBtn
+          key="desiredCompensation"
+          fieldId="desiredCompensation"
+          onValueChange={onValueChange}
+          question="What is your desired compensation?"
+          listOptions={desiredCompensation}
+        />
+        {/* Question 13 */}
+        <EitherOr
+          fieldId="insurance"
+          key="insurance"
+          activeAns={this.state.insurance || ""}
+          onValueChange={onValueChange}
+          question="Would you require your GC to have insurance prior to implantation?"
           btn1="Yes"
           btn2="No"
         />
