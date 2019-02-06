@@ -10,8 +10,8 @@ var users = new Schema({
   phone_num: { type: String },
   created_at: { type: Date },
   survery_answered: { type: Boolean, default: false },
-  survey_results: { type: Object}
+  survey_results: { type: Object }
 });
 
-var userData = mongoose.model("users", usersDataSchema);
+var userData = mongoose.model("users", users);
 module.exports = userData;

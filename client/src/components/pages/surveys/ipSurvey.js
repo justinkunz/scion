@@ -54,7 +54,7 @@ class IPSurvey extends React.Component {
     // ------------------------------------------------------------
 
     const education_lvl = [
-      "N/A",
+      "GED",
       "High School Diploma",
       "Some College",
       "Associates Degree",
