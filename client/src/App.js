@@ -7,13 +7,7 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { HomePage, ResultsPage } from './components/pages';
 import LoginForm from './components/pages/LogIn';
 import SignUpForm from './components/pages/SignUp';
-<<<<<<< HEAD
-import ipSurvey from './components/pages/surveys/ipSurvey';
-import gcSurvey from './components/pages/surveys/gcSurvey';
-import GCInfo from './components/pages/surveys/GCInfo';
-=======
 import GCSurvey from './components/pages/surveys/gcSurvey';
->>>>>>> 25dfc10a060593191f23b39dc53bb4b76183a1ad
 import SignOut from './components/pages/SignOut';
 import SignUpChoose from './components/pages/SignUpChoose';
 import IPSurvey from './components/pages/surveys/ipSurvey';
