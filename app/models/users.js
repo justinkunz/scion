@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-var usersDataSchema = new Schema({
+var users = new Schema({
   email: { type: String, unique: true },
   password: { type: String },
   user_type: { type: String, required: true },
@@ -9,9 +9,9 @@ var usersDataSchema = new Schema({
   last_name: { type: String },
   phone_num: { type: String },
   created_at: { type: Date },
-  answered_survey: { type: Boolean },
-  survey_answers: {type: Object},
+  survery_answered: { type: Boolean, default: false },
+  survey_results: { type: Object }
 });
 
-var userData = mongoose.model("users", usersDataSchema);
+var userData = mongoose.model("users", users);
 module.exports = userData;

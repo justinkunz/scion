@@ -38,20 +38,19 @@ class GCSurvey extends React.Component {
 
     // EXAMPLE OF GC SURVEY
     // ------------------------------------------------------------
-    // PL_PC: "Pro Choice" 0 or 1
-    // birthCenter: "Yes" 0 or 1
-    // degree_type: "Bachelors Degree" 0 1 2a 3 4 . . .
-    // desiredCompensation: "$50,000 - 75,000" 0 1 2 3 4 . . .
-    // embryos_ct: "4-6" 0 1 2 3
-    // ethnicity: "Caucasian" 0 or 1
-    // haveChildren: "Yes" 0 or 1
-    // havePets: "Yes" 0 or 1
-    // hosp_birth: "Yes" 0 or 1
-    // insurance: "No" 0 or 1
-    // location: "Yes" 0 or 1
-    // previous_gc: "No" 0 or 1
-    // relationshipStatus: "Married" 0 or 1
-    // religion: "Christian" 0 or 1
+    // 1. What is your highest level of education?
+    // 2. Are you pro-life or pro choice?
+    // 3. What religion do you practice?
+    // 4. How many embryos would you allowed to be implanted?
+    // 5. Do you prefer to give birth at a birthing center?
+    // 6. Do you prefer to give birth at a hospital?
+    // 7. How soon would you be able to implant the IP’s embryos?
+    // 8. Do you have a support system within 30 miles of your current address?
+    // 9. Are you currently the legal parent or guardian of a child?
+    // 10. Do you have any previous experience as a GC?
+    // 11. What is your current relationship status?
+    // 12. What is your desired compensation?
+    // 13. Are you currently insured?
     // ------------------------------------------------------------
 
     const education_lvl = [
@@ -71,22 +70,6 @@ class GCSurvey extends React.Component {
       "Islamic"
     ];
     const embr_ct = ["1-3", "4-6", "7-10", ">10"];
-    const how_soon = [
-      "Within the next 3 months",
-      "In 3-6 months",
-      "In 6-12 months",
-      "In 1-2 years",
-      "2+ years from now"
-    ];
-    const ethnicity = [
-      "Please Select",
-      "Of Africian decent",
-      "Caucasian",
-      "Middle Eastern",
-      "Indengenous Peoples",
-      "Pacific Islander",
-      "Prefer not to say"
-    ];
     const relationshipStatus = ["Single", "Married", "Commmon Law Married"];
     const desiredCompensation = [
       "< $20,000",
@@ -95,11 +78,20 @@ class GCSurvey extends React.Component {
       "$75,000 - $100,000",
       "> $100,000"
     ];
+    const how_soon = [
+      "0-3 months",
+      "3-6 months",
+      "6-12 months",
+      "1-2 years",
+      "2+ years from now"
+    ];
 
     return (
       <div>
+        <Navbar activePage="Gestational Carriers" />
         <Navbar activePage="Preference Survey" signedIn={this.state.signedIn} />
         <Location />
+        {/* Question 1 */}
         <Dropdown
           key="degree_type"
           fieldId="degree_type"
@@ -107,52 +99,33 @@ class GCSurvey extends React.Component {
           question="What is your highest level of education?"
           listOptions={education_lvl}
         />
+        {/* Question 2 */}
         <EitherOr
           fieldId="PL_PC"
           key="PL_PC"
           activeAns={this.state.PL_PC || ""}
           onValueChange={onValueChange}
-          question="Are you Pro Life or Pro Choice?"
-          btn1="Pro Life"
-          btn2="Pro Choice"
+          question="Are you pro-Life or pro-Choice?"
+          btn1="Pro-Life"
+          btn2="Pro-Choice"
         />
+        {/* Questions 3 */}
         <Dropdown
           key="religion"
           fieldId="religion"
           onValueChange={onValueChange}
-          question="What is your religion?"
+          question="What religion do you practice?"
           listOptions={religions}
         />
-        <Dropdown
-          key="ethnicity"
-          fieldId="ethnicity"
-          onValueChange={onValueChange}
-          question="What is your ethnicity?"
-          listOptions={ethnicity}
-        />
+        {/* Question 4 */}
         <RadioBtn
-          key="embryos_ct"
-          fieldId="embryos_ct"
+          key="embryos_count"
+          fieldId="embryos_count"
           onValueChange={onValueChange}
           question="How many embryos will you allow the intended parents to implant?"
           listOptions={embr_ct}
         />
-        <Dropdown
-          key="relationshipStatus"
-          fieldId="relationshipStatus"
-          onValueChange={onValueChange}
-          question="What is your relationship status?"
-          listOptions={relationshipStatus}
-        />
-        <EitherOr
-          fieldId="location"
-          key="location"
-          activeAns={this.state.location || ""}
-          onValueChange={onValueChange}
-          question="Do you have a support system that lives within 30 miles?"
-          btn1="Yes"
-          btn2="No"
-        />
+        {/* Question 5 */}
         <EitherOr
           fieldId="birthCenter"
           key="birthCenter"
@@ -162,15 +135,45 @@ class GCSurvey extends React.Component {
           btn1="Yes"
           btn2="No"
         />
+        {/* Question 6 */}
         <EitherOr
-          fieldId="hosp_birth"
-          key="hosp_birth"
+          fieldId="hospital"
+          key="hospital"
           activeAns={this.state.hosp_birth || ""}
           onValueChange={onValueChange}
           question="Are you willing to give birth at a hospital?"
           btn1="Yes"
           btn2="No"
         />
+        {/* Question 7 */}
+        <RadioBtn
+          key="implant_timeline"
+          fieldId="implant_timeline"
+          onValueChange={onValueChange}
+          question="How soon would you be ready to recieve an embryo for implantation?"
+          listOptions={how_soon}
+        />
+        {/* Question 8 */}
+        <EitherOr
+          fieldId="location"
+          key="location"
+          activeAns={this.state.location || ""}
+          onValueChange={onValueChange}
+          question="Do you have a support system that lives within 30 miles?"
+          btn1="Yes"
+          btn2="No"
+        />
+        {/* Question 9 */}
+        <EitherOr
+          fieldId="haveChildren"
+          key="haveChildren"
+          activeAns={this.state.haveChildren || ""}
+          onValueChange={onValueChange}
+          question="Are you the legal parent or guardian of a person(s) under the age of 18 years old?"
+          btn1="Yes"
+          btn2="No"
+        />
+        {/* Question 10 */}
         <EitherOr
           fieldId="previous_gc"
           key="previous_gc"
@@ -180,6 +183,15 @@ class GCSurvey extends React.Component {
           btn1="Yes"
           btn2="No"
         />
+        {/* Question 11 */}
+        <Dropdown
+          key="relationshipStatus"
+          fieldId="relationshipStatus"
+          onValueChange={onValueChange}
+          question="What is your relationship status?"
+          listOptions={relationshipStatus}
+        />
+        ;{/* Question 12 */}
         <RadioBtn
           key="desiredCompensation"
           fieldId="desiredCompensation"
@@ -187,30 +199,13 @@ class GCSurvey extends React.Component {
           question="What is your desired compensation?"
           listOptions={desiredCompensation}
         />
+        {/* Question 13 */}
         <EitherOr
           fieldId="insurance"
           key="insurance"
           activeAns={this.state.insurance || ""}
           onValueChange={onValueChange}
           question="Are you currently insured?"
-          btn1="Yes"
-          btn2="No"
-        />
-        <EitherOr
-          fieldId="haveChildren"
-          key="haveChildren"
-          activeAns={this.state.haveChildren || ""}
-          onValueChange={onValueChange}
-          question="Do you have any children of your own, or are you responsible for any minors under the age of 18 years old (this includes split custody)?"
-          btn1="Yes"
-          btn2="No"
-        />
-        <EitherOr
-          fieldId="havePets"
-          key="havePets"
-          activeAns={this.state.havePets || ""}
-          onValueChange={onValueChange}
-          question="Do you have any pets of your own, or are you responsible for anyone elses pets?"
           btn1="Yes"
           btn2="No"
         />

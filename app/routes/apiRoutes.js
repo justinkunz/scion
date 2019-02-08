@@ -4,7 +4,7 @@ var db = require('../models');
 var hash = require('../hash');
 var jwt = require('jsonwebtoken');
 
-mongoose.connect("mongodb://localhost/generalDb");
+mongoose.connect("mongodb://localhost/happyFamily");
 
 function apiRoutes(app) {
 
