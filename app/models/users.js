@@ -8,6 +8,7 @@ var users = new Schema({
   first_name: { type: String },
   last_name: { type: String },
   phone_num: { type: String },
+  zipcode: { type: Number },
   created_at: { type: Date },
   survery_answered: { type: Boolean, default: false },
   survey_results: { type: Object },
