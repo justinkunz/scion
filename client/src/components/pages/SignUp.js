@@ -22,6 +22,7 @@ class SignIn extends React.Component {
             password: '',
             confirm_pw: '',
             phone_num: '',
+            // zipcode: '',
             type: this.props.type,
             acctCreated: false
         }

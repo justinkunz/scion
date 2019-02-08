@@ -192,7 +192,7 @@ class IPSurvey extends React.Component {
           key="relationshipStatus"
           fieldId="relationshipStatus"
           onValueChange={onValueChange}
-          question="What is your relationship status?"
+          question="What kind of relation status do you prefer of you GC?"
           listOptions={relationshipStatus}
         />
         {/* Question 12 */}
@@ -200,7 +200,7 @@ class IPSurvey extends React.Component {
           key="desiredCompensation"
           fieldId="desiredCompensation"
           onValueChange={onValueChange}
-          question="What is your desired compensation?"
+          question="How much are you willing to compensate your GC for their services?"
           listOptions={desiredCompensation}
         />
         {/* Question 13 */}

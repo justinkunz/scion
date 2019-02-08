@@ -10,7 +10,8 @@ var users = new Schema({
   phone_num: { type: String },
   created_at: { type: Date },
   survery_answered: { type: Boolean, default: false },
-  survey_results: { type: Object }
+  survey_results: { type: Object },
+  numerical_survery: { type: Object }
 });
 
 var userData = mongoose.model("users", users);
