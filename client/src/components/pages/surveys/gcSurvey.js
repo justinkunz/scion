@@ -139,7 +139,7 @@ class GCSurvey extends React.Component {
         <EitherOr
           fieldId="hospital"
           key="hospital"
-          activeAns={this.state.hosp_birth || ""}
+          activeAns={this.state.hospital || ""}
           onValueChange={onValueChange}
           question="Are you willing to give birth at a hospital?"
           btn1="Yes"
