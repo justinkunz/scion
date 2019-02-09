@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../../misc/Navbar";
 import converter from './Compare/compareLogic';
 import { Dropdown, EitherOr, RadioBtn, Slide, SubmitBtn, Location } from "../../form";
+import "./gcSurvey.css";
 
 class GCSurvey extends React.Component {
   constructor(props) {
