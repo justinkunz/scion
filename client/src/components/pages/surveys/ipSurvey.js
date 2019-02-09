@@ -85,39 +85,25 @@ class IPSurvey extends React.Component {
       "> $100,000"
     ];
 
-    const m = {
-      PL_PC: 0,
-      embryos_count: 3,
-      birthCenter: 5
-  }
+  // const surveyCompare = (me, allSurveys) => {
+  //     for(let i=0;i<allSurveys.length;i++){
+  //         let diff = 0;
+  //         let them = allSurveys[i]
   
-  const t = {
-      PL_PC: 5,
-      embryos_count: 2,
-      birthCenter: 5
-  }
+  //         diff =+ diff(me.PL_PC, them.PL_PC)
+  //         diff =+ diff(me.embryos_count, them.embryos_count)
+  //         diff =+ diff(me.birthCenter, them.birthCenter)
+  //         console.log(diff)
+  //     }
+  // }
   
-  surveyCompare(m,t)
-  
-  const surveyCompare = (me, allSurveys) => {
-      for(let i=0;i<allSurveys.length;i++){
-          let diff = 0;
-          let them = allSurveys[i]
-  
-          diff =+ diff(me.PL_PC, them.PL_PC)
-          diff =+ diff(me.embryos_count, them.embryos_count)
-          diff =+ diff(me.birthCenter, them.birthCenter)
-          console.log(diff)
-      }
-  }
-  
-  const findDiff = (val1, val2) => {
-      dif = val1-val2
-      if(dif<0){
-          dif = dif * -1
-      }
-      return dif
-  }
+  // const findDiff = (val1, val2) => {
+  //     let dif = val1-val2
+  //     if(dif<0){
+  //         dif = dif * -1
+  //     }
+  //     return dif;
+  // }
 
     return (
       <div>
