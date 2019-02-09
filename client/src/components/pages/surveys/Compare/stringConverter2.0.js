@@ -227,8 +227,12 @@ class Converter extends React.Component {
 
     } // End render
 
-    
 
 } // End Converter
 
 export default Converter;
+
+// zipCodes = []
+//     for(i=0; i<results.length;i++){
+//         zipCodes.push(results[i].zipCode)
+//     }
