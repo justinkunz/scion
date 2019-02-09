@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../../misc/Navbar";
+import converter from './Compare/compareLogic';
 import { Dropdown, EitherOr, RadioBtn, Slide, SubmitBtn, Location } from "../../form";
 import "./gcSurvey.css";
 
@@ -28,14 +29,6 @@ class GCSurvey extends React.Component {
       alert("Form cancelled");
     };
 
-    //on submit btn click
-    const onFormSubmit = () => {
-      alert(
-        "DEV ALERT - Current application state has been logged in the console"
-      );
-      console.log("We will push this to an API once the questions are set up");
-      console.log(this.state);
-    };
 
     // EXAMPLE OF GC SURVEY
     // ------------------------------------------------------------
@@ -89,9 +82,7 @@ class GCSurvey extends React.Component {
 
     return (
       <div>
-        <Navbar activePage="Gestational Carriers" />
         <Navbar activePage="Preference Survey" signedIn={this.state.signedIn} />
-        <Location />
         {/* Question 1 */}
         <Dropdown
           key="degree_type"
@@ -210,7 +201,7 @@ class GCSurvey extends React.Component {
           btn1="Yes"
           btn2="No"
         />
-        <SubmitBtn onCancel={onCancel} onSubmit={onFormSubmit} />
+        <SubmitBtn onCancel={onCancel} onSubmit={() => converter(this.state)} />
       </div >
     );
   }
