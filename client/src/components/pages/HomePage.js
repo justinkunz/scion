@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../misc/Navbar";
 import { Redirect } from 'react-router';
 import axios from 'axios';
+import "./HomePage.css";
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -51,10 +52,8 @@ class HomePage extends React.Component {
     }
     return (
       <div>
-
-        <Navbar activePage="Home" signedIn={this.state.signedIn} />
+        <Navbar activePage="" signedIn={this.state.signedIn} />
         <div className="welcomeMsg">{this.state.topMsg}</div>
-        HOME PAGE
       </div>
     );
   }
