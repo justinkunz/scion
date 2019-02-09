@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var users = new Schema({
+
   email: { type: String, unique: true },
   password: { type: String },
   user_type: { type: String, required: true },
@@ -13,6 +14,7 @@ var users = new Schema({
   survery_answered: { type: Boolean, default: false },
   survey_results: { type: Object },
   numerical_survery: { type: Object }
+
 });
 
 var userData = mongoose.model("users", users);

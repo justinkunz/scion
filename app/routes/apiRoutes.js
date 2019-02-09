@@ -11,13 +11,7 @@ function apiRoutes(app) {
     app.get("/api/get", function (req, res) {
         db.users.find().then(function (data, err) {
             if (err) throw err;
-            res.json(data)
-        });
-    });
-
-    app.post("/api/post/survey", function (req, res) {
-        db.create(req.body).then(function (data, err) {
-            if (err) throw err;
+            console.log(data)
             res.json(data)
         });
     });
@@ -26,6 +20,26 @@ function apiRoutes(app) {
         email.submissionThanksGCS(req.body);
         res.json("success")
     });
+
+    app.post("/api/post/survey", function(req, res){
+        console.log(req.body)
+
+        var decoded = jwt.decode(req.body.token)
+        console.log(decoded)
+
+        //if data exists, return user data
+        if (decoded.data) {
+
+            db.users.update({ _id: decoded.data }, {
+                survery_answered: true,  
+                survey_results: req.body.text, 
+                numerical_survery: req.body.numerical
+            }).then(function(err, data){
+                console.log(err)
+                console.log(data)
+            });
+        }
+    })
 
     //SIGN IN OR SIGN UP OPTIONS 
 

@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../../misc/Navbar";
+import converter from './Compare/compareLogic';
 
 import { Dropdown, EitherOr, RadioBtn, Slide, SubmitBtn } from "../../form";
 
@@ -28,15 +29,6 @@ class IPSurvey extends React.Component {
       alert("Form cancelled");
     };
 
-    //on submit btn click
-    const onFormSubmit = () => {
-      alert(
-        "DEV ALERT - Current application state has been logged in the console"
-      );
-      console.log("We will push this to an API once the questions are set up");
-      console.log(this.state);
-    };
-
     // ------------------------------------------------------------
     // 1. What is the highest level of education you prefer your gestational carrier to have?
     // 2. Do you prefer your gestational carrier to be pro-life or pro choice?
@@ -54,6 +46,7 @@ class IPSurvey extends React.Component {
     // ------------------------------------------------------------
 
     const education_lvl = [
+      "Please Select",
       "GED",
       "High School Diploma",
       "Some College",
@@ -63,6 +56,7 @@ class IPSurvey extends React.Component {
       "PhD"
     ];
     const religions = [
+      "Please Select",
       "Not Religous/Agnostic/Atheist",
       "Christian",
       "Jewish",
@@ -71,7 +65,7 @@ class IPSurvey extends React.Component {
     ];
     const embryos_count = ["1-3", "4-6", "7-10", ">10"];
     const relationshipStatus = [
-      "n/a",
+      "Please Select",
       "Single",
       "Married",
       "Commmon Law Married"
@@ -88,8 +82,42 @@ class IPSurvey extends React.Component {
       "$21,000 - 49,000",
       "$50,000 - 75,000",
       "$75,000 - $100,000",
-      "$100,000 <"
+      "> $100,000"
     ];
+
+    const m = {
+      PL_PC: 0,
+      embryos_count: 3,
+      birthCenter: 5
+  }
+  
+  const t = {
+      PL_PC: 5,
+      embryos_count: 2,
+      birthCenter: 5
+  }
+  
+  surveyCompare(m,t)
+  
+  const surveyCompare = (me, allSurveys) => {
+      for(let i=0;i<allSurveys.length;i++){
+          let diff = 0;
+          let them = allSurveys[i]
+  
+          diff =+ diff(me.PL_PC, them.PL_PC)
+          diff =+ diff(me.embryos_count, them.embryos_count)
+          diff =+ diff(me.birthCenter, them.birthCenter)
+          console.log(diff)
+      }
+  }
+  
+  const findDiff = (val1, val2) => {
+      dif = val1-val2
+      if(dif<0){
+          dif = dif * -1
+      }
+      return dif
+  }
 
     return (
       <div>
@@ -143,7 +171,7 @@ class IPSurvey extends React.Component {
         <EitherOr
           fieldId="hospital"
           key="hospital"
-          activeAns={this.state.hosp_birth || ""}
+          activeAns={this.state.hospital || ""}
           onValueChange={onValueChange}
           question="Do you prefer to have your gestational carrier give birth at a hospital?"
           btn1="Yes"
@@ -183,7 +211,7 @@ class IPSurvey extends React.Component {
           key="previous_gc"
           activeAns={this.state.previous_gc || ""}
           onValueChange={onValueChange}
-          question="do you prefer your GC to have prior expeirence as a gestational carrier?"
+          question="Do you prefer your GC to have prior expeirence as a gestational carrier?"
           btn1="Yes"
           btn2="No"
         />
@@ -213,7 +241,7 @@ class IPSurvey extends React.Component {
           btn1="Yes"
           btn2="No"
         />
-        <SubmitBtn onCancel={onCancel} onSubmit={onFormSubmit} />
+        <SubmitBtn onCancel={onCancel} onSubmit={() => converter(this.state)} />
       </div>
     );
   }
