@@ -25,9 +25,9 @@ const surveyCompare = (me, allSurveys) => {
 }
 
 const findDiff = (val1, val2) => {
-    diff = val1-val2
-    if(diff<0){
-        diff = diff * -1
+    let dif = val1-val2
+    if(dif<0){
+        dif = dif * -1
     }
     return diff
 }
