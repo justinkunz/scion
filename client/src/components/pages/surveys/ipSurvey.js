@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../../misc/Navbar";
 import converter from './Compare/compareLogic';
-
+import {Redirect} from 'react-router-dom';
 import { Dropdown, EitherOr, RadioBtn, Slide, SubmitBtn } from "../../form";
 
 class IPSurvey extends React.Component {
@@ -29,6 +29,15 @@ class IPSurvey extends React.Component {
       alert("Form cancelled");
     };
 
+    const handleSubmission = () => {
+      converter(this.state)
+      this.setState({redirect: true})
+      
+    }
+
+    if(this.state.redirect){
+      return <Redirect to="/results" />
+    }
     // ------------------------------------------------------------
     // 1. What is the highest level of education you prefer your gestational carrier to have?
     // 2. Do you prefer your gestational carrier to be pro-life or pro choice?
@@ -107,7 +116,6 @@ class IPSurvey extends React.Component {
 
     return (
       <div>
-        <Navbar activePage="Intended Parents" />
         <Navbar activePage="Preference Survey" signedIn={this.state.signedIn} />
         {/* Question 1 */}
         <Dropdown
@@ -227,7 +235,8 @@ class IPSurvey extends React.Component {
           btn1="Yes"
           btn2="No"
         />
-        <SubmitBtn onCancel={onCancel} onSubmit={() => converter(this.state)} />
+        <SubmitBtn onCancel={onCancel} onSubmit={() => handleSubmission()} />
+        
       </div>
     );
   }
