@@ -6,9 +6,9 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { HomePage, ResultsPage } from './components/pages';
 import LoginForm from './components/pages/LogIn';
 import SignUpForm from './components/pages/SignUp';
-import GCSurvey from './components/pages/surveys/gcSurvey';
+// import GCSurvey from './components/pages/surveys/gcSurvey';
 import SignOut from './components/pages/SignOut';
-import SignUpChoose from './components/pages/SignUpChoose';
+// import SignUpChoose from './components/pages/SignUpChoose';
 import IPSurvey from './components/pages/surveys/ipSurvey';
 import Loader from './components/misc/Loader';
 import Hp2 from './components/pages/Hp2';
@@ -62,12 +62,6 @@ class App extends Component {
             <Route path="/hp2" exact component={Hp2} />
 
             <Route path="/results" exact component={ResultsPage} />
-<<<<<<< HEAD
-            <Route path="/sign_up" exact component={SignUpChoose} />
-            <Route path="/userhome" exact component={UserHome} />
-            <Route path="/sign_out" exact render={() => <SignOut signOutUser={this.signOutUser} />} />
-            <Route path="/sign_in" exact
-=======
             <Route path="/userhome" exact component={UserHome} />
             <Route path="/sign_out" exact render={() => <SignOut signOutUser={this.signOutUser} />} />
 
@@ -80,7 +74,6 @@ class App extends Component {
               path="/sign_in"
               exact
 
->>>>>>> 1f222941684580b8119f088afe5f06923cd17c9a
               render={() => {
                 if (this.state.token === null) {
                   return <LoginForm signInUser={this.signInUser} />;
@@ -105,7 +98,7 @@ class App extends Component {
                   return <IPSurvey />;
                 }
                 if (this.state.type === "GC") {
-                  return <GCSurvey />;
+                  // return <GCSurvey />;
                 }
                 return <Route path="/" />;
               }}

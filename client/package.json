@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Final Project - React File",
   "private": true,
-  "proxy": "http://localhost:3000",
+  "proxy": "http://localhost:3002",
   "dependencies": {
     "react": "^16.6.3",
     "react-bootstrap-sweetalert": "^4.4.1",
