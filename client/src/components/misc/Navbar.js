@@ -2,12 +2,12 @@ import React from 'react';
 import "./Navbar.css";
 
 class Navbar extends React.Component {
-    getClassNames = page => {
-        if (page === this.props.activePage) {
-            return "active item"
-        }
-        return "item"
+  getClassNames = page => {
+    if (page === this.props.activePage) {
+      return "active item";
     }
+    return "item"
+  }
     render() {
         if (this.props.signedIn) {
             return (
@@ -29,25 +29,29 @@ class Navbar extends React.Component {
             );
         };
 
-        return (
-            <div>
-                <div className="ui secondary pointing menu">
-                    <a href="/" className={this.getClassNames("Home")}>
-                        Home
-                        </a>
-                    <div className="right menu">
-                        <a href="/sign_up" className="ui item" className={this.getClassNames("signUp")}>
-                            Sign Up
-                        </a>
+    return (
+      <div>
+        <div className="ui secondary pointing menu">
+          <a href="/" className={this.getClassNames("Home")}>
+            Home
+          </a>
+          <div className="right menu">
+            <a
+              href="/sign_up"
+              className="ui item"
+              className={this.getClassNames("signUp")}
+            >
+              Sign Up
+            </a>
 
-                        <a href="/sign_in" className={this.getClassNames("signIn")}>
-                            Sign In
-                        </a>
-                    </div>
-                </div>
-            </div>
-        );
-    };
-};
+            <a href="/sign_in" className={this.getClassNames("signIn")}>
+              Sign In
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
 
 export default Navbar;
