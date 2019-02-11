@@ -1,16 +1,84 @@
 import React, { Component } from "react";
-import { Image, List } from "semantic-ui-react";
+import Loader from "../misc/Loader"
+import axios from "axios"
 import "./UserHome.css";
 import Navbar from "../misc/Navbar";
 
 class UserHome extends Component {
   
 
+  constructor(props){
+    super(props);
+    this.state = {
+        signedIn: false,
+        grabbedData: false,
+        results: null,
+        userId: null
+    };
+};
+
+componentDidUpdate() {
+    console.log(this.state)
+}
+verifyUser = async () => {
+
+    const token = localStorage.getItem("token")
+
+    if (!token) {
+      this.setState({ signedIn: false, grabbedData: true })
+    }
+    else {
+      const request = await axios.post('/api/currentUser', { token: localStorage.getItem("token") })
+      if (request.data === "redirect") {
+        this.setState({ signedIn: false, grabbedData: true })
+      } else {
+
+        if (request.data[0]) {
+          this.setState({userId: request.data[0]._id,signedIn: false})
+          this.getResults()
+
+        }
+        else {
+          this.setState({ signedIn: false, grabbedData: true })
+        }
+      }
+    }
+
+  }
+
+  getResults = async () => {
+    const results = await axios.get("/api/get/results/" + this.state.userId)
+    console.log(results.data)
+    this.setState({results: results.data,  grabbedData: true})
+  }
+
+
+
+  
+
   render() {
+
+    if(!this.state.grabbedData){
+      this.verifyUser()
+      return <Loader />
+  }
     const sizes = ["massive"];
     return (
       <div>
+<<<<<<< HEAD
       <Navbar />
+=======
+        <div className="ui secondary pointing menu">
+          <a href="/userhome">Home</a>
+          <a href="/survey">Preference Survey</a>
+          <div className="right menu">
+            <a href="/sign_out" className="ui item">
+              Sign Out
+            </a>
+          </div>
+        </div>
+
+>>>>>>> dd47e45052c30148431fec77f56d2fdd316ed949
         <div className="profile-container">
           <div class="ui card">
             <img
@@ -29,36 +97,69 @@ class UserHome extends Component {
               </a>
             </div>
           </div>
+          
           <div className="match-panel">
           <h1 className="match-text">Matches</h1>
-          {sizes.map(size => (
-            <div key={size}>
-              <List divided horizontal size={size}>
-                <List.Item>
-                  <Image avatar src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-                  <List.Content>
-                    <List.Header>Match #1</List.Header>
-                  </List.Content>
-                </List.Item>
-                <List.Item>
-                  <Image avatar src="https://images.pexels.com/photos/814053/pexels-photo-814053.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-                  <List.Content>
-                    <List.Header>Match #2</List.Header>
-                  </List.Content>
-                </List.Item>
-                <List.Item>
-                  <Image avatar src="https://images.pexels.com/photos/1102341/pexels-photo-1102341.jpeg?auto=compress&cs=tinysrgb&dpr=2&fit=crop&h=500&w=500" />
-                  <List.Content>
-                    <List.Header>Match #3</List.Header>
-                  </List.Content>
-                </List.Item>
-              </List>
-              <br />
-            </div>
-          ))}
+
+          {this.state.results.length ? ( 
+
+            <ul style={{margin: "0 auto", overflow: "auto"}}>
+
+              {this.state.results.map(connection => {
+              console.log("Connection: ", connection);
+
+                let emailer = ("mailto:" + connection.email);
+
+                  return (
+
+                    <li style={{float: "left", listStyle: "none"}} key={connection.email}>
+        
+                      <div className="card m-2" style={{height: "auto", backgroundColor:"rgb(87, 139, 139)"}}>
+        
+                        <img className="card-img m-2" />
+
+                        <div className="card-body">
+          
+                          <div className="row">
+
+                            <div className="col">
+
+                              <h3 className="card-title">
+                                {connection.first_name}
+                              </h3>
+
+                              <h3 className="card-subtitle">
+                                {connection.last_name}
+                              </h3>
+
+                              <div className="mt-2">
+
+                                <a href="#" className="btn btn-primary">Go somewhere</a>
+
+                                <form className="m-2" action={emailer} encType="text/plain" method="post" id="email-form">
+                                  <input type="submit" id="email" className="text-bold btn btn-primaary rounded" value="Email this user" />
+                                </form>
+
+                              </div>
+
+                            </div>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                    </li>
+                  );
+
+                })}
+
+              </ul>
+            ) : (<h1>FUCK YOU!!!!!</h1>)} 
+          </div>
         </div>
       </div>
-        </div>
     );
   }
 }
