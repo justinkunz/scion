@@ -3,6 +3,7 @@ import { Image, List } from "semantic-ui-react";
 import "./UserHome.css";
 
 class UserHome extends Component {
+  
 
   render() {
     const sizes = ["massive"];
