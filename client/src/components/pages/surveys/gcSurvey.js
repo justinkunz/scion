@@ -1,22 +1,25 @@
 import React from "react";
 import Navbar from "../../misc/Navbar";
-import converter from './Compare/compareLogic';
-import { Dropdown, EitherOr, RadioBtn, Slide, SubmitBtn, Location } from "../../form";
+import converter from "./Compare/compareLogic";
+import {Redirect} from 'react-router-dom';
+import Loader from "react-loader-spinner";
+import SweetAlert from 'react-bootstrap-sweetalert';
+
+import {
+  Dropdown,
+  EitherOr,
+  RadioBtn,
+  SubmitBtn,
+} from "../../form";
 
 class GCSurvey extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { signedIn: true };
+    this.state = { signedIn: true, redirect: false };
   }
 
   render() {
-    //setting for slider
-    const settings = {
-      start: 5,
-      min: 0,
-      max: 10,
-      step: 1
-    };
+
 
     //value change handler
     const onValueChange = (fieldId, val) => {
@@ -28,23 +31,16 @@ class GCSurvey extends React.Component {
       alert("Form cancelled");
     };
 
+    //on survey submission
+    const handleSubmission = () => {
+      converter(this.state)
+      this.setState({redirect: true})
+      
+    }
 
-    // EXAMPLE OF GC SURVEY
-    // ------------------------------------------------------------
-    // 1. What is your highest level of education?
-    // 2. Are you pro-life or pro choice?
-    // 3. What religion do you practice?
-    // 4. How many embryos would you allowed to be implanted?
-    // 5. Do you prefer to give birth at a birthing center?
-    // 6. Do you prefer to give birth at a hospital?
-    // 7. How soon would you be able to implant the IP’s embryos?
-    // 8. Do you have a support system within 30 miles of your current address?
-    // 9. Are you currently the legal parent or guardian of a child?
-    // 10. Do you have any previous experience as a GC?
-    // 11. What is your current relationship status?
-    // 12. What is your desired compensation?
-    // 13. Are you currently insured?
-    // ------------------------------------------------------------
+    if(this.state.redirect){
+      return <Redirect to="/results" />
+    }
 
     const education_lvl = [
       "N/A",
@@ -200,8 +196,19 @@ class GCSurvey extends React.Component {
           btn1="Yes"
           btn2="No"
         />
-        <SubmitBtn onCancel={onCancel} onSubmit={() => converter(this.state)} />
-      </div >
+        <SubmitBtn onCancel={onCancel} onSubmit={() => handleSubmission()} />
+        {/* <SweetAlert
+          show={this.state.show}
+          title={this.state.title}
+          onConfirm={() => this.setState({ show: false })}
+        >
+          <div style={{ maxHeight: "20vh", width: "300px" }}>
+          <div style={{margin: "10% 25% 10% 25%"}}>
+          <Loader type="CradleLoader" color="#00BFFF" height="100" width="(200)" />
+          </div>
+          </div>
+        </SweetAlert> */}
+      </div>
     );
   }
 }

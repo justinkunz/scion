@@ -7,7 +7,6 @@ import LoginForm from "./components/pages/LogIn";
 import SignUpForm from "./components/pages/SignUp";
 import GCSurvey from "./components/pages/surveys/gcSurvey";
 import SignOut from "./components/pages/SignOut";
-import SignUpChoose from "./components/pages/SignUpChoose";
 import IPSurvey from "./components/pages/surveys/ipSurvey";
 import Loader from "./components/misc/Loader";
 import Hp2 from "./components/pages/Hp2";
@@ -56,19 +55,10 @@ class App extends Component {
                 />
               )}
             />
-            <Route
-              path="/sign_up/ip"
-              exact
-              render={() => <SignUpForm type="IP" />}
-            />
+            <Route path="/sign_up" component={SignUpForm}/> 
             <Route path="/hp2" exact component={Hp2} />
-            <Route
-              path="/sign_up/gc"
-              exact
-              render={() => <SignUpForm type="GC" />}
-            />
+
             <Route path="/results" exact component={ResultsPage} />
-            <Route path="/sign_up" exact component={SignUpChoose} />
             <Route
               path="/sign_out"
               exact

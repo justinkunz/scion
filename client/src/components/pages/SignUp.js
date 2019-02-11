@@ -4,20 +4,12 @@ import {
   Form,
   Grid,
   Header,
-  Image,
-  Message,
   Segment
 } from "semantic-ui-react";
 import SweetAlert from "react-bootstrap-sweetalert";
 import Navbar from "../misc/Navbar";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-
-const onValueChange = (fieldId, val) => {
-  this.setState({ [fieldId]: val });
-};
-
-const select_type = ["Gestational Carrier", "Intended Parent"];
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -35,9 +27,26 @@ class SignIn extends React.Component {
       confirm_pw: "",
       phone_num: "",
       zipcode: "",
-      type: this.props.type,
+      type: "",
+      errMsg: "",
       acctCreated: false
     };
+  }
+
+  getLocation = () => {
+    navigator.geolocation.getCurrentPosition(this.handlePosition)
+  }
+
+  handlePosition = position => {
+
+    axios.get("/api/get/zip/" + position.coords.latitude + "/" + position.coords.longitude).then(data => {
+
+      if(data.data === "error"){
+        this.setState({errMsg: "Unable to determine your location"})
+        return
+      }
+      this.setState({ zipcode: data.data}) 
+    });
   }
 
   frontEndValidation = () => {
@@ -105,6 +114,7 @@ class SignIn extends React.Component {
   };
 
   onLoginClick = () => {
+    console.log(this.state)
     if (this.frontEndValidation()) return;
 
     axios.post("/api/new/user", this.state).then(data => {
@@ -146,6 +156,7 @@ class SignIn extends React.Component {
   };
 
   render() {
+  
     if (this.state.acctCreated === true && this.state.show === false) {
       return <Redirect to="/sign_in" />;
     }
@@ -236,12 +247,12 @@ class SignIn extends React.Component {
                     </div>
                   </div>
 
-                  <div className="fields">
+                  <div className="fields" style={{marginBottom: "0"}}>
                     <div className="field">
                       <label>What is your zipcode?</label>
                       <input
                         value={this.state.zipcode}
-                        type="password"
+                        type="text"
                         placeholder="5-digit zipcode"
                         onChange={e =>
                           this.setState({ zipcode: e.target.value })
@@ -249,17 +260,25 @@ class SignIn extends React.Component {
                       />
                     </div>
                     <div className="field">
-                      <label>What is your user type?</label>
-                      <input
-                        value={this.state.userType}
-                        type="password"
-                        placeholder="GC or IP?"
-                        onChange={e =>
-                          this.setState({ userType: e.target.value })
-                        }
-                      />
+                      <label>User Type</label>
+                      <select
+                        placeholder="Please Select. . ."
+                        type="text"
+                        onChange={e => e.target.value === "Intended Parent" ? this.setState({type: "IP"}) : this.setState({type: "GC"})}
+                      > 
+                      <option>Select An Answer. . .</option>
+                      <option>Intended Parent</option>
+                      <option>Gestational Carrier</option>
+                    </select>
                     </div>
                   </div>
+                  <div className="fields">
+                 <a style={{float: "left"}} onClick={() => this.getLocation()} >
+                 Use my current location
+                 </a>
+      
+                 </div>
+                 <div style={{color: "red"}}>{this.state.errMsg}</div>
                 </div>
                 <br />
 
