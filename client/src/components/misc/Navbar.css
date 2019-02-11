@@ -1,6 +1,4 @@
-.ui secondary{
-    background: #61B0A2;
-}
-.right menu{
-    background-color: #eee;
+.menu{
+    background-color: #36BDB2;
+    border: .1px solid lightgray;
 }
