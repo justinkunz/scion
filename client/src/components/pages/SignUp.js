@@ -57,7 +57,9 @@ class SignIn extends React.Component {
       this.state.email === "" ||
       this.state.phone_num === "" ||
       this.state.confirm_pw === "" ||
-      this.state.password === ""
+      this.state.password === "" ||
+      this.state.zipcode === "" ||
+      this.state.type === ""
     ) {
       this.setState({
         title: "Yikes!",
@@ -90,7 +92,6 @@ class SignIn extends React.Component {
     }
 
     //passwords dont match
-
     if (this.state.confirm_pw !== this.state.password) {
       this.setState({
         title: "Uh oh!",
@@ -272,12 +273,12 @@ class SignIn extends React.Component {
                     </select>
                     </div>
                   </div>
-                  <div className="fields">
-                 <a style={{float: "left"}} onClick={() => this.getLocation()} >
+        
+                 <a href="#" style={{float: "left"}} onClick={() => this.getLocation()} >
                  Use my current location
                  </a>
       
-                 </div>
+              
                  <div style={{color: "red"}}>{this.state.errMsg}</div>
                 </div>
                 <br />
