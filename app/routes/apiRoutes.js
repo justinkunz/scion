@@ -3,6 +3,8 @@ var email = require("../email/email");
 var db = require('../models');
 var hash = require('../hash');
 var jwt = require('jsonwebtoken');
+var compareSurvey = require('../logic/compareThisShit');
+var request = require("request")
 
 mongoose.connect("mongodb://localhost/happyFamily");
 
@@ -21,6 +23,52 @@ function apiRoutes(app) {
         res.json("success")
     });
 
+    //determining zip code by lattitude and longitude on sign up page
+    app.get("/api/get/zip/:lat/:long", function(req, res){
+        request("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + req.params.lat + "," + req.params.long + "&key=AIzaSyDoy_aXAr9GwIfaWBC7HGCc1Xa9r6pM0MY", function (error, response, body) {
+        
+        if (error) res.json("error")
+       try {
+        results = JSON.parse(response.body).results[0].address_components
+        var toReturn = "error";
+        for(i=0;i<results.length; i++){
+            if(results[i].types[0] === "postal_code"){
+                toReturn = results[i].short_name
+                break;
+            };
+        };
+        res.json(toReturn)
+    } catch(err) {
+        res.json("error")
+    }
+        
+    });
+
+    });
+
+    app.get("/api/delete", function(req, res){
+
+        db.users.remove().then(function(d, e){
+            res.json(d)
+        });
+    });
+
+    app.get("/api/get/results/:id", function(req, res){
+        db.users.find({"_id": req.params.id}).then(function(user, err){
+            if (err) throw err;
+
+            search_type = "IP"
+            if(user[0].user_type === "IP") search_type = "GC"
+            
+            db.users.find({"user_type": search_type}).then(function (compareTo, err) {
+                if (err) throw err;
+                console.log("l")
+                console.log(user[0].numerical_survery)
+                res.json(compareSurvey(user[0].numerical_survery, compareTo))
+                
+            });
+        });
+});
     app.post("/api/post/survey", function(req, res){
         console.log(req.body)
 
@@ -39,7 +87,9 @@ function apiRoutes(app) {
                 console.log(data)
             });
         }
-    })
+    });
+
+
 
     //SIGN IN OR SIGN UP OPTIONS 
 
@@ -112,7 +162,7 @@ function apiRoutes(app) {
         }
 
         //missing fields
-        if (userInfo.first_name === '' || userInfo.last_name === '' || userInfo.email === '' || userInfo.phone_num === '' || userInfo.confirm_pw === '' || userInfo.password === '') {
+        if (userInfo.first_name === '' || userInfo.last_name === '' || userInfo.email === '' || userInfo.phone_num === '' || userInfo.confirm_pw === '' || userInfo.password === '' || userInfo.type === '' || userInfo.zipcode === '' ) {
             res.send({ "error": "Could not sign up user" })
             return
         }
@@ -152,6 +202,7 @@ function apiRoutes(app) {
                     phone_num: userInfo.phone_num,
                     user_type: userInfo.type,
                     created_at: new Date,
+                    zipcode: userInfo.zipcode,
                     answered_survey: false
                 }).then(function (err, data) {
                     res.send({ "error": "Could not sign up user" })
