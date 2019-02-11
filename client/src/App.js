@@ -10,6 +10,7 @@ import SignOut from "./components/pages/SignOut";
 import IPSurvey from "./components/pages/surveys/ipSurvey";
 import Loader from "./components/misc/Loader";
 import Hp2 from "./components/pages/Hp2";
+import UserHome from './components/pages/UserHome';
 
 class App extends Component {
   constructor(props) {
@@ -59,6 +60,10 @@ class App extends Component {
             <Route path="/hp2" exact component={Hp2} />
 
             <Route path="/results" exact component={ResultsPage} />
+            <Route path="/userhome" exact component={UserHome} />
+            <Route path="/sign_out" exact render={() => <SignOut signOutUser={this.signOutUser} />} />
+            <Route path="/sign_in" exact
+
             <Route
               path="/sign_out"
               exact
@@ -67,6 +72,7 @@ class App extends Component {
             <Route
               path="/sign_in"
               exact
+
               render={() => {
                 if (this.state.token === null) {
                   return <LoginForm signInUser={this.signInUser} />;

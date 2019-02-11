@@ -1,4 +1,5 @@
 import React from 'react';
+import "./Navbar.css";
 
 class Navbar extends React.Component {
     getClassNames = page => {
@@ -12,13 +13,12 @@ class Navbar extends React.Component {
             return (
                 <div>
                     <div className="ui secondary pointing menu">
-                        <a href="/" className={this.getClassNames("Home")}>
+                        <a href="/userhome" className={this.getClassNames("UserHome")}>
                             Home
                         </a>
                         <a href="/survey" className={this.getClassNames("Preference Survey")}>
                             Preference Survey
                     </a>
-
                         <div className="right menu">
                             <a href="/sign_out" className="ui item" className={this.getClassNames("signUp")}>
                                 Sign Out

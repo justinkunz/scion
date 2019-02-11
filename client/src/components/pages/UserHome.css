@@ -1,0 +1,19 @@
+.match-panel{
+    padding: 5px;
+    margin-left: 450px;
+    border-radius: 2px;
+    background-color: white;
+    border: .5px solid lightgrey;
+   width: 50%;
+}
+.profile-container{
+    margin-left: 250px;
+    margin-bottom: 30px;
+}
+card{
+    margin-left: 300px;
+}
+.match-text{
+    font-size: 18pt;
+   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
