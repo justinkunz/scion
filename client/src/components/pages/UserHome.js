@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Image, List } from "semantic-ui-react";
 import "./UserHome.css";
+import Navbar from "../misc/Navbar";
 
 class UserHome extends Component {
   
@@ -9,15 +10,7 @@ class UserHome extends Component {
     const sizes = ["massive"];
     return (
       <div>
-        <div className="ui secondary pointing menu">
-          <a href="/userhome">Home</a>
-          <a href="/survey">Preference Survey</a>
-          <div className="right menu">
-            <a href="/sign_out" className="ui item">
-              Sign Out
-            </a>
-          </div>
-        </div>
+      <Navbar />
         <div className="profile-container">
           <div class="ui card">
             <img

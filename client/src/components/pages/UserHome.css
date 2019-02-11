@@ -7,8 +7,9 @@
    width: 50%;
 }
 .profile-container{
-    margin-left: 250px;
+    margin-left: 200px;
     margin-bottom: 30px;
+    padding: 0%;
 }
 card{
     margin-left: 300px;

@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { HomePage, ResultsPage } from './components/pages';
 import LoginForm from './components/pages/LogIn';
 import SignUpForm from './components/pages/SignUp';
-// import GCSurvey from './components/pages/surveys/gcSurvey';
+import GCSurvey from './components/pages/surveys/gcSurvey';
 import SignOut from './components/pages/SignOut';
 // import SignUpChoose from './components/pages/SignUpChoose';
 import IPSurvey from './components/pages/surveys/ipSurvey';
