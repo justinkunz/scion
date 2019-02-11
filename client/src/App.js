@@ -98,7 +98,7 @@ class App extends Component {
                   return <IPSurvey />;
                 }
                 if (this.state.type === "GC") {
-                  // return <GCSurvey />;
+                  return <GCSurvey />;
                 }
                 return <Route path="/" />;
               }}
