@@ -13,7 +13,7 @@ class Navbar extends React.Component {
             return (
                 <div>
                     <div className="ui secondary pointing menu">
-                        <a href="/userhome" className={this.getClassNames("UserHome")}>
+                        <a href="/userhome" className={this.getClassNames("Home")}>
                             Home
                         </a>
                         <a href="/survey" className={this.getClassNames("Preference Survey")}>

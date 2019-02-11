@@ -27,6 +27,7 @@
     "express": "^4.16.3",
     "express-jwt": "^5.3.1",
     "express-session": "^1.15.6",
+    "faker": "^4.1.0",
     "got": "^9.6.0",
     "https": "^1.0.0",
     "if-env": "^1.0.4",
@@ -40,8 +41,8 @@
     "react-bootstrap": "^1.0.0-beta.5",
     "react-bootstrap-sweetalert": "^4.4.1",
     "react-loader-spinner": "^2.3.0",
-    "request": "^2.88.0",
     "reactstrap": "^7.1.0",
+    "request": "^2.88.0",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^8.0.1",
     "sweetalert2-react": "^0.7.2"
