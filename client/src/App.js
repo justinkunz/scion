@@ -62,7 +62,6 @@ class App extends Component {
             <Route path="/results" exact component={ResultsPage} />
             <Route path="/userhome" exact component={UserHome} />
             <Route path="/sign_out" exact render={() => <SignOut signOutUser={this.signOutUser} />} />
-            <Route path="/sign_in" exact
 
             <Route
               path="/sign_out"

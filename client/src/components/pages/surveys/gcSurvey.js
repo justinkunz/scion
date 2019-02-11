@@ -178,7 +178,7 @@ class GCSurvey extends React.Component {
           question="What is your relationship status?"
           listOptions={relationshipStatus}
         />
-        ;{/* Question 12 */}
+        {/* Question 12 */}
         <RadioBtn
           key="desiredCompensation"
           fieldId="desiredCompensation"
