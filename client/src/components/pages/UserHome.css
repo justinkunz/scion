@@ -17,3 +17,7 @@ card{
     font-size: 18pt;
    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+#welcomeTitle {
+    color: #009790;
+}

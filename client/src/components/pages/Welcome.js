@@ -10,10 +10,12 @@ class Welcome extends React.Component {
         <div className="container">
           <div className="row">
             <div className="column offset-2 col-8">
+            <div className="card">
               <div className="card-body">
-                <h5>
+                <h3 id="welcomeTitle"><strong> Welcome to Scion! </strong></h3>
+                <hr/>
                   <p>
-                    Welcome to Scion! It is our mission to help connect intended
+                   It is our mission to help connect intended
                     parents, and gestational carriers together in an attempt to
                     assist those who are having difficulties bringing life into
                     this world. Through our application we make the difficult,
@@ -32,8 +34,9 @@ class Welcome extends React.Component {
                     psychological, and payment regulations which govern the act
                     of creating life through artificial insemination.
                   </p>
-                </h5>
+              
               </div>
+            </div>
             </div>
           </div>
         </div>

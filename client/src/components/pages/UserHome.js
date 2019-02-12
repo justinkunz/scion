@@ -3,7 +3,6 @@ import { Image, List } from "semantic-ui-react";
 import "./UserHome.css";
 
 class UserHome extends Component {
-
   render() {
     const sizes = ["massive"];
     return (
@@ -30,41 +29,49 @@ class UserHome extends Component {
             </div>
             <div class="extra content">
               <a>
-                <i aria-hidden="true" class="user icon" />
-                3 Matches
+                <i aria-hidden="true" class="user icon" />3 Matches
               </a>
             </div>
           </div>
           <div className="match-panel">
-          <h1 className="match-text">Matches</h1>
-          {sizes.map(size => (
-            <div key={size}>
-              <List divided horizontal size={size}>
-                <List.Item>
-                  <Image avatar src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-                  <List.Content>
-                    <List.Header>Match #1</List.Header>
-                  </List.Content>
-                </List.Item>
-                <List.Item>
-                  <Image avatar src="https://images.pexels.com/photos/814053/pexels-photo-814053.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-                  <List.Content>
-                    <List.Header>Match #2</List.Header>
-                  </List.Content>
-                </List.Item>
-                <List.Item>
-                  <Image avatar src="https://images.pexels.com/photos/1102341/pexels-photo-1102341.jpeg?auto=compress&cs=tinysrgb&dpr=2&fit=crop&h=500&w=500" />
-                  <List.Content>
-                    <List.Header>Match #3</List.Header>
-                  </List.Content>
-                </List.Item>
-              </List>
-              <br />
-            </div>
-          ))}
+            <h1 className="match-text">Matches</h1>
+            {sizes.map(size => (
+              <div key={size}>
+                <List divided horizontal size={size}>
+                  <List.Item>
+                    <Image
+                      avatar
+                      src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                    />
+                    <List.Content>
+                      <List.Header>Match #1</List.Header>
+                    </List.Content>
+                  </List.Item>
+                  <List.Item>
+                    <Image
+                      avatar
+                      src="https://images.pexels.com/photos/814053/pexels-photo-814053.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                    />
+                    <List.Content>
+                      <List.Header>Match #2</List.Header>
+                    </List.Content>
+                  </List.Item>
+                  <List.Item>
+                    <Image
+                      avatar
+                      src="https://images.pexels.com/photos/1102341/pexels-photo-1102341.jpeg?auto=compress&cs=tinysrgb&dpr=2&fit=crop&h=500&w=500"
+                    />
+                    <List.Content>
+                      <List.Header>Match #3</List.Header>
+                    </List.Content>
+                  </List.Item>
+                </List>
+                <br />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-        </div>
     );
   }
 }
