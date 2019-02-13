@@ -212,142 +212,152 @@ class UserHome extends Component {
     return (
       <div>
         <Navbar activePage="Home" signedIn="true" />
-        <div className="match-panel">
-          <div
-            style={{
-              backgroundColor: "lightgrey",
-              overflow: "auto",
-              height: "450px",
-              width: "60%"
-            }}
-            className="match-generator rounded border border"
-          >
-          
-            <h1 className="match-text">Matches</h1>
-            
-            {this.state.results.length ? (
-              <ul style={{ margin: "0 auto", overflow: "auto" }}>
-                {this.state.results.map(connection => {
-                  // console.log("Connection: ", connection);
 
-                  let emailer = "mailto:" + connection.email;
+        <br />
 
-                  let gradeColor;
-                  if (connection.grade === "A") {
-                    gradeColor = "rgb(7,122,42)";
-                  }
-                  if (connection.grade === "B") {
-                    gradeColor = "rgb(7,115,159)";
-                  }
-                  if (connection.grade === "C") {
-                    gradeColor = "rgb(241,200,11)";
-                  }
-                  if (connection.grade === "D") {
-                    gradeColor = "rgb(146,26,28)";
-                  }
-                  return (
-                    <div>
-                      <Card style={{ float: "right", margin: "10px" }}>
-                        <div
-                          className="card-image mt-2"
+        <div className="container">
+          <div className="row">
+            {/* profile info col */}
+            <div className="col lg-4 md-3 sm-5">
+              {/* USER PROFILE INFO */}
+              <div className="col md-2 content-Center">
+                <h4>PROFILE</h4>
+                <hr />
+              </div>
+              <div className="ui card" id="profile">
+                <img
+                  src="http://4.bp.blogspot.com/-xhztiK_lRX0/VZxwVYQh__I/AAAAAAABARU/MS1Y_FldP8U/s1600/baby-money-1.jpg"
+                  className="ui image"
+                />
+                <div className="content">
+                  <div className="header">
+                    {this.state.firstName} {this.state.lastName}
+                  </div>
+                  <div className="meta">Joined {formDate}</div>
+                  <div className="description">NEW LOCATION</div>
+                </div>
+                <div className="extra content">
+                  <a>
+                    <i aria-hidden="true" className="user icon" />
+                    {this.state.results.length} Connections
+                  </a>
+                </div>
+              </div>
+
+              {/* END OF USER PROFILE INFO */}
+            </div>
+
+            {/* MATCHES COL */}
+            <div className="col lg-8 md-9 sm-7">
+              <h4>CONNECTIONS</h4>
+              <hr />
+              {this.state.results.length ? (
+                <div>
+                  {this.state.results.map(connection => {
+                    // console.log("Connection: ", connection);
+                    let gradeColor;
+                    if (connection.grade === "A") {
+                      gradeColor = "rgb(7,122,42)";
+                    }
+                    if (connection.grade === "B") {
+                      gradeColor = "rgb(7,115,159)";
+                    }
+                    if (connection.grade === "C") {
+                      gradeColor = "rgb(241,200,11)";
+                    }
+                    if (connection.grade === "D") {
+                      gradeColor = "rgb(146,26,28)";
+                    }
+                    return (
+                      <div className="flex-container">
+                        <Card
                           style={{
-                            margin: "0 auto",
-                            height: "70px",
-                            width: "70px",
-                            backgroundColor: gradeColor,
-                            clipPath: "circle(50% at 50% 50%)"
+                            margin: "10px"
                           }}
-                         >
-                          <h1
-                            className="text-center"
+                        >
+                          <div
+                            className="card-image mt-2"
                             style={{
-                              fontSize: "350%",
-                              fontFamily: "Baloo Bhaijaan, cursive",
-                              transform: "translateY(-50%)",
-                              position: "relative",
-                              top: "50%",
-                              color: "white"
+                              margin: "0 auto",
+                              height: "70px",
+                              width: "70px",
+                              backgroundColor: gradeColor,
+                              clipPath: "circle(50% at 50% 50%)"
                             }}
                           >
-                            {connection.grade}
-                          </h1>
-                        </div>
-                        <Card.Content>
-                          <div
-                            style={{
-                              float: "right",
-                              fontSize: "30px",
-                              color: gradeColor
-                            }}
-                          />
-                          <Card.Header>{`${connection.first_name} ${
-                            connection.last_name
-                          }`}</Card.Header>
-                          <Card.Meta>McKinney, TX</Card.Meta>
-                          <Card.Description>
-                            <ul>
-                              <li>{connection.txt_answers.degree_type}</li>
-                              <li>{connection.txt_answers.PL_PC}</li>
-                              <li>{` Wants ${
-                                connection.txt_answers.desiredCompensation
-                              }`}</li>
-                            </ul>
-                          </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra>
-                          <div className="ui two buttons">
-                            <Button
-                              basic
-                              color="green"
-                              onClick={() => toggleModal(connection)}
+                            <h1
+                              className="text-center"
+                              style={{
+                                fontSize: "350%",
+                                fontFamily: "Baloo Bhaijaan, cursive",
+                                transform: "translateY(-50%)",
+                                position: "relative",
+                                top: "50%",
+                                color: "white"
+                              }}
                             >
-                              More Info
-                            </Button>
-                            <Button
-                              basic
-                              color="red"
-                              onClick={() => contactModal(connection)}
-                            >
-                              Contact Info
-                            </Button>
+                              {connection.grade}
+                            </h1>
                           </div>
-                        </Card.Content>
-                      </Card>
-                      <SweetAlert
-                        show={this.state.show}
-                        title={this.state.title}
-                        onConfirm={() => this.setState({ show: false })}
-                        style={{ maxHeight: "50vh", minWidth: "35%" }}
-                      >
-                        <div style={{ maxHeight: "50vh", minWidth: "35%" }}>
-                          {this.state.text}
-                        </div>
-                      </SweetAlert>
-                    </div>
-                  );
-                })}
-              </ul>
-            ) : (
-              <h1>FUCK YOU!!!!!</h1>
-            )}
-          </div>
-          <div className="col ui card">
-            <img
-              src="http://4.bp.blogspot.com/-xhztiK_lRX0/VZxwVYQh__I/AAAAAAABARU/MS1Y_FldP8U/s1600/baby-money-1.jpg"
-              className="ui image"
-            />
-            <div className="content">
-              <div className="header">
-                {this.state.firstName} {this.state.lastName}
-              </div>
-              <div className="meta">Joined {formDate}</div>
-              <div className="description">Welcome to your account</div>
-            </div>
-            <div className="extra content">
-              <a>
-                <i aria-hidden="true" className="user icon" />
-                {this.state.results.length} Connections
-              </a>
+                          <Card.Content>
+                            <div
+                              style={{
+                                float: "right",
+                                fontSize: "30px",
+                                color: gradeColor
+                              }}
+                            />
+                            <Card.Header>{`${connection.first_name} ${
+                              connection.last_name
+                            }`}</Card.Header>
+                            {/* lat and long calculation for zip and state below */}
+                            <Card.Meta>McKinney, TX</Card.Meta>
+                            <Card.Description>
+                              <ul>
+                                <li>{connection.txt_answers.degree_type}</li>
+                                <li>{connection.txt_answers.PL_PC}</li>
+                                <li>{` Wants ${
+                                  connection.txt_answers.desiredCompensation
+                                }`}</li>
+                              </ul>
+                            </Card.Description>
+                          </Card.Content>
+                          <Card.Content extra>
+                            <div className="ui two buttons">
+                              <Button
+                                basic
+                                color="green"
+                                onClick={() => toggleModal(connection)}
+                              >
+                                More Info
+                              </Button>
+                              <Button
+                                basic
+                                color="red"
+                                onClick={() => contactModal(connection)}
+                              >
+                                Contact Info
+                              </Button>
+                            </div>
+                          </Card.Content>
+                        </Card>
+                        <SweetAlert
+                          show={this.state.show}
+                          title={this.state.title}
+                          onConfirm={() => this.setState({ show: false })}
+                          style={{ maxHeight: "50vh", minWidth: "35%" }}
+                        >
+                          <div style={{ maxHeight: "50vh", minWidth: "35%" }}>
+                            {this.state.text}
+                          </div>
+                        </SweetAlert>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <h1>No Connections</h1>
+              )}
             </div>
           </div>
         </div>
@@ -355,4 +365,5 @@ class UserHome extends Component {
     );
   }
 }
+
 export default UserHome;

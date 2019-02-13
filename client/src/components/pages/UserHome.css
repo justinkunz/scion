@@ -12,8 +12,16 @@
   font-size: 18pt;
   font-family: "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
-.match-generator {
-  float: right;
-  background-color: white;
+
+.container {
+  background-color: lightgray;
 }
 
+#profile {
+  margin: 10px;
+}
+
+.connection {
+  display: inline;
+
+}
