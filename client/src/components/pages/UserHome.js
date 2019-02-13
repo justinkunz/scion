@@ -1,13 +1,10 @@
-
 import React, { Component } from "react";
 import Loader from "../misc/Loader";
 import axios from "axios";
 import "./UserHome.css";
 import Navbar from "../misc/Navbar";
 import { Button, Card } from "semantic-ui-react";
-import SweetAlert from 'react-bootstrap-sweetalert';
-
-
+import SweetAlert from "react-bootstrap-sweetalert";
 class UserHome extends Component {
   constructor(props) {
     super(props);
@@ -23,24 +20,12 @@ class UserHome extends Component {
       title: null,
       text: null
     };
-
- };
-
- getResults = async () => {
-  const results = await axios.get("/api/get/results/" + this.state.userId);
-  // console.log(results.data);
-  this.setState({ results: results.data, grabbedData: true });
-  console.log("State check: ", this.state);
- };
- render() {
-  if (!this.state.grabbedData) {
-   this.verifyUser();
-   return <Loader />;
   }
-
+  componentDidUpdate() {
+    console.log(this.state);
+  }
   verifyUser = async () => {
     const token = localStorage.getItem("token");
-
     if (!token) {
       this.setState({ signedIn: false, grabbedData: true });
     } else {
@@ -66,7 +51,6 @@ class UserHome extends Component {
       }
     }
   };
-
   getResults = async () => {
     const results = await axios.get("/api/get/results/" + this.state.userId);
     // console.log(results.data);
@@ -75,7 +59,7 @@ class UserHome extends Component {
   };
 
   render() {
-    console.log(this.state.user_type)
+    console.log(this.state.user_type);
     if (!this.state.grabbedData) {
       this.verifyUser();
       return <Loader />;
@@ -86,84 +70,126 @@ class UserHome extends Component {
 
     const toggleModal = connection => {
       let prevGC;
-      if(connection.user_type === "GC"){
+      if (connection.user_type === "GC") {
+        connection.txt_answers.previous_gc === "No"
+          ? (prevGC = "Does not have expierence as a gestational carrier")
+          : (prevGC = "Does have gestational carrier expierence");
 
-          connection.txt_answers.previous_gc === "No" ?  prevGC = "Does not have expierence as a gestational carrier" : prevGC = "Does have gestational carrier expierence"
+        let hospBC;
+        if (
+          connection.txt_answers.birthCenter === "No" &&
+          connection.txt_answers.hospital === "No"
+        ) {
+          hospBC = "Is not willing to give birth in a birth center or hospital";
+        }
+        if (
+          connection.txt_answers.birthCenter === "No" &&
+          connection.txt_answers.hospital === "Yes"
+        ) {
+          hospBC =
+            "Is willing to give birth in a hospital, but not a birth center";
+        }
+        if (
+          connection.txt_answers.birthCenter === "Yes" &&
+          connection.txt_answers.hospital === "No"
+        ) {
+          hospBC =
+            "Is willing to give birth in a birth center, but not a hospital";
+        }
+        if (
+          connection.txt_answers.birthCenter === "Yes" &&
+          connection.txt_answers.hospital === "Yes"
+        ) {
+          hospBC =
+            "Is willing to give birth in either a birth center or a hospital";
+        }
 
-         let hospBC;
-          if(connection.txt_answers.birthCenter === "No" && connection.txt_answers.hospital === "No"){
-            hospBC = "Is not willing to give birth in a birth center or hospital"
-          }
-          if(connection.txt_answers.birthCenter === "No" && connection.txt_answers.hospital === "Yes"){
-            hospBC = "Is willing to give birth in a hospital, but not a birth center"
-          }
-          if(connection.txt_answers.birthCenter === "Yes" && connection.txt_answers.hospital === "No"){
-            hospBC = "Is willing to give birth in a birth center, but not a hospital"
-          }
-          if(connection.txt_answers.birthCenter === "Yes" && connection.txt_answers.hospital === "Yes"){
-            hospBC = "Is willing to give birth in either a birth center or a hospital"
-          }
-        
-
-          let text = (
-          <div style={{textAlign: "left"}}>
+        let text = (
+          <div style={{ textAlign: "left" }}>
             <ul>
-              <li>Highest Level of Education: {connection.txt_answers.degree_type} </li>
-              <li>Religion: {connection.txt_answers.religion} </li> 
+              <li>
+                Highest Level of Education: {connection.txt_answers.degree_type}{" "}
+              </li>
+              <li>Religion: {connection.txt_answers.religion} </li>
               <li>{prevGC}</li>
               <li>{hospBC}</li>
               <li>Is {connection.txt_answers.PL_PC}</li>
-              <li>Is looking for {connection.txt_answers.desiredCompensation}</li>
+              <li>
+                Is looking for {connection.txt_answers.desiredCompensation}
+              </li>
               <li>Goal Timeframe: {connection.txt_answers.implant_timeline}</li>
-
             </ul>
           </div>
-          )
-          
-        this.setState({title: `${connection.first_name} ${connection.last_name}`, text: text, show: true})
+        );
+
+        this.setState({
+          title: `${connection.first_name} ${connection.last_name}`,
+          text: text,
+          show: true
+        });
       } else {
-        connection.txt_answers.previous_gc === "No" ?  prevGC = "Doesn't have a preference on carrier expierence" : prevGC = "Prefers someone with gestational carrier expierence"
+        connection.txt_answers.previous_gc === "No"
+          ? (prevGC = "Doesn't have a preference on carrier expierence")
+          : (prevGC = "Prefers someone with gestational carrier expierence");
 
-         let hospBC;
-          if(connection.txt_answers.birthCenter === "No" && connection.txt_answers.hospital === "No"){
-            hospBC = "Would not like the carrier to give birth in a birth center or hospital"
-          }
-          if(connection.txt_answers.birthCenter === "No" && connection.txt_answers.hospital === "Yes"){
-            hospBC = "Would like the carrier to give birth in a hospital, but not a birth center"
-          }
-          if(connection.txt_answers.birthCenter === "Yes" && connection.txt_answers.hospital === "No"){
-            hospBC = "Would like the carrier to give birth in a birth center, but not a hospital"
-          }
-          if(connection.txt_answers.birthCenter === "Yes" && connection.txt_answers.hospital === "Yes"){
-            hospBC = "Would like the carrier to give birth in either a birth center or a hospital"
-          }
-        
+        let hospBC;
+        if (
+          connection.txt_answers.birthCenter === "No" &&
+          connection.txt_answers.hospital === "No"
+        ) {
+          hospBC =
+            "Would not like the carrier to give birth in a birth center or hospital";
+        }
+        if (
+          connection.txt_answers.birthCenter === "No" &&
+          connection.txt_answers.hospital === "Yes"
+        ) {
+          hospBC =
+            "Would like the carrier to give birth in a hospital, but not a birth center";
+        }
+        if (
+          connection.txt_answers.birthCenter === "Yes" &&
+          connection.txt_answers.hospital === "No"
+        ) {
+          hospBC =
+            "Would like the carrier to give birth in a birth center, but not a hospital";
+        }
+        if (
+          connection.txt_answers.birthCenter === "Yes" &&
+          connection.txt_answers.hospital === "Yes"
+        ) {
+          hospBC =
+            "Would like the carrier to give birth in either a birth center or a hospital";
+        }
 
-          let text = (
-          <div style={{textAlign: "left"}}>
+        let text = (
+          <div style={{ textAlign: "left" }}>
             <ul>
               <li>Degree Preference: {connection.txt_answers.degree_type} </li>
-              <li>Religious Preference: {connection.txt_answers.religion} </li> 
+              <li>Religious Preference: {connection.txt_answers.religion} </li>
               <li>{prevGC}</li>
               <li>{hospBC}</li>
               <li>Is {connection.txt_answers.PL_PC}</li>
-              <li>Is looking to pay {connection.txt_answers.desiredCompensation}</li>
+              <li>
+                Is looking to pay {connection.txt_answers.desiredCompensation}
+              </li>
               <li>Goal Timeframe: {connection.txt_answers.implant_timeline}</li>
-
             </ul>
           </div>
-          )
-          
-        this.setState({title: `${connection.first_name} ${connection.last_name}`, text: text, show: true})
-      }
-    }
+        );
 
+        this.setState({
+          title: `${connection.first_name} ${connection.last_name}`,
+          text: text,
+          show: true
+        });
+      }
+    };
     const contactModal = connection => {
       let emailer = "mailto:" + connection.email;
       let text = (
-        
         <div>
-          Phone number: {connection.phone_num} 
+          Phone number: {connection.phone_num}
           <br />
           <form
             className="m-2"
@@ -175,14 +201,17 @@ class UserHome extends Component {
             <span>Email: </span>
             <Button>{connection.email}</Button>
           </form>
-        
         </div>
-      )
-      this.setState({title: `${connection.first_name} ${connection.last_name}`, text: text, show: true})
-    }
+      );
+      this.setState({
+        title: `${connection.first_name} ${connection.last_name}`,
+        text: text,
+        show: true
+      });
+    };
     return (
       <div>
-        <Navbar activePage="Home" signedIn="true"/>
+        <Navbar activePage="Home" signedIn="true" />
         <div className="match-panel">
           <div
             style={{
@@ -191,10 +220,11 @@ class UserHome extends Component {
               height: "450px",
               width: "60%"
             }}
-            className="match-generator rounded border border-dark"
+            className="match-generator rounded border border"
           >
+          
             <h1 className="match-text">Matches</h1>
-
+            
             {this.state.results.length ? (
               <ul style={{ margin: "0 auto", overflow: "auto" }}>
                 {this.state.results.map(connection => {
@@ -217,74 +247,83 @@ class UserHome extends Component {
                   }
                   return (
                     <div>
-                    <Card style={{ float: "right", margin: "10px" }}>
-                    <div 
-                        className="card-image mt-2" 
-                        style={{
-                          margin: "0 auto",
-                          height: "70px", 
-                          width: "70px", 
-                          backgroundColor: gradeColor,
-                          clipPath: "circle(50% at 50% 50%)"}}
-                        >
-
-                        <h1 className="text-center" style={
-                          {
-                            fontSize: "350%",
-                            fontFamily: "Baloo Bhaijaan, cursive",
-                            transform: "translateY(-50%)",
-                            position: "relative",
-                            top:"50%",
-                            color:"white"
-                        }
-                          }>{connection.grade}</h1>
-                        
-                      </div>
-                      <Card.Content>
+                      <Card style={{ float: "right", margin: "10px" }}>
                         <div
+                          className="card-image mt-2"
                           style={{
-                            float: "right",
-                            fontSize: "30px",
-                            color: gradeColor
+                            margin: "0 auto",
+                            height: "70px",
+                            width: "70px",
+                            backgroundColor: gradeColor,
+                            clipPath: "circle(50% at 50% 50%)"
                           }}
-                        >
+                         >
+                          <h1
+                            className="text-center"
+                            style={{
+                              fontSize: "350%",
+                              fontFamily: "Baloo Bhaijaan, cursive",
+                              transform: "translateY(-50%)",
+                              position: "relative",
+                              top: "50%",
+                              color: "white"
+                            }}
+                          >
+                            {connection.grade}
+                          </h1>
                         </div>
-                        <Card.Header>{`${connection.first_name} ${
-                          connection.last_name
-                        }`}</Card.Header>
-                        <Card.Meta>McKinney, TX</Card.Meta>
-                        <Card.Description>
-                          <ul>
-                            <li>{connection.txt_answers.degree_type}</li>
-                            <li>{connection.txt_answers.PL_PC}</li>
-                            <li>{` Wants ${
-                              connection.txt_answers.desiredCompensation
-                            }`}</li>
-                          </ul>
-                        </Card.Description>
-                      </Card.Content>
-                      <Card.Content extra>
-                        <div className="ui two buttons">
-                          <Button basic color="green" onClick={() => toggleModal(connection)}>
-                            More Info
-                          </Button>
-                          <Button basic color="red" onClick={() => contactModal(connection)}>
-                            Contact Info
-                          </Button>
+                        <Card.Content>
+                          <div
+                            style={{
+                              float: "right",
+                              fontSize: "30px",
+                              color: gradeColor
+                            }}
+                          />
+                          <Card.Header>{`${connection.first_name} ${
+                            connection.last_name
+                          }`}</Card.Header>
+                          <Card.Meta>McKinney, TX</Card.Meta>
+                          <Card.Description>
+                            <ul>
+                              <li>{connection.txt_answers.degree_type}</li>
+                              <li>{connection.txt_answers.PL_PC}</li>
+                              <li>{` Wants ${
+                                connection.txt_answers.desiredCompensation
+                              }`}</li>
+                            </ul>
+                          </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra>
+                          <div className="ui two buttons">
+                            <Button
+                              basic
+                              color="green"
+                              onClick={() => toggleModal(connection)}
+                            >
+                              More Info
+                            </Button>
+                            <Button
+                              basic
+                              color="red"
+                              onClick={() => contactModal(connection)}
+                            >
+                              Contact Info
+                            </Button>
+                          </div>
+                        </Card.Content>
+                      </Card>
+                      <SweetAlert
+                        show={this.state.show}
+                        title={this.state.title}
+                        onConfirm={() => this.setState({ show: false })}
+                        style={{ maxHeight: "50vh", minWidth: "35%" }}
+                      >
+                        <div style={{ maxHeight: "50vh", minWidth: "35%" }}>
+                          {this.state.text}
                         </div>
-                      </Card.Content>
-                    </Card>
-                     <SweetAlert
-                     show={this.state.show}
-                     title={this.state.title}
-                     onConfirm={() => this.setState({ show: false })}
-                     style={{ maxHeight: "50vh", minWidth: "35%" }}
-                     >
-                     <div style={{ maxHeight: "50vh", minWidth: "35%" }}>
-                         {this.state.text}
-                     </div>
-                 </SweetAlert>
-                 </div>
+                      </SweetAlert>
+                    </div>
                   );
                 })}
               </ul>
@@ -304,7 +343,6 @@ class UserHome extends Component {
               <div className="meta">Joined {formDate}</div>
               <div className="description">Welcome to your account</div>
             </div>
-
             <div className="extra content">
               <a>
                 <i aria-hidden="true" className="user icon" />
@@ -314,21 +352,7 @@ class UserHome extends Component {
           </div>
         </div>
       </div>
-
-      <div className="extra content">
-      
-       <a>
-        <i aria-hidden="true" className="user icon" />{this.state.results.length} Connections
-       </a>
-
-      </div>
-
-
-     </div>
-    </div>
-   </div>
-  );
- }
+    );
+  }
 }
-
 export default UserHome;
