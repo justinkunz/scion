@@ -1,15 +1,17 @@
-import React, { Component } from "react";
-import axios from "axios";
-import "./css/App.css";
-import { BrowserRouter, Route, Redirect } from "react-router-dom";
-import { HomePage, ResultsPage } from "./components/pages";
-import LoginForm from "./components/pages/LogIn";
-import SignUpForm from "./components/pages/SignUp";
-import GCSurvey from "./components/pages/surveys/gcSurvey";
-import SignOut from "./components/pages/SignOut";
-import IPSurvey from "./components/pages/surveys/ipSurvey";
-import Loader from "./components/misc/Loader";
-import Hp2 from "./components/pages/Hp2";
+
+import React, { Component } from 'react';
+import axios from 'axios';
+import './css/App.css';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { HomePage, ResultsPage } from './components/pages';
+import LoginForm from './components/pages/LogIn';
+import SignUpForm from './components/pages/SignUp';
+import GCSurvey from './components/pages/surveys/gcSurvey';
+import SignOut from './components/pages/SignOut';
+// import SignUpChoose from './components/pages/SignUpChoose';
+import IPSurvey from './components/pages/surveys/ipSurvey';
+import Loader from './components/misc/Loader';
+import Hp2 from './components/pages/Hp2';
 import UserHome from './components/pages/UserHome';
 import Welcome from './components/pages/Welcome'
 

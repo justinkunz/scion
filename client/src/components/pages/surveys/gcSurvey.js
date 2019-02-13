@@ -2,7 +2,6 @@ import React from "react";
 import Navbar from "../../misc/Navbar";
 import converter from "./Compare/compareLogic";
 import {Redirect} from 'react-router-dom';
-import Loader from "react-loader-spinner";
 import SweetAlert from 'react-bootstrap-sweetalert';
 
 import {
@@ -15,7 +14,7 @@ import {
 class GCSurvey extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { signedIn: true, redirect: false };
+    this.state = { signedIn: true, redirect: false, show: false };
   }
 
   render() {
@@ -33,16 +32,39 @@ class GCSurvey extends React.Component {
 
     //on survey submission
     const handleSubmission = () => {
+      
+      //data validation
+      if(!this.state.PL_PC || 
+        !this.state.religion  || 
+        !this.state.embryos_count  || 
+        !this.state.birthCenter || 
+        !this.state.hospital || 
+        !this.state.implant_timeline || 
+        !this.state.location || 
+        !this.state.haveChildren  || 
+        !this.state.previous_gc  || 
+        !this.state.relationshipStatus || 
+        !this.state.desiredCompensation || 
+        !this.state.insurance ){
+
+        //if failed show alert
+        this.setState({title: "Error", text: "Please fill out all fields before submitting your survey", show: true})
+        return
+        }
+
       converter(this.state)
       this.setState({redirect: true})
       
     }
+
+
 
     if(this.state.redirect){
       return <Redirect to="/results" />
     }
 
     const education_lvl = [
+      "Please Select",
       "N/A",
       "High School Diploma",
       "Some College",
@@ -52,6 +74,7 @@ class GCSurvey extends React.Component {
       "PhD"
     ];
     const religions = [
+      "Please Select",
       "Not Religous/Agnostic/Atheist",
       "Christian",
       "Jewish",
@@ -59,7 +82,7 @@ class GCSurvey extends React.Component {
       "Islamic"
     ];
     const embr_ct = ["1-3", "4-6", "7-10", ">10"];
-    const relationshipStatus = ["Single", "Married", "Commmon Law Married"];
+    const relationshipStatus = ["Please Select", "Single", "Married", "Commmon Law Married"];
     const desiredCompensation = [
       "< $20,000",
       "$21,000 - 49,000",
@@ -197,17 +220,15 @@ class GCSurvey extends React.Component {
           btn2="No"
         />
         <SubmitBtn onCancel={onCancel} onSubmit={() => handleSubmission()} />
-        {/* <SweetAlert
+        <SweetAlert
           show={this.state.show}
           title={this.state.title}
           onConfirm={() => this.setState({ show: false })}
         >
-          <div style={{ maxHeight: "20vh", width: "300px" }}>
-          <div style={{margin: "10% 25% 10% 25%"}}>
-          <Loader type="CradleLoader" color="#00BFFF" height="100" width="(200)" />
+          <div >
+          {this.state.text}
           </div>
-          </div>
-        </SweetAlert> */}
+        </SweetAlert>
       </div>
     );
   }

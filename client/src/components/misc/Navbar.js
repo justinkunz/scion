@@ -6,6 +6,7 @@ class Navbar extends React.Component {
     if (page === this.props.activePage) {
       return "active item";
     }
+
     return "item";
   };
   render() {
@@ -35,6 +36,7 @@ class Navbar extends React.Component {
         </div>
       );
     }
+
 
     return (
       <div>
