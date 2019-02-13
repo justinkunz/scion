@@ -212,6 +212,16 @@ class UserHome extends Component {
     return (
       <div>
         <Navbar activePage="Home" signedIn="true" />
+        <SweetAlert
+                        show={this.state.show}
+                        title={this.state.title}
+                        onConfirm={() => this.setState({ show: false })}
+                        style={{ maxHeight: "50vh", minWidth: "35%" }}
+                      >
+                        <div style={{ maxHeight: "50vh", minWidth: "35%" }}>
+                          {this.state.text}
+                        </div>
+                      </SweetAlert>
         <div className="match-panel">
           <div
             style={{
@@ -312,16 +322,7 @@ class UserHome extends Component {
                           </div>
                         </Card.Content>
                       </Card>
-                      <SweetAlert
-                        show={this.state.show}
-                        title={this.state.title}
-                        onConfirm={() => this.setState({ show: false })}
-                        style={{ maxHeight: "50vh", minWidth: "35%" }}
-                      >
-                        <div style={{ maxHeight: "50vh", minWidth: "35%" }}>
-                          {this.state.text}
-                        </div>
-                      </SweetAlert>
+              
                     </div>
                   );
                 })}
