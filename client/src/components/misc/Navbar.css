@@ -1,4 +1,8 @@
-.menu{
-    background-color: #36BDB2;
-    border: .1px solid lightgray;
+
+.ui.secondary.pointing.menu{
+    background: rgb(244, 245, 245);
 }
+.right.menu{
+    background-color: #eee;
+}
+

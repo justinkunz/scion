@@ -46,7 +46,10 @@ class HomePage extends React.Component {
      return <Loader />
     }
     if (!this.state.signedIn && this.state.grabbedData) {
-      return <Redirect to="/sign_in" />
+
+      this.props.signOutUser();
+      return <Redirect to="/welcome" />
+
     }
 
     if (!this.state.answered_survey && this.state.grabbedData) {
