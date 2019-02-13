@@ -6,6 +6,9 @@ var jwt = require("jsonwebtoken");
 var compareSurvey = require("../logic/compareThisShit");
 var request = require("request");
 var faker = require("faker");
+var email = require("../email/email");
+require('dotenv').config()
+
 mongoose.connect("mongodb://localhost/happyFamily");
 
 function apiRoutes(app) {
@@ -16,6 +19,10 @@ function apiRoutes(app) {
       res.json(data);
     });
   });
+
+  app.get("/api/email", function(req, res){
+  
+  })
 
   app.post("/api/email/gcs/conf", function(req, res) {
     email.submissionThanksGCS(req.body);
@@ -29,7 +36,7 @@ function apiRoutes(app) {
         req.params.lat +
         "," +
         req.params.long +
-        "&key=AIzaSyDoy_aXAr9GwIfaWBC7HGCc1Xa9r6pM0MY",
+        "&key=" + process.env.GMAP_APIKEY,
       function(error, response, body) {
         if (error) res.json("error");
         try {
@@ -159,6 +166,7 @@ function apiRoutes(app) {
           }
         )
         .then(function(err, data) {
+          email.matched({firstName: data[0].first_name, lastName: data[0].last_name, email: data[0].email});
           console.log(err);
           console.log(data);
         });
@@ -299,13 +307,22 @@ function apiRoutes(app) {
               answered_survey: false
             })
             .then(function(err, data) {
-              res.send({ error: "Could not sign up user" });
+              
+              if (err){
+                res.send({ error: "Could not sign up user" });
+                return
+              }
+              res
+              .status(200)
+              .send({ success: "Successfully created user account" });
               return;
               console.log(data);
             });
-          res
-            .status(200)
-            .send({ success: "Successfully created user account" });
+            
+            email.acctCreated({firstName: userInfo.first_name, lastName: userInfo.last_name, email: userInfo.email});
+            res
+              .status(200)
+              .send({ success: "Successfully created user account" });
           return;
         }
 

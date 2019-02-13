@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../misc/Navbar";
 import { Redirect } from 'react-router';
 import axios from 'axios';
 import "./HomePage.css";
