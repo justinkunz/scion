@@ -37,7 +37,8 @@ const surveyCompare = (me, allSurveys) => {
                 email: allSurveys[i].email,
                 zip: allSurveys[i].zip_cd,
                 txt_answers: allSurveys[i].survey_results,
-                user_type: allSurveys[i].user_type
+                user_type: allSurveys[i].user_type,
+                zipcode: allSurveys[i].zipcode
             });
         };
     };

@@ -283,7 +283,7 @@ class UserHome extends Component {
                           <Card.Header>{`${connection.first_name} ${
                             connection.last_name
                           }`}</Card.Header>
-                          <Card.Meta>McKinney, TX</Card.Meta>
+                          <Card.Meta>Zip Code {connection.zipcode}</Card.Meta>
                           <Card.Description>
                             <ul>
                               <li>{connection.txt_answers.degree_type}</li>
