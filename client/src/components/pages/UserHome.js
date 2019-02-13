@@ -1,15 +1,4 @@
-foscat
 
-
-
-
-
-
-
-Message List
-
-Kyle Patrick Foster [6:05 PM]
-Untitled 
 import React, { Component } from "react";
 import Loader from "../misc/Loader";
 import axios from "axios";
