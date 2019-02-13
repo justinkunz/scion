@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import Loader from "../misc/Loader";
 import axios from "axios";
@@ -22,11 +23,21 @@ class UserHome extends Component {
       title: null,
       text: null
     };
+
+ };
+
+ getResults = async () => {
+  const results = await axios.get("/api/get/results/" + this.state.userId);
+  // console.log(results.data);
+  this.setState({ results: results.data, grabbedData: true });
+  console.log("State check: ", this.state);
+ };
+ render() {
+  if (!this.state.grabbedData) {
+   this.verifyUser();
+   return <Loader />;
   }
 
-  componentDidUpdate() {
-    console.log(this.state);
-  }
   verifyUser = async () => {
     const token = localStorage.getItem("token");
 
@@ -303,8 +314,21 @@ class UserHome extends Component {
           </div>
         </div>
       </div>
-    );
-  }
+
+      <div className="extra content">
+      
+       <a>
+        <i aria-hidden="true" className="user icon" />{this.state.results.length} Connections
+       </a>
+
+      </div>
+
+
+     </div>
+    </div>
+   </div>
+  );
+ }
 }
 
 export default UserHome;
