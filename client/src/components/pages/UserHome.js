@@ -218,12 +218,11 @@ class UserHome extends Component {
         <div className="container">
           <div className="row">
             {/* profile info col */}
-            <div className="col lg-4 md-3 sm-5">
+            <div className="profile-column">
               {/* USER PROFILE INFO */}
-              <div className="col md-2 content-Center">
+                <br/>
                 <h4>PROFILE</h4>
                 <hr />
-              </div>
               <div className="ui card" id="profile">
                 <img
                   src="http://4.bp.blogspot.com/-xhztiK_lRX0/VZxwVYQh__I/AAAAAAABARU/MS1Y_FldP8U/s1600/baby-money-1.jpg"
@@ -234,7 +233,7 @@ class UserHome extends Component {
                     {this.state.firstName} {this.state.lastName}
                   </div>
                   <div className="meta">Joined {formDate}</div>
-                  <div className="description">NEW LOCATION</div>
+                  <div className="description">location</div>
                 </div>
                 <div className="extra content">
                   <a>
@@ -248,11 +247,12 @@ class UserHome extends Component {
             </div>
 
             {/* MATCHES COL */}
-            <div className="col lg-8 md-9 sm-7">
+            <div className="connection-column">
+              <br/>
               <h4>CONNECTIONS</h4>
               <hr />
               {this.state.results.length ? (
-                <div>
+                <div id="connection-wrapper">
                   {this.state.results.map(connection => {
                     // console.log("Connection: ", connection);
                     let gradeColor;
@@ -269,10 +269,10 @@ class UserHome extends Component {
                       gradeColor = "rgb(146,26,28)";
                     }
                     return (
-                      <div className="flex-container">
+                      <div className="connection-cards">
                         <Card
                           style={{
-                            margin: "10px"
+                            margin: "10px",
                           }}
                         >
                           <div

@@ -17,11 +17,35 @@
   background-color: lightgray;
 }
 
-#profile {
-  margin: 10px;
+.profile-column {
+  margin: 15px;
+  margin-left:20px;
 }
 
-.connection {
-  display: inline;
-
+.connection-column {
+  margin-top: 15px;
+  width: 70%;
 }
+
+.connection-cards {
+  margin: 5px;
+  display:flexbox;
+}
+
+.ui.card {
+  display: flexbox;
+}
+
+h4 {
+  margin-left: 5px;
+}
+
+.connection-wrapper {
+  display: grid;
+  grid-template-columns: 75px, 575px;
+  grid-template-rows: 75px, 75px, 75px;
+}
+
+
+
+
