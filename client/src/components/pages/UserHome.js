@@ -262,7 +262,6 @@ class UserHome extends Component {
                             className="text-center"
                             style={{
                               fontSize: "350%",
-                              fontFamily: "Baloo Bhaijaan, cursive",
                               transform: "translateY(-50%)",
                               position: "relative",
                               top: "50%",
