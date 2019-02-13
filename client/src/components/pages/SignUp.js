@@ -4,7 +4,8 @@ import {
   Form,
   Grid,
   Header,
-  Segment
+  Segment,
+  Message
 } from "semantic-ui-react";
 import SweetAlert from "react-bootstrap-sweetalert";
 import Navbar from "../misc/Navbar";
@@ -259,6 +260,7 @@ class SignIn extends React.Component {
                           this.setState({ zipcode: e.target.value })
                         }
                       />
+          
                     </div>
                     <div className="field">
                       <label>User Type</label>
@@ -267,6 +269,7 @@ class SignIn extends React.Component {
                         type="text"
                         onChange={e => e.target.value === "Intended Parent" ? this.setState({type: "IP"}) : this.setState({type: "GC"})}
                       > 
+                      
                       <option>Select An Answer. . .</option>
                       <option>Intended Parent</option>
                       <option>Gestational Carrier</option>
@@ -300,6 +303,9 @@ class SignIn extends React.Component {
                 </SweetAlert>
               </Segment>
             </Form>
+            <Message>
+                Already have an account? <a href='/sign_in'>Sign In</a>
+            </Message>
           </Grid.Column>
         </Grid>
       </div>
