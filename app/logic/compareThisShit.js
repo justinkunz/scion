@@ -36,7 +36,8 @@ const surveyCompare = (me, allSurveys) => {
                 phone_num:  allSurveys[i].phone_num,
                 email: allSurveys[i].email,
                 zip: allSurveys[i].zip_cd,
-                txt_answers: allSurveys[i].survey_results
+                txt_answers: allSurveys[i].survey_results,
+                user_type: allSurveys[i].user_type
             });
         };
     };
