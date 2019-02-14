@@ -1,12 +1,14 @@
 import React from "react";
 import Navbar from "../../misc/Navbar";
-
+import converter from './Compare/compareLogic';
+import {Redirect} from 'react-router-dom';
 import { Dropdown, EitherOr, RadioBtn, Slide, SubmitBtn } from "../../form";
+import SweetAlert from 'react-bootstrap-sweetalert';
 
 class IPSurvey extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { signedIn: true };
+    this.state = { signedIn: true, show: false };
   }
 
   render() {
@@ -28,32 +30,39 @@ class IPSurvey extends React.Component {
       alert("Form cancelled");
     };
 
-    //on submit btn click
-    const onFormSubmit = () => {
-      alert(
-        "DEV ALERT - Current application state has been logged in the console"
-      );
-      console.log("We will push this to an API once the questions are set up");
-      console.log(this.state);
-    };
+   //on survey submission
+   const handleSubmission = () => {
+      
+    //data validation
+    if(!this.state.PL_PC || 
+      !this.state.religion  || 
+      !this.state.embryos_count  || 
+      !this.state.birthCenter || 
+      !this.state.hospital || 
+      !this.state.implant_timeline || 
+      !this.state.location || 
+      !this.state.haveChildren  || 
+      !this.state.previous_gc  || 
+      !this.state.relationshipStatus || 
+      !this.state.desiredCompensation || 
+      !this.state.insurance ){
 
-    // ------------------------------------------------------------
-    // 1. What is the highest level of education you prefer your gestational carrier to have?
-    // 2. Do you prefer your gestational carrier to be pro-life or pro choice?
-    // 3. Do you have a preference to your gestational carriers religious preference?
-    // 4. How many embryos would you like to implant?
-    // 5. Would you allow your GC to give birth at a birthing center?
-    // 6. Would you allow your GC to give birth at a hospital?
-    // 7. How soon would you like to implant?
-    // 8. Do you prefer your GC to have a support system within 30 miles of their address?
-    // 9. Do you feel comfortable with a GC that is currently the parent or guardian of a child?
-    // 10. Do you prefer your GC to have previous experience as a GC?
-    // 11. Do you have a preference of your GC’s current relationship status?
-    // 12. What amount are you willing to compensate the GC for their services?
-    // 13. Do you require your GC to have insurance?
-    // ------------------------------------------------------------
+      //if failed show alert
+      this.setState({title: "Error", text: "Please fill out all fields before submitting your survey", show: true})
+      return
+      }
+
+    converter(this.state)
+    this.setState({redirect: true})
+    
+  }
+
+    if(this.state.redirect){
+      return <Redirect to="/results" />
+    }
 
     const education_lvl = [
+      "Please Select",
       "GED",
       "High School Diploma",
       "Some College",
@@ -63,6 +72,7 @@ class IPSurvey extends React.Component {
       "PhD"
     ];
     const religions = [
+      "Please Select",
       "Not Religous/Agnostic/Atheist",
       "Christian",
       "Jewish",
@@ -71,7 +81,7 @@ class IPSurvey extends React.Component {
     ];
     const embryos_count = ["1-3", "4-6", "7-10", ">10"];
     const relationshipStatus = [
-      "n/a",
+      "Please Select",
       "Single",
       "Married",
       "Commmon Law Married"
@@ -88,13 +98,14 @@ class IPSurvey extends React.Component {
       "$21,000 - 49,000",
       "$50,000 - 75,000",
       "$75,000 - $100,000",
-      "$100,000 <"
+      "> $100,000"
     ];
 
     return (
       <div>
-        <Navbar activePage="Intended Parents" />
         <Navbar activePage="Preference Survey" signedIn={this.state.signedIn} />
+        <br />
+        <br />
         {/* Question 1 */}
         <Dropdown
           key="degree_type"
@@ -143,7 +154,7 @@ class IPSurvey extends React.Component {
         <EitherOr
           fieldId="hospital"
           key="hospital"
-          activeAns={this.state.hosp_birth || ""}
+          activeAns={this.state.hospital || ""}
           onValueChange={onValueChange}
           question="Do you prefer to have your gestational carrier give birth at a hospital?"
           btn1="Yes"
@@ -183,7 +194,7 @@ class IPSurvey extends React.Component {
           key="previous_gc"
           activeAns={this.state.previous_gc || ""}
           onValueChange={onValueChange}
-          question="do you prefer your GC to have prior expeirence as a gestational carrier?"
+          question="Do you prefer your GC to have prior expeirence as a gestational carrier?"
           btn1="Yes"
           btn2="No"
         />
@@ -213,7 +224,17 @@ class IPSurvey extends React.Component {
           btn1="Yes"
           btn2="No"
         />
-        <SubmitBtn onCancel={onCancel} onSubmit={onFormSubmit} />
+        <SubmitBtn onCancel={onCancel} onSubmit={() => handleSubmission()} />
+        <SweetAlert
+          show={this.state.show}
+          title={this.state.title}
+          onConfirm={() => this.setState({ show: false })}
+        >
+          <div >
+          {this.state.text}
+          </div>
+        </SweetAlert>
+        
       </div>
     );
   }

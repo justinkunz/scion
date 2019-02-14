@@ -1,8 +1,8 @@
 import React from "react";
-import Navbar from "../misc/Navbar";
 import { Redirect } from 'react-router';
 import axios from 'axios';
-
+import "./HomePage.css";
+import Loader from '../misc/Loader';
 class HomePage extends React.Component {
   constructor(props) {
     super(props)
@@ -25,11 +25,11 @@ class HomePage extends React.Component {
       const request = await axios.post('/api/currentUser', { token: localStorage.getItem("token") })
 
       if (request.data === "redirect") {
-        this.setState({ signedIn: false, grabbedData: true, answered_survey: request.data.answered_survey })
+        this.setState({ signedIn: false, grabbedData: true})
       } else {
 
         if (request.data[0]) {
-          this.setState({ signedIn: true, grabbedData: true, topMsg: "Welcome " + request.data[0].first_name })
+          this.setState({ signedIn: true, grabbedData: true, answered_survey: request.data[0].survery_answered  })
         }
         else {
           this.setState({ signedIn: false, grabbedData: true })
@@ -40,23 +40,22 @@ class HomePage extends React.Component {
   }
 
   render() {
-
+    console.log(this.state)
+    if(!this.state.grabbedData){
+     return <Loader />
+    }
     if (!this.state.signedIn && this.state.grabbedData) {
+
       this.props.signOutUser();
-      return <Redirect to="/sign_in" />
+      return <Redirect to="/welcome" />
+
     }
 
     if (!this.state.answered_survey && this.state.grabbedData) {
       return <Redirect to="/survey" />
     }
-    return (
-      <div>
-
-        <Navbar activePage="Home" signedIn={this.state.signedIn} />
-        <div className="welcomeMsg">{this.state.topMsg}</div>
-        HOME PAGE
-      </div>
-    );
+    return <Redirect to="/results" />
+  
   }
 }
 

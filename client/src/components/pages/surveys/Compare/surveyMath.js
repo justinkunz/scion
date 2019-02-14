@@ -108,6 +108,7 @@ class SurveyMath extends React.Component {
                     const mySurvey = this.state.user.userSurvey;
                     const thierSurvey = person.userSurvey;
 
+                    
                     //////////////////////////// Degree ifs \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
                     // If user chose N/A for degree

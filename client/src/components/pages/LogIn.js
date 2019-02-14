@@ -25,6 +25,10 @@ class LoginForm extends React.Component {
 
     }
 
+    forgotPw = () => {
+        this.setState({title: "Too bad!", text: "This feature isn't yet available... Just make a new account", show: true})
+    }
+
     render() {
 
 
@@ -74,6 +78,9 @@ class LoginForm extends React.Component {
                         </Form>
                         <Message>
                             New to us? <a href='/sign_up'>Sign Up</a>
+                        </Message>
+                        <Message>
+                           Forgot your password? <a href='#' onClick={() => this.forgotPw()}>Click Here</a>
                         </Message>
                     </Grid.Column>
                 </Grid>

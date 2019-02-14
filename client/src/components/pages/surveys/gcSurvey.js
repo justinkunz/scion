@@ -1,21 +1,24 @@
 import React from "react";
 import Navbar from "../../misc/Navbar";
-import { Dropdown, EitherOr, RadioBtn, Slide, SubmitBtn, Location } from "../../form";
+import converter from "./Compare/compareLogic";
+import {Redirect} from 'react-router-dom';
+import SweetAlert from 'react-bootstrap-sweetalert';
+
+import {
+  Dropdown,
+  EitherOr,
+  RadioBtn,
+  SubmitBtn,
+} from "../../form";
 
 class GCSurvey extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { signedIn: true };
+    this.state = { signedIn: true, redirect: false, show: false };
   }
 
   render() {
-    //setting for slider
-    const settings = {
-      start: 5,
-      min: 0,
-      max: 10,
-      step: 1
-    };
+
 
     //value change handler
     const onValueChange = (fieldId, val) => {
@@ -27,33 +30,41 @@ class GCSurvey extends React.Component {
       alert("Form cancelled");
     };
 
-    //on submit btn click
-    const onFormSubmit = () => {
-      alert(
-        "DEV ALERT - Current application state has been logged in the console"
-      );
-      console.log("We will push this to an API once the questions are set up");
-      console.log(this.state);
-    };
+    //on survey submission
+    const handleSubmission = () => {
+      
+      //data validation
+      if(!this.state.PL_PC || 
+        !this.state.religion  || 
+        !this.state.embryos_count  || 
+        !this.state.birthCenter || 
+        !this.state.hospital || 
+        !this.state.implant_timeline || 
+        !this.state.location || 
+        !this.state.haveChildren  || 
+        !this.state.previous_gc  || 
+        !this.state.relationshipStatus || 
+        !this.state.desiredCompensation || 
+        !this.state.insurance ){
 
-    // EXAMPLE OF GC SURVEY
-    // ------------------------------------------------------------
-    // 1. What is your highest level of education?
-    // 2. Are you pro-life or pro choice?
-    // 3. What religion do you practice?
-    // 4. How many embryos would you allowed to be implanted?
-    // 5. Do you prefer to give birth at a birthing center?
-    // 6. Do you prefer to give birth at a hospital?
-    // 7. How soon would you be able to implant the IP’s embryos?
-    // 8. Do you have a support system within 30 miles of your current address?
-    // 9. Are you currently the legal parent or guardian of a child?
-    // 10. Do you have any previous experience as a GC?
-    // 11. What is your current relationship status?
-    // 12. What is your desired compensation?
-    // 13. Are you currently insured?
-    // ------------------------------------------------------------
+        //if failed show alert
+        this.setState({title: "Error", text: "Please fill out all fields before submitting your survey", show: true})
+        return
+        }
+
+      converter(this.state)
+      this.setState({redirect: true})
+      
+    }
+
+
+
+    if(this.state.redirect){
+      return <Redirect to="/results" />
+    }
 
     const education_lvl = [
+      "Please Select",
       "N/A",
       "High School Diploma",
       "Some College",
@@ -63,6 +74,7 @@ class GCSurvey extends React.Component {
       "PhD"
     ];
     const religions = [
+      "Please Select",
       "Not Religous/Agnostic/Atheist",
       "Christian",
       "Jewish",
@@ -70,7 +82,7 @@ class GCSurvey extends React.Component {
       "Islamic"
     ];
     const embr_ct = ["1-3", "4-6", "7-10", ">10"];
-    const relationshipStatus = ["Single", "Married", "Commmon Law Married"];
+    const relationshipStatus = ["Please Select", "Single", "Married", "Commmon Law Married"];
     const desiredCompensation = [
       "< $20,000",
       "$21,000 - 49,000",
@@ -88,9 +100,9 @@ class GCSurvey extends React.Component {
 
     return (
       <div>
-        <Navbar activePage="Gestational Carriers" />
         <Navbar activePage="Preference Survey" signedIn={this.state.signedIn} />
-        <Location />
+        <br />
+        <br />
         {/* Question 1 */}
         <Dropdown
           key="degree_type"
@@ -191,7 +203,7 @@ class GCSurvey extends React.Component {
           question="What is your relationship status?"
           listOptions={relationshipStatus}
         />
-        ;{/* Question 12 */}
+        {/* Question 12 */}
         <RadioBtn
           key="desiredCompensation"
           fieldId="desiredCompensation"
@@ -209,8 +221,17 @@ class GCSurvey extends React.Component {
           btn1="Yes"
           btn2="No"
         />
-        <SubmitBtn onCancel={onCancel} onSubmit={onFormSubmit} />
-      </div >
+        <SubmitBtn onCancel={onCancel} onSubmit={() => handleSubmission()} />
+        <SweetAlert
+          show={this.state.show}
+          title={this.state.title}
+          onConfirm={() => this.setState({ show: false })}
+        >
+          <div >
+          {this.state.text}
+          </div>
+        </SweetAlert>
+      </div>
     );
   }
 }

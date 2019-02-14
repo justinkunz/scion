@@ -6,8 +6,8 @@ class Location extends React.Component {
         return (
             <div>
                 <div className="qCont" style={{ marginTop: "5vh", marginBottom: "5vh" }}>
-                    <div className=" ui qbox segment">
-                        <div className="ui raised segment">
+                <div className=" ui qbox segment" style={{backgroundColor: "rgb(241, 240, 240)"}}>
+                        <div className="ui raised segment" style={{backgroundColor: "rgb(244, 245, 245)"}}>
                             <div className="titleWrap">
                                 <div className="ui form">
                                     <div className="field">
