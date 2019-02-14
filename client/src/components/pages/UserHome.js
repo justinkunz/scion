@@ -64,7 +64,6 @@ class UserHome extends Component {
       this.verifyUser();
       return <Loader />;
     }
-    const sizes = ["massive"];
     let formDate = this.state.userDate.substring(0, 10);
     console.log("Form Date: ", formDate);
 
@@ -225,22 +224,20 @@ class UserHome extends Component {
         <div className="match-panel">
           <div
             style={{
-              backgroundColor: "lightgrey",
               overflow: "auto",
               height: "450px",
-              width: "60%"
+              width: "60%",
+              float: "right"
             }}
-            className="match-generator rounded border border"
+            className="match-generator"
           >
           
-            <h1 className="match-text">Matches</h1>
+            <h1 className="match-text" style={{position: "fixed", zIndex: "1", fontSize: "18px"}}>Matches</h1>
+            <br />
             
             {this.state.results.length ? (
               <ul style={{ margin: "0 auto", overflow: "auto" }}>
                 {this.state.results.map(connection => {
-                  // console.log("Connection: ", connection);
-
-                  let emailer = "mailto:" + connection.email;
 
                   let gradeColor;
                   if (connection.grade === "A") {

@@ -7,13 +7,13 @@ class Dropdown extends React.Component {
         return (
             <div>
                 <div className="qCont">
-                    <div className=" ui qbox segment">
-                        <div className="ui raised segment">
+                    <div className=" ui qbox segment" style={{backgroundColor: "rgb(241, 240, 240)"}}>
+                        <div className="ui raised segment" style={{backgroundColor: "rgb(244, 245, 245)"}}>
                             <div className="titleWrap">
                                 <div className="ui form">
                                     <div className="field">
                                         <span>{this.props.question}</span>
-                                        <select onChange={(e) => this.props.onValueChange(this.props.fieldId, e.target.value)} className="valuegrab ui search dropdown ui qbox segment">
+                                        <select style={{backgroundColor: "#efefef"}} onChange={(e) => this.props.onValueChange(this.props.fieldId, e.target.value)} className="valuegrab ui search dropdown ui qbox segment">
                                             {this.props.listOptions.map(e => <option >{e}</option>)}
                                         </select>
                                     </div>

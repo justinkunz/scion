@@ -5,7 +5,13 @@
   border-radius: 4px;
   /* border: 3px solid #36bdb2; */
   width: 85%;
-  background-color: white;
+  background-color: rgb(244, 245, 245);
+}
+
+.qBox {
+  margin: 0 25% 10px 25%;
+  height: 35px;
+  background-color: rgb(244, 245, 245);
 }
 
 .match-text {
@@ -13,13 +19,9 @@
   font-family: "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
-.container {
-  background-color: lightgray;
-}
-
 .profile-column {
   margin: 15px;
-  margin-left:20px;
+  margin-left: 20px;
 }
 
 .connection-column {
@@ -29,7 +31,7 @@
 
 .connection-cards {
   margin: 5px;
-  display:flexbox;
+  display: flexbox;
 }
 
 .ui.card {
@@ -45,7 +47,3 @@ h4 {
   grid-template-columns: 75px, 575px;
   grid-template-rows: 75px, 75px, 75px;
 }
-
-
-
-

@@ -11,8 +11,8 @@ class EitherOr extends React.Component {
 
         return (
             <div className="qCont">
-                <div className=" ui qbox segment">
-                    <div className="ui raised segment">
+                <div className=" ui qbox segment" style={{backgroundColor: "rgb(241, 240, 240)"}}>
+                        <div className="ui raised segment" style={{backgroundColor: "rgb(244, 245, 245)"}}>
                         <div className="titleWrap">
                             <span className="qTitle">{this.props.question}</span>
                             <div className="ui buttons">
