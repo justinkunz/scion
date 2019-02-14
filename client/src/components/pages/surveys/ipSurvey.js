@@ -103,7 +103,7 @@ class IPSurvey extends React.Component {
 
     return (
       <div>
-        <Navbar activePage="Preference Survey" signedIn={this.state.signedIn} />
+        <Navbar activePage="Preference Survey" survey="Preference Survey" signedIn={this.state.signedIn} />
         <br />
         <br />
         {/* Question 1 */}

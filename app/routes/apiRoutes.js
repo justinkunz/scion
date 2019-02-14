@@ -15,8 +15,6 @@ mongoose.connect("mongodb://localhost/happyFamily");
 function apiRoutes(app) {
   app.get("/api/get", function(req, res) {
     db.users.find().then(function(data, err) {
-      if (err) throw err;
-      console.log(data);
       res.json(data);
     });
   });
