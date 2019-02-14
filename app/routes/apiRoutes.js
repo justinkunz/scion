@@ -7,6 +7,7 @@ var compareSurvey = require("../logic/compareThisShit");
 var request = require("request");
 var faker = require("faker");
 var email = require("../email/email");
+var converter = require("../logic/fakerCompare");
 require('dotenv').config()
 
 mongoose.connect("mongodb://localhost/happyFamily");
@@ -71,6 +72,68 @@ function apiRoutes(app) {
     if (rand > 0.5) {
       type = "IP";
     }
+    const education_lvl = [
+      "N/A",
+      "High School Diploma",
+      "Some College",
+      "Associates Degree",
+      "Bachelors Degree",
+      "Masters Degree",
+      "PhD"
+    ];
+    const religions = [
+      "Not Religous/Agnostic/Atheist",
+      "Christian",
+      "Jewish",
+      "Buddist",
+      "Islamic"
+    ];
+    const embr_ct = ["1-3", "4-6", "7-10", ">10"];
+    const relationshipStatus = ["Single", "Married", "Commmon Law Married"];
+    const desiredCompensation = [
+      "< $20,000",
+      "$21,000 - 49,000",
+      "$50,000 - 75,000",
+      "$75,000 - $100,000",
+      "> $100,000"
+    ];
+    const how_soon = [
+      "0-3 months",
+      "3-6 months",
+      "6-12 months",
+      "1-2 years",
+      "2+ years from now"
+    ];
+    function yesNo() {
+      if(Math.random()>0.5){
+        return "Yes"
+      }
+      return "No"
+    }
+    function PLPC() {
+      if(Math.random()>0.5){
+        return "Pro Life"
+      }
+      return "Pro Choice"
+    }
+    var survey_res = {
+      signedIn: true,
+      degree_type: education_lvl[Math.floor(Math.random()*education_lvl.length)],
+      PL_PC: PLPC(),
+      religion: religions[Math.floor(Math.random()*religions.length)],
+      embryos_count: embr_ct[Math.floor(Math.random()*embr_ct.length)],
+      birthCenter: yesNo(),
+      hospital: yesNo(),
+      implant_timeline: how_soon[Math.floor(Math.random()*how_soon.length)],
+      location: yesNo(),
+      haveChildren: yesNo(),
+      previous_gc: yesNo(),
+      relationshipStatus: relationshipStatus[Math.floor(Math.random()*relationshipStatus.length)],
+      desiredCompensation: desiredCompensation[Math.floor(Math.random()*desiredCompensation.length)],
+      insurance: yesNo(),
+    }
+
+
     db.users
       .create({
         email: faker.internet.email().toLowerCase(),
@@ -82,43 +145,15 @@ function apiRoutes(app) {
         created_at: new Date(),
         zipcode: faker.address.zipCode(),
         answered_survey: true,
-        numerical_survery: {
-          degree_type: zeroToFive(),
-          PL_PC: zeroOrFive(),
-          religion: zeroToFive(),
-          embryos_count: zeroToFive(),
-          birthCenter: zeroOrFive(),
-          hospital: zeroOrFive(),
-          implant_timeline: zeroToFive(),
-          location: zeroOrFive(),
-          haveChildren: zeroOrFive(),
-          previous_gc: zeroOrFive(),
-          relationshipStatus: zeroToFive(),
-          desiredCompensation: zeroToFive(),
-          insurance: zeroOrFive(),
-        },
-        survey_results: {
-          signedIn: true,
-          degree_type: "Associates Degree",
-          PL_PC: "Pro-Choice",
-          religion: "Buddist",
-          embryos_count: "4-6",
-          birthCenter: "Yes",
-          hospital: "No",
-          implant_timeline: "6-12 months",
-          location: "No",
-          haveChildren: "Yes",
-          previous_gc: "No",
-          relationshipStatus: "Married",
-          desiredCompensation: "$50,000 - 75,000",
-          insurance: "Yes"
-        }
+        numerical_survery:  converter(survey_res),
+        survey_results: survey_res
       })
       .then(function(err, data) {
         // res.send({"Completed": "Signed up fake user" });
         console.log(data);
       });
     };
+    
     res.send({"Completed": "Signed up " + req.params.count + " fake user(s)" })
 
     function zeroToFive() {

@@ -1,17 +1,20 @@
 import React from "react";
 import Navbar from "../../components/misc/Navbar";
 
+// background-image: url(https://images.pexels.com/photos/1089550/pexels-photo-1089550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+//     height: 100vh;
+//     background-size: cover;
 class Welcome extends React.Component {
   render() {
     return (
-      <div>
-        <Navbar />
+      <div style={{backgroundImage: "url('https://images.pexels.com/photos/1089550/pexels-photo-1089550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')", height: "100vh", backgroundSize: "cover"}}>
+        <Navbar activePage="Home" />
         <br />
         <div className="container">
-          <div className="row">
+          <div className="row"  style={{marginTop: "100px"}}>
             <div className="column offset-2 col-8">
             <div className="card">
-              <div className="card-body">
+              <div className="card-body" style={{backgroundColor: "aliceblue"}}>
                 <h3 id="welcomeTitle"><strong> Welcome to Scion! </strong></h3>
                 <hr/>
                   <p>

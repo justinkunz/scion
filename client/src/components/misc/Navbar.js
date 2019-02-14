@@ -14,7 +14,7 @@ class Navbar extends React.Component {
       return (
         <div>
           <div className="ui secondary pointing menu">
-            <a href="/userhome" className={this.getClassNames("UserHome")}>
+            <a href="/userhome" className={this.getClassNames("Home")}>
               <h3>SCION</h3>
             </a>
             <a

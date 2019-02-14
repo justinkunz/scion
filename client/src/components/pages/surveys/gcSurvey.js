@@ -101,6 +101,8 @@ class GCSurvey extends React.Component {
     return (
       <div>
         <Navbar activePage="Preference Survey" signedIn={this.state.signedIn} />
+        <br />
+        <br />
         {/* Question 1 */}
         <Dropdown
           key="degree_type"

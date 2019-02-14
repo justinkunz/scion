@@ -1,19 +1,15 @@
-.ui .qBox .segment {
-  margin:0 25% 10px 25%;
-  height: 35px;
-}
 .titleWrap {
   text-align: center;
 }
 .qTitle {
-margin-right: 10px;
+  margin-right: 10px;
 }
 
 .parent {
   position: absolute;
 }
 .qCont {
-  margin:0 25% 10px 25%;
+  margin: 0 25% 10px 25%;
 }
 
 .toggleComp {
@@ -51,7 +47,7 @@ margin-right: 10px;
   font-size: 50px;
   text-align: right;
   max-width: 50%;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 .homePage .smallTitle {
   font-size: 20px;
