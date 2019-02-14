@@ -100,7 +100,7 @@ class GCSurvey extends React.Component {
 
     return (
       <div>
-        <Navbar activePage="Preference Survey" signedIn={this.state.signedIn} />
+        <Navbar activePage="Preference Survey" survey="Preference Survey" signedIn={this.state.signedIn} />
         <br />
         <br />
         {/* Question 1 */}
@@ -126,7 +126,7 @@ class GCSurvey extends React.Component {
           key="religion"
           fieldId="religion"
           onValueChange={onValueChange}
-          question="What religion do you practice?"
+          question="How do you religiously identify?"
           listOptions={religions}
         />
         {/* Question 4 */}
