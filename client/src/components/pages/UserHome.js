@@ -211,17 +211,7 @@ class UserHome extends Component {
     };
     return (
       <div>
-        <Navbar activePage="Home" survey="Retake Preference Survey" signedIn="true" />
-        <SweetAlert
-          show={this.state.show}
-          title={this.state.title}
-          onConfirm={() => this.setState({ show: false })}
-          style={{ maxHeight: "50vh", minWidth: "35%" }}
-        >
-          <div style={{ maxHeight: "50vh", minWidth: "35%" }}>
-            {this.state.text}
-          </div>
-        </SweetAlert>
+        <Navbar activePage="Home" signedIn="true" />
 
         <br />
 
@@ -362,6 +352,16 @@ class UserHome extends Component {
                             </div>
                           </Card.Content>
                         </Card>
+                        <SweetAlert
+                          show={this.state.show}
+                          title={this.state.title}
+                          onConfirm={() => this.setState({ show: false })}
+                          style={{ maxHeight: "50vh", minWidth: "35%" }}
+                        >
+                          <div style={{ maxHeight: "50vh", minWidth: "35%" }}>
+                            {this.state.text}
+                          </div>
+                        </SweetAlert>
                       </div>
                     );
                   })}
