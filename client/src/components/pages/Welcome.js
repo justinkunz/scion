@@ -1,6 +1,9 @@
 import React from "react";
 import Navbar from "../../components/misc/Navbar";
 
+import React from "react";
+import Navbar from "../../components/misc/Navbar";
+
 // background-image: url(https://images.pexels.com/photos/1089550/pexels-photo-1089550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
 //     height: 100vh;
 //     background-size: cover;
@@ -25,7 +28,7 @@ class Welcome extends React.Component {
                     opaque process of finding suitable candidates not only more
                     efficient, but transparent for both of the primary parties
                     involved. We focus on the key attributes from each party
-                    that will ultimately facilitate this process, which, in turn
+                    that will ultimately facilitate this process, which in turn
                     will lead to more successful results from artificial
                     insemination.
                   </p>
@@ -33,11 +36,19 @@ class Welcome extends React.Component {
                   <p>
                     Our app is currently in its infancy, but we are diligently
                     working on rolling out a more complete experience that will
-                    further assist individuals navigate the tumultuous legal,
+                    further assist individuals to navigate the tumultuous legal,
                     psychological, and payment regulations which govern the act
                     of creating life through artificial insemination.
                   </p>
               
+                  <a
+                    href="/sign_up"
+                    className="ui item"
+                  >
+                    <button type="button" className="btn btn-info">
+                      Sign Up
+                    </button>
+                  </a>
               </div>
             </div>
             </div>
