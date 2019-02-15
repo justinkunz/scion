@@ -21,7 +21,7 @@ class Navbar extends React.Component {
               href="/survey"
               className={this.getClassNames("Preference Survey")}
             >
-              Preference Survey
+              {this.props.survey}
             </a>
             <div className="right menu">
               <a
