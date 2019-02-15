@@ -211,8 +211,11 @@ class UserHome extends Component {
     };
     return (
       <div>
-        <Navbar activePage="Home" signedIn="true" />
-
+        <Navbar
+          activePage="Home"
+          survey="Retake Preference Survey"
+          signedIn="true"
+        />
         <br />
 
         <div className="container">

@@ -1,9 +1,9 @@
 import React from "react";
 import Navbar from "../../misc/Navbar";
-import converter from './Compare/compareLogic';
-import {Redirect} from 'react-router-dom';
+import converter from "./Compare/compareLogic";
+import { Redirect } from "react-router-dom";
 import { Dropdown, EitherOr, RadioBtn, Slide, SubmitBtn } from "../../form";
-import SweetAlert from 'react-bootstrap-sweetalert';
+import SweetAlert from "react-bootstrap-sweetalert";
 
 class IPSurvey extends React.Component {
   constructor(props) {
@@ -30,35 +30,38 @@ class IPSurvey extends React.Component {
       alert("Form cancelled");
     };
 
-   //on survey submission
-   const handleSubmission = () => {
-      
-    //data validation
-    if(!this.state.PL_PC || 
-      !this.state.religion  || 
-      !this.state.embryos_count  || 
-      !this.state.birthCenter || 
-      !this.state.hospital || 
-      !this.state.implant_timeline || 
-      !this.state.location || 
-      !this.state.haveChildren  || 
-      !this.state.previous_gc  || 
-      !this.state.relationshipStatus || 
-      !this.state.desiredCompensation || 
-      !this.state.insurance ){
-
-      //if failed show alert
-      this.setState({title: "Error", text: "Please fill out all fields before submitting your survey", show: true})
-      return
+    //on survey submission
+    const handleSubmission = () => {
+      //data validation
+      if (
+        !this.state.PL_PC ||
+        !this.state.religion ||
+        !this.state.embryos_count ||
+        !this.state.birthCenter ||
+        !this.state.hospital ||
+        !this.state.implant_timeline ||
+        !this.state.location ||
+        !this.state.haveChildren ||
+        !this.state.previous_gc ||
+        !this.state.relationshipStatus ||
+        !this.state.desiredCompensation ||
+        !this.state.insurance
+      ) {
+        //if failed show alert
+        this.setState({
+          title: "Error",
+          text: "Please fill out all fields before submitting your survey",
+          show: true
+        });
+        return;
       }
 
-    converter(this.state)
-    this.setState({redirect: true})
-    
-  }
+      converter(this.state);
+      this.setState({ redirect: true });
+    };
 
-    if(this.state.redirect){
-      return <Redirect to="/results" />
+    if (this.state.redirect) {
+      return <Redirect to="/results" />;
     }
 
     const education_lvl = [
@@ -103,7 +106,11 @@ class IPSurvey extends React.Component {
 
     return (
       <div>
-        <Navbar activePage="Preference Survey" survey="Preference Survey" signedIn={this.state.signedIn} />
+        <Navbar
+          activePage="Preference Survey"
+          survey="Preference Survey"
+          signedIn={this.state.signedIn}
+        />{" "}
         <br />
         <br />
         {/* Question 1 */}
@@ -129,7 +136,7 @@ class IPSurvey extends React.Component {
           key="religion"
           fieldId="religion"
           onValueChange={onValueChange}
-          question="Do you have a preference on your gestational carrier's religious preference?"
+          question="Do you care, if at all, how your gestational carrier religiously identifies?"
           listOptions={religions}
         />
         {/* Question 4 */}
@@ -230,11 +237,8 @@ class IPSurvey extends React.Component {
           title={this.state.title}
           onConfirm={() => this.setState({ show: false })}
         >
-          <div >
-          {this.state.text}
-          </div>
+          <div>{this.state.text}</div>
         </SweetAlert>
-        
       </div>
     );
   }
