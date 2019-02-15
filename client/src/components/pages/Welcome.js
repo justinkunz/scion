@@ -1,9 +1,6 @@
 import React from "react";
 import Navbar from "../../components/misc/Navbar";
 
-import React from "react";
-import Navbar from "../../components/misc/Navbar";
-
 // background-image: url(https://images.pexels.com/photos/1089550/pexels-photo-1089550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
 //     height: 100vh;
 //     background-size: cover;
