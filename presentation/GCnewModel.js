@@ -211,21 +211,8 @@ class UserHome extends Component {
     };
     return (
       <div>
-        <Navbar
-          activePage="Home"
-          survey="Retake Preference Survey"
-          signedIn="true"
-        />
-        <SweetAlert
-          show={this.state.show}
-          title={this.state.title}
-          onConfirm={() => this.setState({ show: false })}
-          style={{ maxHeight: "50vh", minWidth: "35%" }}
-        >
-          <div style={{ maxHeight: "50vh", minWidth: "35%" }}>
-            {this.state.text}
-          </div>
-        </SweetAlert>
+        <Navbar activePage="Home" signedIn="true" />
+
         <br />
 
         <div className="container">
@@ -258,11 +245,7 @@ class UserHome extends Component {
                     {this.state.firstName} {this.state.lastName}
                   </div>
                   <div className="meta">Joined {formDate}</div>
-                  <div className="description">
-                    Thanks for joining the Scion family! Your connections are
-                    displayed to the right. Take a peak at who we recommend for
-                    you.
-                  </div>
+                  <div className="description">location</div>
                 </div>
                 <div className="extra content">
                   <a>
@@ -339,7 +322,7 @@ class UserHome extends Component {
                               connection.last_name
                             }`}</Card.Header>
                             {/* lat and long calculation for zip and state below */}
-                            <Card.Meta />
+                            <Card.Meta>McKinney, TX</Card.Meta>
                             <Card.Description>
                               <ul>
                                 <li>{connection.txt_answers.degree_type}</li>
@@ -369,6 +352,16 @@ class UserHome extends Component {
                             </div>
                           </Card.Content>
                         </Card>
+                        <SweetAlert
+                          show={this.state.show}
+                          title={this.state.title}
+                          onConfirm={() => this.setState({ show: false })}
+                          style={{ maxHeight: "50vh", minWidth: "35%" }}
+                        >
+                          <div style={{ maxHeight: "50vh", minWidth: "35%" }}>
+                            {this.state.text}
+                          </div>
+                        </SweetAlert>
                       </div>
                     );
                   })}
