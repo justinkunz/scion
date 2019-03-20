@@ -104,6 +104,37 @@ class IPSurvey extends React.Component {
       "> $100,000"
     ];
 
+    const donorRequired = [
+      "Please Select",
+      "Sperm Donor",
+      "Egg Donor",
+      "No Donor Required"
+    ];
+
+    const professions = [
+      "Please Select",
+      "Accountancy",
+      "Agriculture",
+      "Animals Services",
+      "Business Management",
+      "Construction",
+      "Creative Arts",
+      "Fashion",
+      "Finance",
+      "Government",
+      "Insurance",
+      "Law",
+      "Law Enforcement",
+      "Media",
+      "Medical/ Medical Services",
+      "Sales",
+      "Science & Engineering",
+      "Service Industry",
+      "Sports",
+      "Retail",
+      "Tourism & Travel"
+    ];
+
     return (
       <div>
         <Navbar
@@ -231,6 +262,76 @@ class IPSurvey extends React.Component {
           btn1="Yes"
           btn2="No"
         />
+        {/* NEW SRUVEY QUESTIONS THAT NEED TO BE COMPARED */}
+        <EitherOr
+          fieldId="havePets"
+          key="havePets"
+          activeAns={this.state.havePets || ""}
+          onValueChange={onValueChange}
+          question="Are you ok with your GC having pets?"
+          btn1="Yes"
+          btn2="No"
+        />
+        {/* NEW SURVEY QUESTIONS */}
+        <Dropdown
+          key="yourProfession"
+          fieldId="yourProfession"
+          onValueChange={onValueChange}
+          question="What is your profession?"
+          listOptions={professions}
+        />
+        <EitherOr
+          fieldId="fertilityTreatment"
+          key="fertilityTreatment"
+          activeAns={this.state.fertilityTreatment || ""}
+          onValueChange={onValueChange}
+          question="Do you ever undergone fertility treatment?"
+          btn1="Yes"
+          btn2="No"
+        />
+        <EitherOr
+          fieldId="haveEmbryo"
+          key="haveEmbryo"
+          activeAns={this.state.haveEmbryo || ""}
+          onValueChange={onValueChange}
+          question="Do you have any embryos currently cryo-preserved?"
+          btn1="Yes"
+          btn2="No"
+        />
+        <EitherOr
+          fieldId="haveEmbryoBeenTested"
+          key="haveEmbryoBeenTested"
+          activeAns={this.state.haveEmbryoBeenTested || ""}
+          onValueChange={onValueChange}
+          question="If so have they been PSG tested? (if you have no embryos preserved please select no)."
+          btn1="Yes"
+          btn2="No"
+        />
+        <EitherOr
+          fieldId="CurrentlyMarried"
+          key="CurrentlyMarried"
+          activeAns={this.state.CurrentlyMarried || ""}
+          onValueChange={onValueChange}
+          question="Are you currently married, in a domestic partnership, or in a relationship?"
+          btn1="Yes"
+          btn2="No"
+        />
+        <Dropdown
+          key="donorRequired"
+          fieldId="donorRequired"
+          onValueChange={onValueChange}
+          question="Do you require a donor of any kind? (If no donor is require please indicate in the dropdown)."
+          listOptions={donorRequired}
+        />
+         <Dropdown
+          key="yourProfession"
+          fieldId="yourProfession"
+          onValueChange={onValueChange}
+          question="What is your profession?"
+          listOptions={professions}
+        />
+
+        {/* ============================================= */}
         <SubmitBtn onCancel={onCancel} onSubmit={() => handleSubmission()} />
         <SweetAlert
           show={this.state.show}

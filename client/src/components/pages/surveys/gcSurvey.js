@@ -97,6 +97,30 @@ class GCSurvey extends React.Component {
       "2+ years from now"
     ];
 
+    const professions = [
+      "Please Select",
+      "Accountancy",
+      "Agriculture",
+      "Animals Services",
+      "Business Management",
+      "Construction",
+      "Creative Arts",
+      "Fashion",
+      "Finance",
+      "Government",
+      "Insurance",
+      "Law",
+      "Law Enforcement",
+      "Media",
+      "Medical/ Medical Services",
+      "Sales",
+      "Science & Engineering",
+      "Service Industry",
+      "Sports",
+      "Retail",
+      "Tourism & Travel"
+    ];
+
     return (
       <div>
         <Navbar
@@ -220,10 +244,45 @@ class GCSurvey extends React.Component {
           key="insurance"
           activeAns={this.state.insurance || ""}
           onValueChange={onValueChange}
-          question="Are you currently insured?"
+          question="Are you currently insured? (Please note you will be required to provide proof of insurance)."
           btn1="Yes"
           btn2="No"
         />
+        {/* NEW SURVEY QUEASTIONS THAT NEED TO BE COMPARED */}
+        <EitherOr
+          fieldId="havePets"
+          key="havePets"
+          activeAns={this.state.havePets || ""}
+          onValueChange={onValueChange}
+          question="Do you currently own, or partially responsible for any pets or animals?"
+          btn1="Yes"
+          btn2="No"
+        />
+        {/* NEW SURVEY QUESTIONS */}
+        <EitherOr
+          fieldId="givenBirth"
+          key="givenbirth"
+          activeAns={this.state.givenBirth || ""}
+          onValueChange={onValueChange}
+          question="Have you given birth before?"
+          btn1="Yes"
+          btn2="no"
+        />
+        <Dropdown
+          key="yourProfession"
+          fieldId="yourProfession"
+          onValueChange={onValueChange}
+          question="What is your profession?"
+          listOptions={professions}
+        />
+        <Dropdown
+          key="spouseProfession"
+          fieldId="spouseProfession"
+          onValueChange={onValueChange}
+          question="What is spouse's profession?"
+          listOptions={professions}
+        />
+        {/*=============================================================*/}
         <SubmitBtn onCancel={onCancel} onSubmit={() => handleSubmission()} />
         <SweetAlert
           show={this.state.show}
