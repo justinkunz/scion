@@ -1,15 +1,10 @@
 import React from "react";
 import Navbar from "../../misc/Navbar";
 import converter from "./Compare/compareLogic";
-import {Redirect} from 'react-router-dom';
-import SweetAlert from 'react-bootstrap-sweetalert';
+import { Redirect } from "react-router-dom";
+import SweetAlert from "react-bootstrap-sweetalert";
 
-import {
-  Dropdown,
-  EitherOr,
-  RadioBtn,
-  SubmitBtn,
-} from "../../form";
+import { Dropdown, EitherOr, RadioBtn, SubmitBtn } from "../../form";
 
 class GCSurvey extends React.Component {
   constructor(props) {
@@ -18,8 +13,6 @@ class GCSurvey extends React.Component {
   }
 
   render() {
-
-
     //value change handler
     const onValueChange = (fieldId, val) => {
       this.setState({ [fieldId]: val });
@@ -32,35 +25,36 @@ class GCSurvey extends React.Component {
 
     //on survey submission
     const handleSubmission = () => {
-      
       //data validation
-      if(!this.state.PL_PC || 
-        !this.state.religion  || 
-        !this.state.embryos_count  || 
-        !this.state.birthCenter || 
-        !this.state.hospital || 
-        !this.state.implant_timeline || 
-        !this.state.location || 
-        !this.state.haveChildren  || 
-        !this.state.previous_gc  || 
-        !this.state.relationshipStatus || 
-        !this.state.desiredCompensation || 
-        !this.state.insurance ){
-
+      if (
+        !this.state.PL_PC ||
+        !this.state.religion ||
+        !this.state.embryos_count ||
+        !this.state.birthCenter ||
+        !this.state.hospital ||
+        !this.state.implant_timeline ||
+        !this.state.location ||
+        !this.state.haveChildren ||
+        !this.state.previous_gc ||
+        !this.state.relationshipStatus ||
+        !this.state.desiredCompensation ||
+        !this.state.insurance
+      ) {
         //if failed show alert
-        this.setState({title: "Error", text: "Please fill out all fields before submitting your survey", show: true})
-        return
-        }
+        this.setState({
+          title: "Error",
+          text: "Please fill out all fields before submitting your survey",
+          show: true
+        });
+        return;
+      }
 
-      converter(this.state)
-      this.setState({redirect: true})
-      
-    }
+      converter(this.state);
+      this.setState({ redirect: true });
+    };
 
-
-
-    if(this.state.redirect){
-      return <Redirect to="/results" />
+    if (this.state.redirect) {
+      return <Redirect to="/results" />;
     }
 
     const education_lvl = [
@@ -82,7 +76,12 @@ class GCSurvey extends React.Component {
       "Islamic"
     ];
     const embr_ct = ["1-3", "4-6", "7-10", ">10"];
-    const relationshipStatus = ["Please Select", "Single", "Married", "Commmon Law Married"];
+    const relationshipStatus = [
+      "Please Select",
+      "Single",
+      "Married",
+      "Commmon Law Married"
+    ];
     const desiredCompensation = [
       "< $20,000",
       "$21,000 - 49,000",
@@ -100,7 +99,11 @@ class GCSurvey extends React.Component {
 
     return (
       <div>
-        <Navbar activePage="Preference Survey" survey="Preference Survey" signedIn={this.state.signedIn} />
+        <Navbar
+          activePage="Preference Survey"
+          survey="Preference Survey"
+          signedIn={this.state.signedIn}
+        />{" "}
         <br />
         <br />
         {/* Question 1 */}
@@ -227,9 +230,7 @@ class GCSurvey extends React.Component {
           title={this.state.title}
           onConfirm={() => this.setState({ show: false })}
         >
-          <div >
-          {this.state.text}
-          </div>
+          <div>{this.state.text}</div>
         </SweetAlert>
       </div>
     );
