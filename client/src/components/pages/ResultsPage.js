@@ -44,7 +44,7 @@ class ResultsPage extends React.Component {
   };
 
   getResults = async () => {
-    const results = await axios.post("/api/get/results/" + this.state.userId);
+    const results = await axios.get("/api/get/results/" + this.state.userId);
     console.log(results.data);
     this.setState({ results: results.data });
   };
