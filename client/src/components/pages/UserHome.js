@@ -53,7 +53,6 @@ class UserHome extends Component {
   };
   getResults = async () => {
     const results = await axios.get("/api/get/results/" + this.state.userId);
-    // console.log(results.data);
     this.setState({ results: results.data, grabbedData: true });
     console.log("State check: ", this.state);
   };
@@ -64,9 +63,8 @@ class UserHome extends Component {
       this.verifyUser();
       return <Loader />;
     }
-    const sizes = ["massive"];
+    
     let formDate = this.state.userDate.substring(0, 10);
-    console.log("Form Date: ", formDate);
 
     const toggleModal = connection => {
       let prevGC;
@@ -222,9 +220,9 @@ class UserHome extends Component {
           onConfirm={() => this.setState({ show: false })}
           style={{ maxHeight: "50vh", minWidth: "35%" }}
         >
-          <div style={{ maxHeight: "50vh", minWidth: "35%" }}>
-            {this.state.text}
-          </div>
+        <div style={{ maxHeight: "50vh", minWidth: "35%" }}>
+          {this.state.text}
+        </div>
         </SweetAlert>
         <br />
 

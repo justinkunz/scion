@@ -123,6 +123,7 @@ class IPSurvey extends React.Component {
       "Finance",
       "Government",
       "Insurance",
+      "IT/Tech",
       "Law",
       "Law Enforcement",
       "Media",
@@ -167,7 +168,7 @@ class IPSurvey extends React.Component {
           key="religion"
           fieldId="religion"
           onValueChange={onValueChange}
-          question="Do you care, if at all, how your gestational carrier religiously identifies?"
+          question="Preferred GC Religion"
           listOptions={religions}
         />
         {/* Question 4 */}
@@ -241,7 +242,7 @@ class IPSurvey extends React.Component {
           key="relationshipStatus"
           fieldId="relationshipStatus"
           onValueChange={onValueChange}
-          question="What kind of relation status do you prefer of you GC?"
+          question="Preferred GC Relationship Status"
           listOptions={relationshipStatus}
         />
         {/* Question 12 */}
@@ -322,13 +323,6 @@ class IPSurvey extends React.Component {
           onValueChange={onValueChange}
           question="Do you require a donor of any kind? (If no donor is require please indicate in the dropdown)."
           listOptions={donorRequired}
-        />
-         <Dropdown
-          key="yourProfession"
-          fieldId="yourProfession"
-          onValueChange={onValueChange}
-          question="What is your profession?"
-          listOptions={professions}
         />
 
         {/* ============================================= */}

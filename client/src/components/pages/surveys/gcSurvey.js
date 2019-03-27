@@ -99,7 +99,7 @@ class GCSurvey extends React.Component {
 
     const professions = [
       "Please Select",
-      "Accountancy",
+      "Accounting",
       "Agriculture",
       "Animals Services",
       "Business Management",
@@ -109,6 +109,7 @@ class GCSurvey extends React.Component {
       "Finance",
       "Government",
       "Insurance",
+      "IT/Tech",
       "Law",
       "Law Enforcement",
       "Media",
@@ -254,7 +255,7 @@ class GCSurvey extends React.Component {
           key="havePets"
           activeAns={this.state.havePets || ""}
           onValueChange={onValueChange}
-          question="Do you currently own, or partially responsible for any pets or animals?"
+          question="Do you have any pets or animals?"
           btn1="Yes"
           btn2="No"
         />
