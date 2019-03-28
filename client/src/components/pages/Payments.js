@@ -1,57 +1,58 @@
 import React, { Component } from "react";
-import { Input, Button, Form } from "semantic-ui-react";
+import { Grid, Button, Form } from "semantic-ui-react";
+import Navbar from "../misc/Navbar";
 
 const stateList = [
-  'AK',
-  'AR',
-  'AL',
-  'AZ',
-  'CA',
-  'CO',
-  'CT',
-  'DE',
-  'FL',
-  'GA',
-  'HI',
-  'IA',
-  'ID',
-  'IL',
-  'IN',
-  'KS',
-  'KY',
-  'LA',
-  'MA',
-  'MD',
-  'ME',
-  'MI',
-  'MN',
-  'MO',
-  'MS',
-  'MT',
-  'NC',
-  'ND',
-  'NE',
-  'NH',
-  'NJ',
-  'NM',
-  'NV',
-  'NY',
-  'OH',
-  'OK',
-  'OR',
-  'PA',
-  'RI',
-  'SC',
-  'SD',
-  'TN',
-  'TX',
-  'UT',
-  'VA',
-  'VT',
-  'WA',
-  'WI',
-  'WV',
-  'WY'
+  "AK",
+  "AR",
+  "AL",
+  "AZ",
+  "CA",
+  "CO",
+  "CT",
+  "DE",
+  "FL",
+  "GA",
+  "HI",
+  "IA",
+  "ID",
+  "IL",
+  "IN",
+  "KS",
+  "KY",
+  "LA",
+  "MA",
+  "MD",
+  "ME",
+  "MI",
+  "MN",
+  "MO",
+  "MS",
+  "MT",
+  "NC",
+  "ND",
+  "NE",
+  "NH",
+  "NJ",
+  "NM",
+  "NV",
+  "NY",
+  "OH",
+  "OK",
+  "OR",
+  "PA",
+  "RI",
+  "SC",
+  "SD",
+  "TN",
+  "TX",
+  "UT",
+  "VA",
+  "VT",
+  "WA",
+  "WI",
+  "WV",
+  "WY"
 ];
 
 class Payments extends Component {
@@ -59,31 +60,35 @@ class Payments extends Component {
 
   render() {
     return (
-    //   <div className="payment-page">
-        <div className="container">
-          <div className="row">
-            {/* <div className="picture-column">
-              <p>picture goes here</p>
-            </div> */}
-            <div className="form-column" width={16}>
-              <Form>
+      <div>
+        <Navbar 
+        activePage="Payments"
+        UserHome="Back to Home"
+        signedIn="tue"
+        />
+        <br />
+        <Grid>
+          <Grid.Row columns={2}>
+            <Grid.Column width={4} />
+            <Grid.Column width={8}>
+              <h4>Payment Information</h4>
+              <br/>
+              <hr />
+              <Form width={10}>
                 <Form.Group>
                   <Form.Input transparent placeholder="Card Number" width={6} />
-                  <Form.Input
-                    type="date"
-                    transparent
-                    placeholder="expiration date"
-                    width={4}
-                  />
+                  <Form.Input transparent placeholder="Month" width={2} />
+                  <Form.Input transparent placeholder="Year" width={2} />
                   <Form.Input transparent placeholder="CCV" width={2} />
                 </Form.Group>
                 <Form.Group>
                   <Form.Input transparent placeholder="First Name" width={6} />
                   <Form.Input transparent placeholder="Last Name" width={6} />
                 </Form.Group>
-                <hr />
-                <label>Billing Address</label>
+
                 <br />
+                <label>Billing Address</label>
+                <hr />
                 <Form.Group>
                   <Form.Input transparent placeholder="Address" width={6} />
                   <Form.Input transparent placeholder="City" width={4} />
@@ -94,15 +99,17 @@ class Payments extends Component {
                     width={2}
                   />
                   <datalist id="state">
-                    <option value="map over state list" />
+                    <option value="map over state"/>
                   </datalist>
                 </Form.Group>
-                <Button basic color='pink' content='Submit' />
+                <br />
+                <Button basic color="pink" content="Submit" />
               </Form>
-            </div>
-          </div>
-        </div>
-    //   </div>
+            </Grid.Column>
+            <Grid.Column width={4} />
+          </Grid.Row>
+        </Grid>
+      </div>
     );
   }
 }
