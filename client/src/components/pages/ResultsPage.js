@@ -60,7 +60,7 @@ class ResultsPage extends React.Component {
         <div className="profile-container">
           <div class="ui card">
             <img
-              src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              src="https://www.watsonmartin.com/wp-content/uploads/2016/03/default-profile-picture.jpg"
               class="ui image"
             />
             <div class="content">
