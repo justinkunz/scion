@@ -14,6 +14,7 @@ import Hp2 from "./components/pages/Hp2";
 import NewHome from "./components/pages/NewHome";
 import Welcome from "./components/pages/Welcome";
 import Payments from "./components/pages/Payments";
+import UserHome from './components/pages/UserHome';
 
 class App extends Component {
   constructor(props) {
@@ -66,7 +67,7 @@ class App extends Component {
             <Route path="/payments" component={Payments} />
 
             <Route path="/results" render={() => <Redirect to="/userhome" />} />
-            <Route path="/userhome" exact component={NewHome} />
+            <Route path="/userhome" exact component={UserHome} />
             <Route
               path="/sign_out"
               exact
