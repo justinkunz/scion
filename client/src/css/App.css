@@ -52,3 +52,12 @@
 .homePage .smallTitle {
   font-size: 20px;
 }
+
+@media screen and (max-width: 768px) {
+  .qCont {
+    margin: 0 5% 10px;
+  }
+  .item {
+    font-size: 12px;
+  }
+}
