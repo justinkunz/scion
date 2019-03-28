@@ -3,10 +3,10 @@ import Loader from "../misc/Loader";
 import axios from "axios";
 import "./UserHome.css";
 import Navbar from "../misc/Navbar";
-import { Button, Card } from "semantic-ui-react";
+import { Button, Card, Grid } from "semantic-ui-react";
 import SweetAlert from "react-bootstrap-sweetalert";
 
-class UserHome extends Component {
+class NewHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -64,7 +64,7 @@ class UserHome extends Component {
       this.verifyUser();
       return <Loader />;
     }
-    
+
     let formDate = this.state.userDate.substring(0, 10);
 
     const toggleModal = connection => {
@@ -221,35 +221,22 @@ class UserHome extends Component {
           onConfirm={() => this.setState({ show: false })}
           style={{ maxHeight: "50vh", minWidth: "35%" }}
         >
-        <div style={{ maxHeight: "50vh", minWidth: "35%" }}>
-          {this.state.text}
-        </div>
+          <div style={{ maxHeight: "50vh", minWidth: "35%" }}>
+            {this.state.text}
+          </div>
         </SweetAlert>
         <br />
 
-        <div className="container">
-          <div className="row">
-            <div id="profile-title-column">
-              <br />
-              <h4>PROFILE</h4>
+        <Grid stackable columns = {4}>
+          <Grid.Row>
+            <Grid.Column width={2} />
+            <Grid.Column width={4}>
+              <h5>Profile</h5>
               <hr />
-            </div>
 
-            <div id="connections-title-column">
-              <br />
-              <h4 id="connections-title">CONNECTIONS</h4>
-              <hr id="connections-title-seperator" />
-            </div>
-          </div>
-
-          <div className="row">
-            {/* profile info col */}
-
-            <div className="profile-column">
-              {/* USER PROFILE INFO */}
               <div className="ui card" id="profile">
                 <img
-                  src="https://www.watsonmartin.com/wp-content/uploads/2016/03/default-profile-picture.jpg"
+                  src="http://4.bp.blogspot.com/-xhztiK_lRX0/VZxwVYQh__I/AAAAAAABARU/MS1Y_FldP8U/s1600/baby-money-1.jpg"
                   className="ui image"
                 />
                 <div className="content">
@@ -257,13 +244,11 @@ class UserHome extends Component {
                     {this.state.firstName} {this.state.lastName}
                   </div>
                   <div className="meta">Joined {formDate}</div>
-
                   <div className="description">
                     Thanks for joining the Scion family! Your connections are
                     displayed to the right. Take a peak at who we recommend for
                     you.
                   </div>
-
                 </div>
                 <div className="extra content">
                   <a>
@@ -272,116 +257,118 @@ class UserHome extends Component {
                   </a>
                 </div>
               </div>
+            </Grid.Column>
+            <Grid.Column width={8}>
+              <h5>Connections</h5>
+              <hr />
 
-              {/* END OF USER PROFILE INFO */}
-            </div>
-
-            {/* MATCHES COL */}
-
-            <div className="connection-column">
-              {this.state.results.length ? (
-                <div id="connection-wrapper">
-                  {this.state.results.map(connection => {
-                    // console.log("Connection: ", connection);
-                    let gradeColor;
-                    if (connection.grade === "A") {
-                      gradeColor = "rgb(7,122,42)";
-                    }
-                    if (connection.grade === "B") {
-                      gradeColor = "rgb(7,115,159)";
-                    }
-                    if (connection.grade === "C") {
-                      gradeColor = "rgb(241,200,11)";
-                    }
-                    if (connection.grade === "D") {
-                      gradeColor = "rgb(146,26,28)";
-                    }
-                    return (
-                      <div className="connection-cards">
-                        <Card
-                          style={{
-                            margin: "10px",
-                            float: "left"
-                          }}
-                        >
-                          <div
-                            className="card-image mt-2"
+              <div className="connection-column">
+                {this.state.results.length ? (
+                  <div id="connection-wrapper">
+                    {this.state.results.map(connection => {
+                      // console.log("Connection: ", connection);
+                      let gradeColor;
+                      if (connection.grade === "A") {
+                        gradeColor = "rgb(7,122,42)";
+                      }
+                      if (connection.grade === "B") {
+                        gradeColor = "rgb(7,115,159)";
+                      }
+                      if (connection.grade === "C") {
+                        gradeColor = "rgb(241,200,11)";
+                      }
+                      if (connection.grade === "D") {
+                        gradeColor = "rgb(146,26,28)";
+                      }
+                      return (
+                        <div className="connection-cards">
+                          <Card
                             style={{
-                              margin: "0 auto",
-                              height: "70px",
-                              width: "70px",
-                              backgroundColor: gradeColor,
-                              clipPath: "circle(50% at 50% 50%)"
+                              margin: "10px",
+                              float: "right"
                             }}
                           >
-                            <h1
-                              className="text-center"
+                            <div
+                              className="card-image mt-2"
                               style={{
-                                fontSize: "350%",
-                                transform: "translateY(-50%)",
-                                position: "relative",
-                                top: "50%",
-                                color: "white"
+                                margin: "0 auto",
+                                height: "70px",
+                                width: "70px",
+                                backgroundColor: gradeColor,
+                                clipPath: "circle(50% at 50% 50%)"
                               }}
                             >
-                              {connection.grade}
-                            </h1>
-                          </div>
-                          <Card.Content>
-                            <div
-                              style={{
-                                float: "right",
-                                fontSize: "30px",
-                                color: gradeColor
-                              }}
-                            />
-                            <Card.Header>{`${connection.first_name} ${
-                              connection.last_name
-                            }`}</Card.Header>
-                            {/* lat and long calculation for zip and state below */}
-                            <Card.Meta />
-                            <Card.Description>
-                              <ul>
-                                <li>{connection.txt_answers.degree_type}</li>
-                                <li>{connection.txt_answers.PL_PC}</li>
-                                <li>{` Wants ${
-                                  connection.txt_answers.desiredCompensation
-                                }`}</li>
-                              </ul>
-                            </Card.Description>
-                          </Card.Content>
-                          <Card.Content extra>
-                            <div className="ui two buttons">
-                              <Button
-                                basic
-                                color="green"
-                                onClick={() => toggleModal(connection)}
+                              <h1
+                                className="text-center"
+                                style={{
+                                  fontSize: "350%",
+                                  fontFamily: "Baloo Bhaijaan, cursive",
+                                  transform: "translateY(-50%)",
+                                  position: "relative",
+                                  top: "50%",
+                                  color: "white"
+                                }}
                               >
-                                More Info
-                              </Button>
-                              <Button
-                                basic
-                                color="red"
-                                onClick={() => contactModal(connection)}
-                              >
-                                Contact Info
-                              </Button>
+                                {connection.grade}
+                              </h1>
                             </div>
-                          </Card.Content>
-                        </Card>
-                      </div>
-                    );
-                  })}
-                </div>
-              ) : (
-                <h1>No Connections</h1>
-              )}
-            </div>
-          </div>
-        </div>
+                            <Card.Content>
+                              <div
+                                style={{
+                                  float: "right",
+                                  fontSize: "30px",
+                                  color: gradeColor
+                                }}
+                              />
+                              <Card.Header>{`${connection.first_name} ${
+                                connection.last_name
+                              }`}</Card.Header>
+                              {/* lat and long calculation for zip and state below */}
+                              <Card.Meta />
+                              <Card.Description>
+                                <ul>
+                                  <li>{connection.txt_answers.degree_type}</li>
+                                  <li>{connection.txt_answers.PL_PC}</li>
+                                  <li>{` Wants ${
+                                    connection.txt_answers.desiredCompensation
+                                  }`}</li>
+                                </ul>
+                              </Card.Description>
+                            </Card.Content>
+                            <Card.Content extra>
+                              <div className="ui two buttons">
+                                <Button
+                                  basic
+                                  color="green"
+                                  onClick={() => toggleModal(connection)}
+                                >
+                                  More Info
+                                </Button>
+                                <Button
+                                  basic
+                                  color="red"
+                                  onClick={() => contactModal(connection)}
+                                >
+                                  Contact Info
+                                </Button>
+                              </div>
+                            </Card.Content>
+                          </Card>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <h1>No Connections</h1>
+                )}
+              </div>
+            </Grid.Column>
+            <Grid.Column width={2} />
+          </Grid.Row>
+        </Grid>
       </div>
     );
   }
 }
 
-export default UserHome;
+export default NewHome;

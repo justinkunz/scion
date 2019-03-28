@@ -11,8 +11,9 @@ import SignOut from "./components/pages/SignOut";
 import IPSurvey from "./components/pages/surveys/ipSurvey";
 import Loader from "./components/misc/Loader";
 import Hp2 from "./components/pages/Hp2";
-import UserHome from "./components/pages/UserHome";
+import NewHome from "./components/pages/NewHome";
 import Welcome from "./components/pages/Welcome";
+import Payments from "./components/pages/Payments";
 
 class App extends Component {
   constructor(props) {
@@ -62,8 +63,10 @@ class App extends Component {
             <Route path="/sign_up" component={SignUpForm} />
             <Route path="/hp2" exact component={Hp2} />
 
+            <Route path="/payments" component={Payments} />
+
             <Route path="/results" render={() => <Redirect to="/userhome" />} />
-            <Route path="/userhome" exact component={UserHome} />
+            <Route path="/userhome" exact component={NewHome} />
             <Route
               path="/sign_out"
               exact
