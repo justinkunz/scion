@@ -13,6 +13,7 @@ import Loader from "./components/misc/Loader";
 import Hp2 from "./components/pages/Hp2";
 import UserHome from "./components/pages/UserHome";
 import Welcome from "./components/pages/Welcome";
+import Payments from "./components/pages/Payments";
 
 class App extends Component {
   constructor(props) {
@@ -61,6 +62,8 @@ class App extends Component {
             <Route path="/welcome" component={Welcome} />
             <Route path="/sign_up" component={SignUpForm} />
             <Route path="/hp2" exact component={Hp2} />
+
+            <Route path="/payments" component={Payments} />
 
             <Route path="/results" render={() => <Redirect to="/userhome" />} />
             <Route path="/userhome" exact component={UserHome} />
