@@ -249,7 +249,7 @@ class UserHome extends Component {
               {/* USER PROFILE INFO */}
               <div className="ui card" id="profile">
                 <img
-                  src="http://4.bp.blogspot.com/-xhztiK_lRX0/VZxwVYQh__I/AAAAAAABARU/MS1Y_FldP8U/s1600/baby-money-1.jpg"
+                  src="https://www.watsonmartin.com/wp-content/uploads/2016/03/default-profile-picture.jpg"
                   className="ui image"
                 />
                 <div className="content">
@@ -257,11 +257,13 @@ class UserHome extends Component {
                     {this.state.firstName} {this.state.lastName}
                   </div>
                   <div className="meta">Joined {formDate}</div>
+
                   <div className="description">
                     Thanks for joining the Scion family! Your connections are
                     displayed to the right. Take a peak at who we recommend for
                     you.
                   </div>
+
                 </div>
                 <div className="extra content">
                   <a>
@@ -316,7 +318,6 @@ class UserHome extends Component {
                               className="text-center"
                               style={{
                                 fontSize: "350%",
-                                fontFamily: "Baloo Bhaijaan, cursive",
                                 transform: "translateY(-50%)",
                                 position: "relative",
                                 top: "50%",
