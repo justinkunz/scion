@@ -226,14 +226,12 @@ class NewHome extends Component {
           </div>
         </SweetAlert>
         <br />
-
         <Grid stackable columns = {4}>
           <Grid.Row>
             <Grid.Column width={2} />
             <Grid.Column width={4}>
               <h5>Profile</h5>
               <hr />
-
               <div className="ui card" id="profile">
                 <img
                   src="http://4.bp.blogspot.com/-xhztiK_lRX0/VZxwVYQh__I/AAAAAAABARU/MS1Y_FldP8U/s1600/baby-money-1.jpg"
@@ -261,7 +259,6 @@ class NewHome extends Component {
             <Grid.Column width={8}>
               <h5>Connections</h5>
               <hr />
-
               <div className="connection-column">
                 {this.state.results.length ? (
                   <div id="connection-wrapper">
