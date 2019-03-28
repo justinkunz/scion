@@ -53,3 +53,23 @@ h4 {
   margin-left: 120px;
   float: right;
 }
+
+@media screen and (max-width: 768px) {
+  .profile-column {
+    display: none;
+  }
+  .ui .card {
+    width: 400px;
+  }
+  #profile-title-column {
+    display: none;
+  }
+  #connections-title-column,
+  #connection-wrapper,
+  .connection-column {
+    margin: auto;
+  }
+  #connections-title-column {
+    text-align: center;
+  }
+}
