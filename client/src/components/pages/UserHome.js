@@ -272,6 +272,17 @@ class UserHome extends Component {
                   </a>
                 </div>
               </div>
+              <div id="donate">
+              <span style={{fontSize: "20px"}}>Like us? Donate!  </span>
+              <a href="/payments">
+              <img 
+                src="https://img.icons8.com/cotton/2x/bank-card-back-side.png"
+                alt="credit card"
+                id="donateBtn"
+              />
+              </a>
+            
+              </div>
 
               {/* END OF USER PROFILE INFO */}
             </div>
